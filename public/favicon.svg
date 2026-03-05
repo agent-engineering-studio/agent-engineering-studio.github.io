@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Agent Engineering Studio favicon: lab flask + node graph -->
+  <rect width="32" height="32" rx="6" fill="#0a0e17"/>
+  <!-- Flask body -->
+  <path d="M12 6h8v6l5 12a2 2 0 0 1-1.85 2.76H8.85A2 2 0 0 1 7 24l5-12V6z" fill="none" stroke="#00e5ff" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Flask top -->
+  <line x1="11" y1="6" x2="21" y2="6" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Bubbles / nodes inside -->
+  <circle cx="14" cy="20" r="1.5" fill="#00e5ff" opacity="0.8"/>
+  <circle cx="18" cy="18" r="1" fill="#f5a623" opacity="0.8"/>
+  <circle cx="16" cy="22" r="1.2" fill="#00e5ff" opacity="0.6"/>
+</svg>

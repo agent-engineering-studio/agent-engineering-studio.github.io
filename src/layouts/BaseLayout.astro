@@ -1,0 +1,73 @@
+---
+/*
+ * BaseLayout.astro — Layout base del sito
+ * Contiene <head> con meta, fonts, analytics placeholder.
+ * Per modificare SEO/meta: aggiorna le props o i valori di default qui sotto.
+ */
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Agent Engineering Studio — AI Agents dal Concept alla Release',
+  description = 'Il laboratorio open-source per costruire AI agents: starter kit, template, demo end-to-end e best practice.',
+} = Astro.props;
+
+const canonicalUrl = 'https://agent-engineering-studio.github.io/';
+const ogImage = new URL('/og-image.png', canonicalUrl).href;
+---
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="theme-color" content="#0a0e17" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:site_name" content="Agent Engineering Studio" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Google Fonts: JetBrains Mono + Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global CSS -->
+  <style is:global>
+    @import '../styles/global.css';
+  </style>
+
+  <!-- TODO: analytics -->
+</head>
+<body>
+  <slot />
+
+  <!-- Easter egg console message -->
+  <script is:inline>
+    console.log('%c\uD83D\uDD2C Agent Engineering Studio', 'font-size:16px;font-weight:bold;color:#00e5ff');
+    console.log('%cVuoi contribuire? \u2192 github.com/agent-engineering-studio', 'font-size:12px;color:#e0e6ed');
+  </script>
+</body>
+</html>

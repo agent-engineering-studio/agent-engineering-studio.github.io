@@ -1,0 +1,142 @@
+---
+/*
+ * Hero.astro — Sezione hero principale
+ * Contiene titolo, tagline, sottotitolo e badge di stato.
+ * Per modificare i testi: aggiorna direttamente l'HTML qui sotto.
+ */
+---
+
+<header class="hero">
+  <div class="container">
+    <!-- SVG animato decorativo: nodi/agenti connessi -->
+    <div class="hero__nodes animate-in" aria-hidden="true">
+      <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" class="nodes-svg">
+        <!-- Nodi -->
+        <circle cx="60" cy="60" r="8" class="node node--1" />
+        <circle cx="160" cy="30" r="6" class="node node--2" />
+        <circle cx="200" cy="90" r="10" class="node node--3" />
+        <circle cx="300" cy="50" r="7" class="node node--4" />
+        <circle cx="340" cy="95" r="5" class="node node--5" />
+        <!-- Connessioni -->
+        <line x1="60" y1="60" x2="160" y2="30" class="edge" />
+        <line x1="160" y1="30" x2="200" y2="90" class="edge" />
+        <line x1="200" y1="90" x2="300" y2="50" class="edge" />
+        <line x1="300" y1="50" x2="340" y2="95" class="edge" />
+        <line x1="60" y1="60" x2="200" y2="90" class="edge edge--secondary" />
+        <line x1="160" y1="30" x2="300" y2="50" class="edge edge--secondary" />
+      </svg>
+    </div>
+
+    <h1 class="hero__title animate-in animate-delay-1">
+      Agent <span class="hero__accent">Engineering</span> Studio
+    </h1>
+
+    <p class="hero__tagline animate-in animate-delay-2">
+      Il laboratorio dove le idee diventano AI agents.
+    </p>
+
+    <p class="hero__subtitle animate-in animate-delay-3">
+      Starter kit, template, demo end-to-end e best practice &mdash; dal concept alla prima release.
+    </p>
+
+    <div class="hero__badge animate-in animate-delay-4">
+      <span class="badge">
+        <span class="badge__icon" aria-hidden="true">&#x1F52C;</span>
+        In costruzione &mdash; prime release in arrivo
+      </span>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    text-align: center;
+  }
+
+  .hero__nodes {
+    margin-bottom: var(--space-xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  .nodes-svg {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .node {
+    fill: var(--color-accent);
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .node--1 { animation-delay: 0s; }
+  .node--2 { animation-delay: 0.5s; }
+  .node--3 { animation-delay: 1s; }
+  .node--4 { animation-delay: 1.5s; }
+  .node--5 { animation-delay: 2s; }
+
+  .edge {
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    opacity: 0.3;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .edge--secondary {
+    stroke-dasharray: 4 4;
+    opacity: 0.15;
+  }
+
+  .hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__accent {
+    color: var(--color-accent);
+  }
+
+  .hero__tagline {
+    font-family: var(--font-body);
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero__subtitle {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .hero__badge {
+    display: flex;
+    justify-content: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-accent-glow);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .badge__icon {
+    font-size: 1.1rem;
+  }
+</style>

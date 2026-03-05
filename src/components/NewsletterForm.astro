@@ -1,0 +1,120 @@
+---
+/*
+ * NewsletterForm.astro — Form email per early access / notify me
+ * Il form NON ha un backend reale. Collegare a Formspree, Buttondown, ecc.
+ * Per attivare: decommentare l'attributo action nel <form> e rimuovere il TODO.
+ */
+---
+
+<!-- TODO: collegare a servizio newsletter (Formspree, Buttondown, ecc.) -->
+<section class="newsletter-section" aria-labelledby="newsletter-heading">
+  <div class="container">
+    <div class="newsletter animate-in animate-delay-6">
+      <h2 id="newsletter-heading" class="newsletter__title">Resta aggiornato</h2>
+      <p class="newsletter__text">
+        Lascia la tua email per sapere quando usciranno i primi kit e progetti.
+      </p>
+      <form
+        class="newsletter__form"
+        method="POST"
+        action="https://formspree.io/f/PLACEHOLDER"
+      >
+        <label for="email-input" class="sr-only">Indirizzo email</label>
+        <input
+          id="email-input"
+          type="email"
+          name="email"
+          placeholder="la-tua@email.com"
+          required
+          autocomplete="email"
+          class="newsletter__input"
+        />
+        <button type="submit" class="newsletter__button">Avvisami</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter-section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .newsletter {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-2xl);
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .newsletter__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .newsletter__text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+  }
+
+  .newsletter__form {
+    display: flex;
+    gap: var(--space-sm);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .newsletter__input {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    color: var(--color-text);
+    transition: border-color var(--transition-fast);
+  }
+
+  .newsletter__input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .newsletter__input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-accent-glow);
+  }
+
+  .newsletter__button {
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-cta);
+    color: var(--color-bg);
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition:
+      background var(--transition-fast),
+      transform var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .newsletter__button:hover {
+    background: var(--color-cta-hover);
+    transform: translateY(-1px);
+  }
+
+  .newsletter__button:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 480px) {
+    .newsletter__form {
+      flex-direction: column;
+    }
+  }
+</style>

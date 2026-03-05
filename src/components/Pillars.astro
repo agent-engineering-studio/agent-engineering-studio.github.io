@@ -1,0 +1,99 @@
+---
+/*
+ * Pillars.astro — Le 4 aree dello studio (cards)
+ * Per modificare le card: aggiorna l'array `pillars` qui sotto.
+ */
+
+const pillars = [
+  {
+    icon: '\u{1F9E9}',
+    title: 'Starter Kit',
+    description: 'Template pronti per partire: agenti, tool, orchestrazioni. Fork e inizia.',
+  },
+  {
+    icon: '\u{1F3D7}\u{FE0F}',
+    title: 'Progetti End-to-End',
+    description: 'Demo complete dal concept al deploy. Stack reali, codice funzionante.',
+  },
+  {
+    icon: '\u{1F4D0}',
+    title: 'Best Practice',
+    description: 'Pattern, architetture e convenzioni testate. Impara dai nostri errori.',
+  },
+  {
+    icon: '\u{1F680}',
+    title: 'Community Lab',
+    description: 'Contribuisci, testa, migliora. Ogni progetto è aperto e documentato.',
+  },
+];
+---
+
+<section class="pillars" aria-labelledby="pillars-heading">
+  <div class="container">
+    <h2 id="pillars-heading" class="sr-only">Le aree dello studio</h2>
+    <div class="pillars__grid">
+      {pillars.map((pillar, i) => (
+        <article class={`pillar-card animate-in animate-delay-${i + 3}`}>
+          <span class="pillar-card__icon" aria-hidden="true">{pillar.icon}</span>
+          <h3 class="pillar-card__title">{pillar.title}</h3>
+          <p class="pillar-card__desc">{pillar.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pillars {
+    padding: var(--space-3xl) 0;
+  }
+
+  .pillars__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 600px) {
+    .pillars__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pillar-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    transition:
+      transform var(--transition-base),
+      border-color var(--transition-base),
+      box-shadow var(--transition-base);
+  }
+
+  .pillar-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 24px var(--color-accent-glow);
+  }
+
+  .pillar-card__icon {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .pillar-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .pillar-card__desc {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+</style>

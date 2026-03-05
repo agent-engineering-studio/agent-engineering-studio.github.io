@@ -1,0 +1,26 @@
+---
+/*
+ * index.astro — Landing page "coming soon"
+ * Pagina principale single-page. Assembla tutti i componenti.
+ * Per modificare l'ordine delle sezioni: riordina i componenti nel <main>.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Pillars from '../components/Pillars.astro';
+import Countdown from '../components/Countdown.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <main>
+    <Hero />
+    <Pillars />
+    <Countdown />
+    <NewsletterForm />
+    <SocialLinks />
+  </main>
+  <Footer />
+</BaseLayout>

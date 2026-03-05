@@ -1,0 +1,161 @@
+---
+/*
+ * Countdown.astro — Mini-timeline/roadmap con 3 step
+ * NON un countdown numerico. Mostra lo stato di avanzamento del progetto.
+ * Per modificare gli step: aggiorna l'array `steps` qui sotto.
+ */
+
+const steps = [
+  {
+    status: 'done',
+    icon: '\u2705',
+    label: 'Organizzazione creata',
+    detail: 'Completato',
+  },
+  {
+    status: 'active',
+    icon: '\u{1F504}',
+    label: 'Primo progetto in sviluppo',
+    detail: 'In corso',
+  },
+  {
+    status: 'pending',
+    icon: '\u23F3',
+    label: 'Release pubblica',
+    detail: 'Prossimamente',
+  },
+];
+---
+
+<section class="roadmap" aria-labelledby="roadmap-heading">
+  <div class="container">
+    <h2 id="roadmap-heading" class="roadmap__title animate-in animate-delay-5">Dove siamo</h2>
+    <div class="timeline animate-in animate-delay-6">
+      {steps.map((step) => (
+        <div class={`timeline__step timeline__step--${step.status}`}>
+          <div class="timeline__marker">
+            <span class="timeline__icon" aria-hidden="true">{step.icon}</span>
+          </div>
+          <div class="timeline__content">
+            <h3 class="timeline__label">{step.label}</h3>
+            <span class="timeline__detail">{step.detail}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .roadmap {
+    padding: var(--space-3xl) 0;
+  }
+
+  .roadmap__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-text);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .timeline__step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    position: relative;
+    padding-bottom: var(--space-xl);
+  }
+
+  .timeline__step:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Vertical connector line */
+  .timeline__step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+  }
+
+  .timeline__step--done:not(:last-child)::after {
+    background: var(--color-accent);
+    opacity: 0.4;
+  }
+
+  .timeline__marker {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-elevated);
+    border: 2px solid var(--color-border);
+    z-index: 1;
+  }
+
+  .timeline__step--done .timeline__marker {
+    border-color: var(--color-accent);
+    background: rgba(0, 229, 255, 0.1);
+  }
+
+  .timeline__step--active .timeline__marker {
+    border-color: var(--color-cta);
+    background: rgba(245, 166, 35, 0.1);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .timeline__icon {
+    font-size: 1.1rem;
+  }
+
+  .timeline__content {
+    padding-top: var(--space-xs);
+  }
+
+  .timeline__label {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 2px;
+  }
+
+  .timeline__detail {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .timeline__step--done .timeline__label {
+    color: var(--color-accent);
+  }
+
+  .timeline__step--active .timeline__detail {
+    color: var(--color-cta);
+    font-weight: 500;
+  }
+
+  .timeline__step--pending .timeline__label {
+    opacity: 0.5;
+  }
+
+  .timeline__step--pending .timeline__detail {
+    opacity: 0.5;
+  }
+</style>
