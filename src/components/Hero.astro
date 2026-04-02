@@ -1,7 +1,7 @@
 ---
 /*
  * Hero.astro — Sezione hero principale
- * Contiene titolo, tagline, sottotitolo e badge di stato.
+ * Contiene titolo, tagline e sottotitolo.
  * Per modificare i testi: aggiorna direttamente l'HTML qui sotto.
  */
 ---
@@ -38,13 +38,6 @@
     <p class="hero__subtitle animate-in animate-delay-3">
       Starter kit, template, demo end-to-end e best practice &mdash; dal concept alla prima release.
     </p>
-
-    <div class="hero__badge animate-in animate-delay-4">
-      <span class="badge">
-        <span class="badge__icon" aria-hidden="true">&#x1F52C;</span>
-        In costruzione &mdash; prime release in arrivo
-      </span>
-    </div>
   </div>
 </header>
 
@@ -114,29 +107,6 @@
     font-size: clamp(0.95rem, 2vw, 1.1rem);
     color: var(--color-text-muted);
     max-width: 600px;
-    margin: 0 auto var(--space-xl);
-  }
-
-  .hero__badge {
-    display: flex;
-    justify-content: center;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-lg);
-    background: var(--color-accent-glow);
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    border-radius: 999px;
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    color: var(--color-accent);
-    animation: pulse-glow 4s ease-in-out infinite;
-  }
-
-  .badge__icon {
-    font-size: 1.1rem;
+    margin: 0 auto;
   }
 </style>
