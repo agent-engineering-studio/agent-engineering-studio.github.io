@@ -1,0 +1,528 @@
+---
+/*
+ * ProjectsSection.astro — Catalogo progetti multi-project
+ * Griglia di card con dettagli per ciascun progetto.
+ * Pensato per crescere: aggiungere un elemento a `projects` per ogni nuovo progetto.
+ */
+
+const agents = [
+  { name: 'Orchestrator', role: 'Router + Planner' },
+  { name: 'Ingestion', role: 'Document Lifecycle' },
+  { name: 'Analyst', role: 'Vector + Graph' },
+  { name: 'KGC', role: 'Graph Completion' },
+  { name: 'Validator', role: 'Quality Assurance' },
+  { name: 'Synthesis', role: 'Report Generation' },
+  { name: 'Monitor', role: 'Observability' },
+];
+
+const projects = [
+  {
+    slug: 'multi-agent-knowledge-graph',
+    title: 'Multi-Agent Knowledge Graph',
+    status: 'In Development',
+    description:
+      'Un sistema di agenti specializzati che collaborano su un Knowledge Graph condiviso — il grafo diventa oggetto di lavoro e memoria persistente degli agenti.',
+    tags: ['LangGraph', 'MCP Protocol', 'Neo4j', 'Redis for AI', 'Ollama', 'FastAPI', 'Docker'],
+    color: '#00e5ff',
+    repoUrl: 'https://github.com/agent-engineering-studio/knowledge-graph',
+    agents: agents,
+    phases: [
+      { label: 'Fase 1', title: 'Foundation', duration: '2 sett.', items: ['Wrapper MCP → LangChain tools', 'AgentState condiviso', 'Orchestrator + Ingestion Agent'] },
+      { label: 'Fase 2', title: 'Intelligence', duration: '3 sett.', items: ['Analyst + Validator + KGC Agent', 'Memoria agenti nel KG'] },
+      { label: 'Fase 3', title: 'Autonomy', duration: '2 sett.', items: ['Synthesis + Monitor Agent', 'Agent API + Docker Compose'] },
+      { label: 'Fase 4', title: 'Production', duration: '1 sett.', items: ['Human-in-the-loop', 'Tracing OpenTelemetry', 'Dashboard qualità'] },
+    ],
+  },
+  // Aggiungi qui i prossimi progetti:
+  // {
+  //   slug: 'next-project-slug',
+  //   title: 'Titolo del prossimo progetto',
+  //   ...
+  // },
+];
+
+const project = projects[0]; // First project expanded
+---
+
+<section class="projects" id="projects" aria-labelledby="projects-heading">
+  <div class="container">
+    <div class="projects__header animate-in">
+      <h2 id="projects-heading" class="projects__title">Progetti</h2>
+      <p class="projects__subtitle">
+        Progetti open-source per sistemi multi-agente e AI engineering
+      </p>
+    </div>
+
+    {/* Main project card — expanded view */}
+    <article class="project-card animate-in">
+      <div class="project-card__header">
+        <span class="project-card__status">{project.status}</span>
+        <h3 class="project-card__title">
+          Multi-Agent <span class="project-card__accent">Knowledge Graph</span>
+        </h3>
+        <p class="project-card__desc">{project.description}</p>
+      </div>
+
+      {/* Architecture diagram */}
+      <div class="project-card__arch" aria-label="Diagramma architettura Supervisor + Specialists">
+        <div class="arch-diagram">
+          <div class="arch-node arch-node--orchestrator">
+            <span class="arch-node__label">Orchestrator</span>
+            <span class="arch-node__sub">Router + Planner</span>
+          </div>
+          <div class="arch-edges" aria-hidden="true">
+            <span class="arch-edge"></span>
+            <span class="arch-edge"></span>
+            <span class="arch-edge"></span>
+          </div>
+          <div class="arch-agents">
+            <div class="arch-node arch-node--agent">Ingestion</div>
+            <div class="arch-node arch-node--agent">Analyst</div>
+            <div class="arch-node arch-node--agent">Synthesis</div>
+          </div>
+          <div class="arch-edges arch-edges--secondary" aria-hidden="true">
+            <span class="arch-edge"></span>
+            <span class="arch-edge"></span>
+            <span class="arch-edge"></span>
+          </div>
+          <div class="arch-agents">
+            <div class="arch-node arch-node--agent">Validator</div>
+            <div class="arch-node arch-node--agent">KGC</div>
+            <div class="arch-node arch-node--agent">Monitor</div>
+          </div>
+          <div class="arch-layer">
+            <div class="arch-node arch-node--tool">MCP Tool Layer &rarr; Neo4j + Redis</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Agents catalog */}
+      <div class="project-card__agents">
+        <h4 class="project-card__section-title">Catalogo Agenti</h4>
+        <div class="agents-mini-grid">
+          {project.agents.map((agent) => (
+            <div class="agent-mini">
+              <span class="agent-mini__name">{agent.name}</span>
+              <span class="agent-mini__role">{agent.role}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Roadmap */}
+      <div class="project-card__roadmap">
+        <h4 class="project-card__section-title">Roadmap</h4>
+        <div class="roadmap">
+          {project.phases.map((phase, i) => (
+            <div class="roadmap-phase">
+              <div class="roadmap-phase__marker">
+                <span class="roadmap-phase__dot"></span>
+                {i < project.phases.length - 1 && <span class="roadmap-phase__line"></span>}
+              </div>
+              <div class="roadmap-phase__content">
+                <div class="roadmap-phase__head">
+                  <span class="roadmap-phase__label">{phase.label}</span>
+                  <span class="roadmap-phase__title">{phase.title}</span>
+                  <span class="roadmap-phase__duration">{phase.duration}</span>
+                </div>
+                <ul class="roadmap-phase__items">
+                  {phase.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Stack tags */}
+      <div class="project-card__stack">
+        <h4 class="project-card__section-title">Stack</h4>
+        <div class="stack-tags">
+          {project.tags.map((tech) => (
+            <span class="stack-tag">{tech}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* Repo link */}
+      <div class="project-card__actions">
+        <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="project-card__repo-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          Vai alla Repository
+        </a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .projects {
+    padding: var(--space-3xl) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .projects__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .projects__title {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .projects__subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Project Card ── */
+  .project-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .project-card__header {
+    text-align: center;
+  }
+
+  .project-card__status {
+    display: inline-block;
+    padding: 0.2em 0.8em;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border-radius: 999px;
+    margin-bottom: var(--space-md);
+  }
+
+  .project-card__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+  }
+
+  .project-card__accent {
+    color: var(--color-accent);
+  }
+
+  .project-card__desc {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: var(--color-text-muted);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .project-card__section-title {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-align: center;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Architecture diagram */
+  .project-card__arch {
+    padding: var(--space-lg) 0;
+  }
+
+  .arch-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .arch-node {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+  }
+
+  .arch-node--orchestrator {
+    padding: var(--space-md) var(--space-xl);
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-size: 0.9rem;
+  }
+
+  .arch-node--orchestrator .arch-node__sub {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+
+  .arch-node--agent {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-size: 0.75rem;
+  }
+
+  .arch-node--tool {
+    padding: var(--space-sm) var(--space-lg);
+    background: transparent;
+    border: 1px dashed var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .arch-edges {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+  }
+
+  .arch-edge {
+    display: block;
+    width: 1px;
+    height: 16px;
+    background: var(--color-border);
+  }
+
+  .arch-edges--secondary .arch-edge {
+    height: 12px;
+    opacity: 0.5;
+  }
+
+  .arch-agents {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .arch-layer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-sm);
+    width: 100%;
+  }
+
+  /* Agents mini grid */
+  .agents-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-sm);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .agent-mini {
+    background: rgba(0, 229, 255, 0.04);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .agent-mini:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 12px var(--color-accent-glow);
+  }
+
+  .agent-mini__name {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .agent-mini__role {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Roadmap */
+  .project-card__roadmap {
+    max-width: 560px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .roadmap-phase {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .roadmap-phase__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 20px;
+  }
+
+  .roadmap-phase__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px var(--color-accent-glow);
+  }
+
+  .roadmap-phase__line {
+    width: 1px;
+    flex: 1;
+    background: var(--color-border);
+    min-height: 20px;
+  }
+
+  .roadmap-phase__content {
+    padding-bottom: var(--space-lg);
+  }
+
+  .roadmap-phase__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .roadmap-phase__label {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .roadmap-phase__title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .roadmap-phase__duration {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-left: auto;
+  }
+
+  .roadmap-phase__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .roadmap-phase__items li {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    padding-left: 1em;
+    position: relative;
+  }
+
+  .roadmap-phase__items li::before {
+    content: '\203A';
+    position: absolute;
+    left: 0;
+    color: var(--color-border);
+  }
+
+  /* Stack tags */
+  .project-card__stack {
+    text-align: center;
+  }
+
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  .stack-tag {
+    padding: 0.3em 0.9em;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    transition: border-color var(--transition-base);
+  }
+
+  .stack-tag:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+    color: var(--color-accent);
+  }
+
+  /* Actions */
+  .project-card__actions {
+    text-align: center;
+  }
+
+  .project-card__repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.6em 1.5em;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    transition: border-color var(--transition-base), color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .project-card__repo-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: 0 0 16px var(--color-accent-glow);
+  }
+
+  @media (max-width: 400px) {
+    .agents-mini-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

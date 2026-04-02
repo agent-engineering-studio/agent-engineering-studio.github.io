@@ -15,14 +15,15 @@ const books = [
     description:
       'Un percorso completo dalla teoria accademica all\'implementazione enterprise con Python, Neo4j, Redis, RAG, MCP e Agent Framework.',
     tags: ['Python', 'Neo4j', 'Redis', 'MCP', 'Agent Framework'],
-    color: '#0B3D91',
+    cover: '/agent-engineering-studio-site/covers/knowledge-graph-thumb.jpg',
     amazonUrl: '#', // TODO: inserire URL Amazon reale
   },
   // Aggiungi qui i prossimi libri:
   // {
   //   slug: 'next-book-slug',
   //   title: 'Titolo del prossimo libro',
-  //   ...
+  //   ...,
+  //   cover: '/agent-engineering-studio-site/covers/next-book-thumb.jpg',
   // },
 ];
 ---
@@ -40,12 +41,16 @@ const books = [
       {books.map((book) => (
         <article class="book-card animate-in">
           <a href={`/agent-engineering-studio-site/books/${book.slug}`} class="book-card__link">
-            {/* Cover mini */}
-            <div class="book-card__cover" style={`--cover-color: ${book.color}`}>
-              <div class="book-card__cover-inner">
-                <span class="book-card__cover-tag">BOOK</span>
-                <span class="book-card__cover-title">{book.title.split(':')[0]}</span>
-              </div>
+            {/* Cover con immagine reale */}
+            <div class="book-card__cover">
+              <img
+                src={book.cover}
+                alt={`Copertina: ${book.title}`}
+                class="book-card__cover-img"
+                width="400"
+                height="640"
+                loading="lazy"
+              />
             </div>
 
             <div class="book-card__body">
@@ -149,51 +154,27 @@ const books = [
     height: 100%;
   }
 
-  /* ── Mini cover ── */
+  /* ── Cover con immagine reale ── */
   .book-card__cover {
-    height: 140px;
-    background: linear-gradient(135deg, var(--cover-color) 0%, color-mix(in srgb, var(--cover-color), #000 20%) 100%);
     position: relative;
     overflow: hidden;
+    background: #0a0e1a;
     display: flex;
     align-items: center;
     justify-content: center;
+    max-height: 280px;
   }
 
-  .book-card__cover::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
-    background-size: 20px 20px;
-    pointer-events: none;
+  .book-card__cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.3s ease;
   }
 
-  .book-card__cover-inner {
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .book-card__cover-tag {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 0.55rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: #ff9900;
-    text-transform: uppercase;
-    margin-bottom: 0.3em;
-  }
-
-  .book-card__cover-title {
-    font-family: var(--font-heading);
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.15;
+  .book-card:hover .book-card__cover-img {
+    transform: scale(1.03);
   }
 
   /* ── Card body ── */
