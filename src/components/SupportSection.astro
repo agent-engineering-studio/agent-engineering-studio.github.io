@@ -1,0 +1,102 @@
+---
+/*
+ * SupportSection.astro — Sezione "Supporta il progetto" con Buy Me a Coffee
+ * Posizionata tra BookSection e ProjectsSection.
+ */
+---
+
+<section class="support-section animate-in animate-delay-5" aria-label="Supporta il progetto">
+  <div class="container">
+    <div class="support-section__card">
+      <div class="support-section__icon" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+          <line x1="6" y1="1" x2="6" y2="4"/>
+          <line x1="10" y1="1" x2="10" y2="4"/>
+          <line x1="14" y1="1" x2="14" y2="4"/>
+        </svg>
+      </div>
+      <h2 class="support-section__title">Supporta il Progetto</h2>
+      <p class="support-section__desc">
+        Se questo progetto open-source ti è utile, considera di offrire un caffè per aiutare a mantenerlo attivo e in crescita.
+      </p>
+      <a
+        href="https://www.buymeacoffee.com/f9t3zol"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="support-section__btn"
+      >
+        <span class="support-section__btn-emoji">🤖</span>
+        <span>Help the project</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .support-section {
+    padding: var(--space-xl) 0;
+    text-align: center;
+  }
+
+  .support-section__card {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-xl);
+    background: rgba(15, 34, 64, 0.5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg, 12px);
+    backdrop-filter: blur(8px);
+  }
+
+  .support-section__icon {
+    color: #FF813F;
+    margin-bottom: var(--space-sm);
+  }
+
+  .support-section__title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .support-section__desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .support-section__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.6rem;
+    background: #FF813F;
+    color: #ffffff;
+    font-family: 'Cookie', cursive;
+    font-size: 1.15rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(255, 129, 63, 0.3);
+  }
+
+  .support-section__btn:hover {
+    background: #e5712e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(255, 129, 63, 0.4);
+  }
+
+  .support-section__btn-emoji {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 500px) {
+    .support-section__card {
+      padding: var(--space-md);
+    }
+  }
+</style>
