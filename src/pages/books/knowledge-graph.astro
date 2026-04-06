@@ -3,13 +3,45 @@
  * knowledge-graph.astro — Pagina dedicata al libro
  * "Knowledge Graph: dalla Teoria alla Pratica"
  *
- * TODO: Aggiornare AMAZON_BOOK_URL con l'URL reale Amazon.
+ * Edizioni: Italiano + English
+ * Formati: Paperback, Hardcover, eBook Kindle
+ * Cover: Neo4j-style Knowledge Graph diagram (v7)
+ *
+ * TODO: Aggiornare AMAZON_IT_URL e AMAZON_EN_URL con gli URL reali Amazon.
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
 
-const AMAZON_BOOK_URL = '#'; // TODO: inserire URL Amazon reale
+const AMAZON_IT_URL = '#'; // TODO: inserire URL Amazon IT
+const AMAZON_EN_URL = '#'; // TODO: inserire URL Amazon EN
+
+const editions = [
+  {
+    lang: 'it',
+    flag: '🇮🇹',
+    label: 'Edizione Italiana',
+    title: 'Knowledge Graph: dalla Teoria alla Pratica',
+    subtitle: 'Un percorso completo dalla teoria accademica all\'implementazione enterprise con Python, MCP e Agent Framework.',
+    cover: '/agent-engineering-studio-site/covers/knowledge-graph-cover-it.jpg',
+    thumb: '/agent-engineering-studio-site/covers/knowledge-graph-thumb.jpg',
+    pages: '190 pagine full color',
+    amazonUrl: AMAZON_IT_URL,
+    ctaLabel: 'Acquista su Amazon',
+  },
+  {
+    lang: 'en',
+    flag: '🇬🇧',
+    label: 'English Edition',
+    title: 'Knowledge Graph: From Theory to Practice',
+    subtitle: 'A complete journey from academic theory to enterprise implementation with Python, MCP and Agent Framework.',
+    cover: '/agent-engineering-studio-site/covers/knowledge-graph-cover-en.jpg',
+    thumb: '/agent-engineering-studio-site/covers/knowledge-graph-en-thumb.jpg',
+    pages: '200 pages full color',
+    amazonUrl: AMAZON_EN_URL,
+    ctaLabel: 'Buy on Amazon',
+  },
+];
 
 const parts = [
   { number: '1', title: 'Fondamenti', chapters: '1–4', desc: 'Teoria dei KG, modelli dati, query Cypher, ontologie e ragionamento' },
@@ -23,23 +55,29 @@ const stack = ['Python 3.11+', 'C# (.NET 9)', 'Neo4j', 'Redis for AI', 'Ollama',
 
 const highlights = [
   { icon: '📖', label: '23 capitoli + 4 appendici' },
-  { icon: '🎨', label: '190 pagine full color' },
+  { icon: '🎨', label: 'Full color' },
   { icon: '💻', label: 'Codice funzionante e testato' },
   { icon: '🏗️', label: 'Architetture reali enterprise' },
   { icon: '🤖', label: 'Multi-agent orchestration' },
   { icon: '🔗', label: 'MCP + Knowledge Graph' },
 ];
+
+const formats = [
+  { icon: '📖', title: 'Paperback', details: ['7" × 10" — Full color', 'Carta bianca premium, copertina lucida'] },
+  { icon: '📕', title: 'Hardcover', details: ['7" × 10" — Full color', 'Copertina rigida, dorso stampato'] },
+  { icon: '📱', title: 'eBook Kindle', details: ['EPUB 3.0 — Reflowable', 'TOC navigabile, 39 immagini'] },
+];
 ---
 
 <BaseLayout
   title="Knowledge Graph: dalla Teoria alla Pratica — Agent Engineering Studio"
-  description="Il libro completo su Knowledge Graph con Python, Neo4j, Redis, RAG, MCP e Agent Framework. Disponibile su Amazon."
+  description="Il libro completo su Knowledge Graph con Python, Neo4j, Redis, RAG, MCP e Agent Framework. Disponibile in italiano e inglese su Amazon."
 >
   <main>
     <!-- Hero -->
     <section class="book-hero">
       <div class="container">
-        <a href="/" class="back-link">&larr; Agent Engineering Studio</a>
+        <a href="/agent-engineering-studio-site/" class="back-link">&larr; Agent Engineering Studio</a>
 
         <div class="book-hero__layout">
           <div class="book-hero__info">
@@ -56,16 +94,24 @@ const highlights = [
               di <strong>Giuseppe Zileni</strong> — AI Senior Software Architect @ Hevolus Innovation
             </p>
 
+            <div class="book-hero__editions-label">
+              <span class="editions-label">Disponibile in 2 edizioni</span>
+            </div>
+
             <!-- Amazon CTA -->
             <div class="book-hero__actions">
-              <a href={AMAZON_BOOK_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon">
-                Acquista su Amazon
+              <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon">
+                🇮🇹 Acquista su Amazon
               </a>
+              <a href={AMAZON_EN_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--secondary">
+                🇬🇧 Buy on Amazon
+              </a>
+            </div>
+            <div class="book-hero__badge-row">
               <a
-                href={AMAZON_BOOK_URL}
+                href={AMAZON_IT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="amazon-badge-wrap"
                 aria-label="Available at Amazon"
               >
                 <img
@@ -83,15 +129,17 @@ const highlights = [
             </p>
           </div>
 
-          <!-- Book cover mock -->
+          <!-- Book cover — real image -->
           <div class="book-hero__cover">
-            <div class="cover-mock">
-              <div class="cover-mock__inner">
-                <span class="cover-mock__tag">BOOK</span>
-                <span class="cover-mock__title">Knowledge<br/>Graph</span>
-                <span class="cover-mock__sub">dalla Teoria<br/>alla Pratica</span>
-                <span class="cover-mock__author">Giuseppe Zileni</span>
-              </div>
+            <div class="cover-3d">
+              <img
+                src="/agent-engineering-studio-site/covers/knowledge-graph-cover-it.jpg"
+                alt="Copertina: Knowledge Graph dalla Teoria alla Pratica"
+                class="cover-3d__img"
+                width="320"
+                height="512"
+                loading="eager"
+              />
             </div>
           </div>
         </div>
@@ -107,6 +155,41 @@ const highlights = [
               <span class="highlight-item__icon" aria-hidden="true">{h.icon}</span>
               <span class="highlight-item__label">{h.label}</span>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Editions -->
+    <section class="editions">
+      <div class="container">
+        <h2 class="section-title">Edizioni disponibili</h2>
+        <div class="editions__grid">
+          {editions.map((ed) => (
+            <article class="edition-card">
+              <div class="edition-card__cover">
+                <img
+                  src={ed.cover}
+                  alt={`Cover: ${ed.title}`}
+                  class="edition-card__img"
+                  width="400"
+                  height="640"
+                  loading="lazy"
+                />
+              </div>
+              <div class="edition-card__body">
+                <div class="edition-card__lang">
+                  <span>{ed.flag}</span>
+                  <span>{ed.label}</span>
+                </div>
+                <h3 class="edition-card__title">{ed.title}</h3>
+                <p class="edition-card__desc">{ed.subtitle}</p>
+                <p class="edition-card__pages">{ed.pages}</p>
+                <a href={ed.amazonUrl} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--sm">
+                  {ed.ctaLabel}
+                </a>
+              </div>
+            </article>
           ))}
         </div>
       </div>
@@ -172,27 +255,27 @@ const highlights = [
       <div class="container">
         <h2 class="section-title">Formati disponibili</h2>
         <div class="formats__grid">
-          <div class="format-card">
-            <span class="format-card__icon" aria-hidden="true">📖</span>
-            <h3 class="format-card__title">Paperback</h3>
-            <p class="format-card__detail">7" × 10" — Full color — 190 pagine</p>
-            <p class="format-card__detail">Carta bianca premium, copertina lucida</p>
-          </div>
-          <div class="format-card">
-            <span class="format-card__icon" aria-hidden="true">📱</span>
-            <h3 class="format-card__title">eBook Kindle</h3>
-            <p class="format-card__detail">EPUB 3.0 — Reflowable</p>
-            <p class="format-card__detail">29 capitoli, 39 immagini, TOC navigabile</p>
-          </div>
+          {formats.map((fmt) => (
+            <div class="format-card">
+              <span class="format-card__icon" aria-hidden="true">{fmt.icon}</span>
+              <h3 class="format-card__title">{fmt.title}</h3>
+              {fmt.details.map((d) => (
+                <p class="format-card__detail">{d}</p>
+              ))}
+            </div>
+          ))}
         </div>
 
         <!-- Final Amazon CTA -->
         <div class="formats__cta">
-          <a href={AMAZON_BOOK_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--lg">
-            Acquista su Amazon
+          <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--lg">
+            🇮🇹 Acquista su Amazon
+          </a>
+          <a href={AMAZON_EN_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--lg btn-amazon--secondary">
+            🇬🇧 Buy on Amazon
           </a>
           <a
-            href={AMAZON_BOOK_URL}
+            href={AMAZON_IT_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Available at Amazon"
@@ -217,8 +300,6 @@ const highlights = [
 </BaseLayout>
 
 <style>
-  /* ── Variables inherit from global.css ── */
-
   /* ── Back link ── */
   .back-link {
     display: inline-block;
@@ -281,19 +362,35 @@ const highlights = [
   .book-hero__author {
     font-size: 0.9rem;
     color: var(--color-text-muted);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
   }
 
   .book-hero__author strong {
     color: var(--color-text);
   }
 
+  .book-hero__editions-label {
+    margin-bottom: var(--space-md);
+  }
+
+  .editions-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
   /* ── Amazon CTA ── */
   .book-hero__actions {
     display: flex;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+  }
+
+  .book-hero__badge-row {
     margin-bottom: var(--space-sm);
   }
 
@@ -305,7 +402,7 @@ const highlights = [
     background: #ff9900;
     color: #0a0e17;
     font-family: var(--font-heading);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     border-radius: var(--border-radius);
     text-decoration: none;
@@ -319,14 +416,26 @@ const highlights = [
     box-shadow: 0 4px 24px rgba(255, 153, 0, 0.35);
   }
 
+  .btn-amazon--secondary {
+    background: transparent;
+    color: #ff9900;
+    border: 1px solid #ff9900;
+  }
+
+  .btn-amazon--secondary:hover {
+    background: rgba(255, 153, 0, 0.1);
+    color: #ffad33;
+    border-color: #ffad33;
+  }
+
+  .btn-amazon--sm {
+    font-size: 0.78rem;
+    padding: 0.5em 1.2em;
+  }
+
   .btn-amazon--lg {
     font-size: 1rem;
     padding: 0.8em 2em;
-  }
-
-  .amazon-badge-wrap {
-    display: inline-block;
-    line-height: 0;
   }
 
   .amazon-badge-img {
@@ -341,77 +450,36 @@ const highlights = [
     opacity: 0.4;
   }
 
-  /* ── Cover mock ── */
+  /* ── Cover 3D ── */
   .book-hero__cover {
     flex-shrink: 0;
   }
 
-  .cover-mock {
-    width: 220px;
-    height: 314px;
-    perspective: 800px;
+  .cover-3d {
+    width: 260px;
+    perspective: 900px;
   }
 
-  .cover-mock__inner {
+  .cover-3d__img {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #0B3D91 0%, #1A5276 60%, #2471A3 100%);
+    height: auto;
     border-radius: 4px 12px 12px 4px;
     box-shadow:
-      -4px 0 0 #08244d,
-      -6px 1px 0 #061a38,
-      0 8px 40px rgba(0,0,0,0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: var(--space-lg);
-    gap: var(--space-sm);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+      -4px 0 0 rgba(0, 229, 255, 0.15),
+      -6px 1px 0 rgba(0, 229, 255, 0.08),
+      0 8px 40px rgba(0, 0, 0, 0.5),
+      0 0 60px rgba(0, 229, 255, 0.08);
+    transform: rotateY(-6deg);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
-  .cover-mock__inner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
-    background-size: 20px 20px;
-    pointer-events: none;
-  }
-
-  .cover-mock__tag {
-    font-family: var(--font-heading);
-    font-size: 0.55rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: #ff9900;
-    text-transform: uppercase;
-  }
-
-  .cover-mock__title {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.15;
-  }
-
-  .cover-mock__sub {
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.3;
-  }
-
-  .cover-mock__author {
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.5);
-    margin-top: var(--space-sm);
+  .cover-3d:hover .cover-3d__img {
+    transform: rotateY(-2deg) translateY(-4px);
+    box-shadow:
+      -3px 0 0 rgba(0, 229, 255, 0.2),
+      -5px 1px 0 rgba(0, 229, 255, 0.12),
+      0 12px 48px rgba(0, 0, 0, 0.6),
+      0 0 80px rgba(0, 229, 255, 0.12);
   }
 
   /* ── Highlights ── */
@@ -442,6 +510,94 @@ const highlights = [
   }
 
   .highlight-item__icon { font-size: 1.1rem; }
+
+  /* ── Editions ── */
+  .editions {
+    padding: var(--space-3xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .editions__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: var(--space-xl);
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .edition-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  }
+
+  .edition-card:hover {
+    border-color: rgba(0, 229, 255, 0.35);
+    box-shadow: 0 0 24px var(--color-accent-glow);
+    transform: translateY(-3px);
+  }
+
+  .edition-card__cover {
+    background: #0a0e1a;
+    overflow: hidden;
+    max-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .edition-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.3s ease;
+  }
+
+  .edition-card:hover .edition-card__img {
+    transform: scale(1.03);
+  }
+
+  .edition-card__body {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .edition-card__lang {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .edition-card__title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+
+  .edition-card__desc {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .edition-card__pages {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+  }
 
   /* ── Section titles ── */
   .section-title {
@@ -577,9 +733,9 @@ const highlights = [
 
   .formats__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-lg);
-    max-width: 560px;
+    max-width: 720px;
     margin: 0 auto var(--space-2xl);
   }
 
@@ -612,8 +768,8 @@ const highlights = [
     }
     .book-hero__subtitle { margin-left: auto; margin-right: auto; }
     .book-hero__actions { justify-content: center; }
+    .cover-3d { width: 200px; }
     .formats__grid { grid-template-columns: 1fr; }
-    .cover-mock { width: 180px; height: 257px; }
-    .cover-mock__title { font-size: 1.1rem; }
+    .editions__grid { grid-template-columns: 1fr; }
   }
 </style>
