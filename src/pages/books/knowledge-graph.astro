@@ -1,7 +1,7 @@
 ---
 /*
  * knowledge-graph.astro — Pagina dedicata al libro
- * "Knowledge Graph: dalla Teoria alla Pratica"
+ * "AI che Ragiona"
  *
  * Edizioni: Italiano + English
  * Formati: Paperback, Hardcover, eBook Kindle
@@ -21,11 +21,11 @@ const editions = [
     lang: 'it',
     flag: '🇮🇹',
     label: 'Edizione Italiana',
-    title: 'Knowledge Graph: dalla Teoria alla Pratica',
-    subtitle: 'Un percorso completo dalla teoria accademica all\'implementazione enterprise con Python, MCP e Agent Framework.',
-    cover: '/agent-engineering-studio-site/covers/knowledge-graph-cover-it.jpg',
-    thumb: '/agent-engineering-studio-site/covers/knowledge-graph-thumb.jpg',
-    pages: '190 pagine full color',
+    title: 'AI che Ragiona',
+    subtitle: 'Un percorso completo dalla teoria accademica all\'implementazione enterprise con Python, Neo4j e Microsoft Agent Framework.',
+    cover: '/agent-engineering-studio-site/covers/ai-che-ragiona-it-ebook-cover.jpg',
+    thumb: '/agent-engineering-studio-site/covers/ai-che-ragiona-it-thumb.jpg',
+    pages: '280+ pagine full color',
     amazonUrl: AMAZON_IT_URL,
     ctaLabel: 'Acquista su Amazon',
   },
@@ -33,28 +33,28 @@ const editions = [
     lang: 'en',
     flag: '🇬🇧',
     label: 'English Edition',
-    title: 'Knowledge Graph: From Theory to Practice',
-    subtitle: 'A complete journey from academic theory to enterprise implementation with Python, MCP and Agent Framework.',
-    cover: '/agent-engineering-studio-site/covers/knowledge-graph-cover-en.jpg',
-    thumb: '/agent-engineering-studio-site/covers/knowledge-graph-en-thumb.jpg',
-    pages: '200 pages full color',
+    title: 'AI that Reasons',
+    subtitle: 'Building Intelligent Systems with Graphs, RAG and Agents in Production with Python, Neo4j and Microsoft Agent Framework.',
+    cover: '/agent-engineering-studio-site/covers/ai-che-ragiona-en-ebook-cover.jpg',
+    thumb: '/agent-engineering-studio-site/covers/ai-che-ragiona-en-thumb.jpg',
+    pages: '280+ pages full color',
     amazonUrl: AMAZON_EN_URL,
     ctaLabel: 'Buy on Amazon',
   },
 ];
 
 const parts = [
-  { number: '1', title: 'Fondamenti', chapters: '1–4', desc: 'Teoria dei KG, modelli dati, query Cypher, ontologie e ragionamento' },
-  { number: '2', title: 'Costruire con Python', chapters: '5–9', desc: 'Architettura, Vector Store, pipeline RAG, interfacce NL, KG Completion' },
-  { number: '3', title: 'Avanzato', chapters: '10–16', desc: 'KG dinamici, produzione, pipeline da testo, metriche qualità, ontologie multi-schema' },
-  { number: '4', title: 'MCP Protocol', chapters: '17–20', desc: 'Teoria MCP, architettura del protocollo, server MCP per Knowledge Graph' },
-  { number: '5', title: 'Agent Framework', chapters: '21–23', desc: 'Agenti AI orchestrati, Microsoft Agent Framework, i 7 agenti del progetto' },
+  { number: 'I', title: 'Fondamenti dei Knowledge Graph', chapters: '1-4', desc: 'Teoria KG, modelli dati (RDF, Property Graph), query Cypher/SPARQL, ontologie OWL e ragionamento' },
+  { number: 'II', title: 'Costruire con Python', chapters: '5-12', desc: 'Quick Start in 30 min, architettura, pipeline ingestion, Docker Compose, Pydantic, Vector Store' },
+  { number: 'III-V', title: 'RAG, KGC e Pipeline', chapters: '13-20', desc: 'Graph-RAG vs RAG classico, ricerca ibrida, KG Completion, pipeline da testo, metriche qualita''' },
+  { number: 'VI', title: 'Model Context Protocol', chapters: '21-24', desc: 'Architettura MCP, server per KG, tool custom, sicurezza enterprise, debug' },
+  { number: 'VII+', title: 'Agent AI e Business', chapters: '25-32', desc: '7 agenti orchestrati con MAF, confronto framework, pricing, ROI, deployment cloud enterprise' },
 ];
 
 const stack = ['Python 3.11+', 'C# (.NET 9)', 'Neo4j', 'Redis for AI', 'Ollama', 'FastAPI', 'Docker', 'MCP', 'Microsoft Agent Framework'];
 
 const highlights = [
-  { icon: '📖', label: '23 capitoli + 4 appendici' },
+  { icon: '📖', label: '30+ capitoli + 3 appendici' },
   { icon: '🎨', label: 'Full color' },
   { icon: '💻', label: 'Codice funzionante e testato' },
   { icon: '🏗️', label: 'Architetture reali enterprise' },
@@ -65,13 +65,13 @@ const highlights = [
 const formats = [
   { icon: '📖', title: 'Paperback', details: ['7" × 10" — Full color', 'Carta bianca premium, copertina lucida'] },
   { icon: '📕', title: 'Hardcover', details: ['7" × 10" — Full color', 'Copertina rigida, dorso stampato'] },
-  { icon: '📱', title: 'eBook Kindle', details: ['EPUB 3.0 — Reflowable', 'TOC navigabile, 39 immagini'] },
+  { icon: '📱', title: 'eBook Kindle', details: ['EPUB 3.0 — Reflowable', 'TOC navigabile, 35 figure'] },
 ];
 ---
 
 <BaseLayout
-  title="Knowledge Graph: dalla Teoria alla Pratica — Agent Engineering Studio"
-  description="Il libro completo su Knowledge Graph con Python, Neo4j, Redis, RAG, MCP e Agent Framework. Disponibile in italiano e inglese su Amazon."
+  title="AI che Ragiona — Agent Engineering Studio"
+  description="AI che Ragiona: Costruire Sistemi Intelligenti con Grafi, RAG e Agenti in Produzione. Knowledge Graph, Graph-RAG, MCP e Microsoft Agent Framework. Disponibile in italiano e inglese su Amazon."
 >
   <main>
     <!-- Hero -->
@@ -83,12 +83,12 @@ const formats = [
           <div class="book-hero__info">
             <span class="badge-new">Aprile 2026</span>
             <h1 class="book-hero__title">
-              Knowledge Graph:<br/>
-              <span class="accent">dalla Teoria alla Pratica</span>
+              AI che Ragiona<br/>
+              <span class="accent">Sistemi Intelligenti con Grafi, RAG e Agenti</span>
             </h1>
             <p class="book-hero__subtitle">
-              Un percorso completo dalla teoria accademica all'implementazione enterprise
-              con Python, MCP e Agent Framework.
+              Costruire Sistemi Intelligenti con Grafi, RAG e Agenti in Produzione
+              con Python, Neo4j e Microsoft Agent Framework.
             </p>
             <p class="book-hero__author">
               di <strong>Giuseppe Zileni</strong> — AI Senior Software Architect @ Hevolus Innovation
@@ -133,8 +133,8 @@ const formats = [
           <div class="book-hero__cover">
             <div class="cover-3d">
               <img
-                src="/agent-engineering-studio-site/covers/knowledge-graph-cover-it.jpg"
-                alt="Copertina: Knowledge Graph dalla Teoria alla Pratica"
+                src="/agent-engineering-studio-site/covers/ai-che-ragiona-it-ebook-cover.jpg"
+                alt="Copertina: AI che Ragiona"
                 class="cover-3d__img"
                 width="320"
                 height="512"
