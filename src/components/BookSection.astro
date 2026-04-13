@@ -17,7 +17,7 @@ const books = [
     description:
       'Costruire Sistemi Intelligenti con Grafi, RAG e Agenti in Produzione con Python, Neo4j e Microsoft Agent Framework.',
     tags: ['Python', 'Neo4j', 'Redis', 'Graph-RAG', 'MCP', 'Agent Framework'],
-    cover: '/agent-engineering-studio-site/covers/ai-che-ragiona-it-thumb.jpg',
+    cover: '/covers/ai-che-ragiona-it-thumb.jpg',
     amazonUrl: '#', // TODO: inserire URL Amazon reale
   },
   // Aggiungi qui i prossimi libri:
@@ -25,7 +25,7 @@ const books = [
   //   slug: 'next-book-slug',
   //   title: 'Titolo del prossimo libro',
   //   ...,
-  //   cover: '/agent-engineering-studio-site/covers/next-book-thumb.jpg',
+  //   cover: '/covers/next-book-thumb.jpg',
   // },
 ];
 ---
@@ -42,7 +42,7 @@ const books = [
     <div class="catalog__grid">
       {books.map((book) => (
         <article class="book-card animate-in">
-          <a href={`/agent-engineering-studio-site/books/${book.slug}`} class="book-card__link">
+          <a href={`/books/${book.slug}`} class="book-card__link">
             {/* Cover con immagine reale */}
             <div class="book-card__cover">
               <img
@@ -84,7 +84,7 @@ const books = [
               {/* Amazon badge */}
               <div class="book-card__badge">
                 <img
-                  src="/agent-engineering-studio-site/badges/available_at_amazon_en_horizontal_drk.png"
+                  src="/badges/available_at_amazon_en_horizontal_drk.png"
                   alt="Available at Amazon"
                   width="140"
                   height="36"
