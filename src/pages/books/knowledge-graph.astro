@@ -3,45 +3,15 @@
  * knowledge-graph.astro — Pagina dedicata al libro
  * "AI che Ragiona"
  *
- * Edizioni: Italiano + English
+ * Edizione: Italiano
  * Formati: Paperback, Hardcover, eBook Kindle
  * Cover: Neo4j-style Knowledge Graph diagram (v7)
- *
- * TODO: Aggiornare AMAZON_IT_URL e AMAZON_EN_URL con gli URL reali Amazon.
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
 
-const AMAZON_IT_URL = '#'; // TODO: inserire URL Amazon IT
-const AMAZON_EN_URL = '#'; // TODO: inserire URL Amazon EN
-
-const editions = [
-  {
-    lang: 'it',
-    flag: '🇮🇹',
-    label: 'Edizione Italiana',
-    title: 'AI che Ragiona',
-    subtitle: 'Un percorso completo dalla teoria accademica all\'implementazione enterprise con Python, Neo4j e Microsoft Agent Framework.',
-    cover: '/covers/ai-che-ragiona-it-ebook-cover.jpg',
-    thumb: '/covers/ai-che-ragiona-it-thumb.jpg',
-    pages: '280+ pagine full color',
-    amazonUrl: AMAZON_IT_URL,
-    ctaLabel: 'Acquista su Amazon',
-  },
-  {
-    lang: 'en',
-    flag: '🇬🇧',
-    label: 'English Edition',
-    title: 'AI that Reasons',
-    subtitle: 'Building Intelligent Systems with Graphs, RAG and Agents in Production with Python, Neo4j and Microsoft Agent Framework.',
-    cover: '/covers/ai-che-ragiona-en-ebook-cover.jpg',
-    thumb: '/covers/ai-che-ragiona-en-thumb.jpg',
-    pages: '280+ pages full color',
-    amazonUrl: AMAZON_EN_URL,
-    ctaLabel: 'Buy on Amazon',
-  },
-];
+const AMAZON_IT_URL = 'https://www.amazon.it/gp/product/B0GWRX64Z8/ref=ox_sc_act_title_1?smid=A1FPE5JXJST57&psc=1';
 
 const parts = [
   { number: 'I', title: 'Fondamenti dei Knowledge Graph', chapters: '1-4', desc: 'Teoria KG, modelli dati (RDF, Property Graph), query Cypher/SPARQL, ontologie OWL e ragionamento' },
@@ -71,7 +41,7 @@ const formats = [
 
 <BaseLayout
   title="AI che Ragiona — Agent Engineering Studio"
-  description="AI che Ragiona: Costruire Sistemi Intelligenti con Grafi, RAG e Agenti in Produzione. Knowledge Graph, Graph-RAG, MCP e Microsoft Agent Framework. Disponibile in italiano e inglese su Amazon."
+  description="AI che Ragiona: Costruire Sistemi Intelligenti con Grafi, RAG e Agenti in Produzione. Knowledge Graph, Graph-RAG, MCP e Microsoft Agent Framework. Disponibile su Amazon."
 >
   <main>
     <!-- Hero -->
@@ -94,17 +64,10 @@ const formats = [
               di <strong>Giuseppe Zileni</strong> — AI Senior Software Architect @ Hevolus Innovation
             </p>
 
-            <div class="book-hero__editions-label">
-              <span class="editions-label">Disponibile in 2 edizioni</span>
-            </div>
-
             <!-- Amazon CTA -->
             <div class="book-hero__actions">
               <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon">
-                🇮🇹 Acquista su Amazon
-              </a>
-              <a href={AMAZON_EN_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--secondary">
-                🇬🇧 Buy on Amazon
+                Acquista su Amazon
               </a>
             </div>
             <div class="book-hero__badge-row">
@@ -155,41 +118,6 @@ const formats = [
               <span class="highlight-item__icon" aria-hidden="true">{h.icon}</span>
               <span class="highlight-item__label">{h.label}</span>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Editions -->
-    <section class="editions">
-      <div class="container">
-        <h2 class="section-title">Edizioni disponibili</h2>
-        <div class="editions__grid">
-          {editions.map((ed) => (
-            <article class="edition-card">
-              <div class="edition-card__cover">
-                <img
-                  src={ed.cover}
-                  alt={`Cover: ${ed.title}`}
-                  class="edition-card__img"
-                  width="400"
-                  height="640"
-                  loading="lazy"
-                />
-              </div>
-              <div class="edition-card__body">
-                <div class="edition-card__lang">
-                  <span>{ed.flag}</span>
-                  <span>{ed.label}</span>
-                </div>
-                <h3 class="edition-card__title">{ed.title}</h3>
-                <p class="edition-card__desc">{ed.subtitle}</p>
-                <p class="edition-card__pages">{ed.pages}</p>
-                <a href={ed.amazonUrl} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--sm">
-                  {ed.ctaLabel}
-                </a>
-              </div>
-            </article>
           ))}
         </div>
       </div>
@@ -269,10 +197,7 @@ const formats = [
         <!-- Final Amazon CTA -->
         <div class="formats__cta">
           <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--lg">
-            🇮🇹 Acquista su Amazon
-          </a>
-          <a href={AMAZON_EN_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--lg btn-amazon--secondary">
-            🇬🇧 Buy on Amazon
+            Acquista su Amazon
           </a>
           <a
             href={AMAZON_IT_URL}
@@ -367,18 +292,6 @@ const formats = [
 
   .book-hero__author strong {
     color: var(--color-text);
-  }
-
-  .book-hero__editions-label {
-    margin-bottom: var(--space-md);
-  }
-
-  .editions-label {
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
   }
 
   /* ── Amazon CTA ── */
@@ -510,94 +423,6 @@ const formats = [
   }
 
   .highlight-item__icon { font-size: 1.1rem; }
-
-  /* ── Editions ── */
-  .editions {
-    padding: var(--space-3xl) 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .editions__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: var(--space-xl);
-    max-width: 820px;
-    margin: 0 auto;
-  }
-
-  .edition-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
-  }
-
-  .edition-card:hover {
-    border-color: rgba(33, 150, 243, 0.35);
-    box-shadow: 0 0 24px var(--color-accent-glow);
-    transform: translateY(-3px);
-  }
-
-  .edition-card__cover {
-    background: #0a0e1a;
-    overflow: hidden;
-    max-height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .edition-card__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    transition: transform 0.3s ease;
-  }
-
-  .edition-card:hover .edition-card__img {
-    transform: scale(1.03);
-  }
-
-  .edition-card__body {
-    padding: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .edition-card__lang {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-family: var(--font-heading);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .edition-card__title {
-    font-family: var(--font-heading);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 1.3;
-  }
-
-  .edition-card__desc {
-    font-size: 0.82rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-  }
-
-  .edition-card__pages {
-    font-family: var(--font-heading);
-    font-size: 0.72rem;
-    color: var(--color-text-muted);
-  }
 
   /* ── Section titles ── */
   .section-title {
@@ -770,6 +595,5 @@ const formats = [
     .book-hero__actions { justify-content: center; }
     .cover-3d { width: 200px; }
     .formats__grid { grid-template-columns: 1fr; }
-    .editions__grid { grid-template-columns: 1fr; }
   }
 </style>
