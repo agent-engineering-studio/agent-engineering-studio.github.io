@@ -28,7 +28,7 @@ Vedi `.github/workflows/deploy.yml`.
 
 ## Struttura
 
-```
+```text
 src/
   layouts/BaseLayout.astro     # Layout base con <head>, meta, fonts
   pages/index.astro            # Landing page principale
