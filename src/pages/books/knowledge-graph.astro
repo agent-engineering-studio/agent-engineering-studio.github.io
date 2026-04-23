@@ -41,7 +41,7 @@ const formats = [
 
 <BaseLayout
   title="AI che Ragiona — Agent Engineering Studio"
-  description="AI che Ragiona: Costruire Sistemi Intelligenti con Grafi, RAG e Agenti in Produzione. Knowledge Graph, Graph-RAG, MCP e Microsoft Agent Framework. Disponibile su Amazon."
+  description="Dalla teoria dei Knowledge Graph a una pipeline Graph-RAG in produzione: Neo4j, Redis, Ollama, Model Context Protocol e agenti orchestrati con Microsoft Agent Framework. Codice eseguibile con un docker compose up."
 >
   <main>
     <!-- Hero -->
@@ -129,19 +129,27 @@ const formats = [
         <h2 class="section-title">Di cosa parla il libro</h2>
         <div class="description__content">
           <p>
-            Questo libro porta il lettore dal concetto di <strong>grafo di conoscenza</strong> fino a un
-            sistema funzionante in produzione, capace di rispondere a domande in linguaggio naturale su
-            documenti aziendali.
+            La domanda non è <em>"cos'è un Knowledge Graph?"</em> — a quella risponde Wikipedia.
+            La domanda è: <strong>come costruisco un sistema che funziona davvero, in produzione,
+            con dati reali, e che un'azienda è disposta a pagare?</strong>
           </p>
           <p>
-            Copre l'intero ciclo: modelli dati, ontologie, pipeline RAG, Vector Store, LLM,
-            <strong>Model Context Protocol</strong> e orchestrazione <strong>multi-agente</strong>
-            con Microsoft Agent Framework.
+            Il libro colma il divario tra la letteratura accademica sui KG — eccellente ma lontana
+            dalla pratica — e la documentazione dei singoli tool, ottima per il componente ma raramente
+            in grado di mostrare come i pezzi si incastrano in un sistema coerente.
           </p>
           <p>
-            Pensato per <strong>sviluppatori Python e C#</strong>, data engineer e AI engineer che vogliono
-            costruire un KG reale, ma anche per <strong>CTO e product manager</strong> che vogliono
-            valutare il potenziale dei Knowledge Graph e stimare il ROI.
+            Il percorso è completo: modelli dati (RDF, Property Graph), ontologie e ragionamento,
+            pipeline <strong>Graph-RAG</strong> con ricerca ibrida, <strong>Model Context Protocol</strong>
+            per esporre il KG come servizio cognitivo, e orchestrazione <strong>multi-agente</strong>
+            con Microsoft Agent Framework — il successore unificato di Semantic Kernel e AutoGen.
+            Tutto eseguibile con un singolo <code>docker compose up</code>.
+          </p>
+          <p>
+            Pensato per <strong>sviluppatori Python e C#</strong>, data engineer e AI engineer che
+            vogliono costruire un KG reale, ma anche per <strong>CTO e product manager</strong> che
+            devono valutare il potenziale dei Knowledge Graph, stimare il ROI e presentare metriche
+            al board.
           </p>
         </div>
       </div>
@@ -456,6 +464,21 @@ const formats = [
 
   .description__content strong {
     color: var(--color-text);
+  }
+
+  .description__content em {
+    color: var(--color-text);
+    font-style: italic;
+  }
+
+  .description__content code {
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 0.85em;
+    padding: 0.1em 0.4em;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-accent);
   }
 
   /* ── TOC ── */

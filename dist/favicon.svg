@@ -1,14 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Agent Engineering Studio favicon: AE + AI hexagon -->
+  <defs>
+    <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3ba4f7"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+    <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+  </defs>
   <rect width="32" height="32" rx="6" fill="#0a0e17"/>
-  <!-- Stylized A shape -->
-  <path d="M6 26L13 6h2l-4 12h6L13 6h2l7 20h-2.5l-2-6H10.5l-2 6H6z" fill="#1a7abf" opacity="0.9"/>
-  <!-- AI hexagon badge -->
-  <path d="M22 8l4 2.3v4.6L22 17.2 18 14.9v-4.6L22 8z" fill="#0d6ebd" stroke="#2196F3" stroke-width="0.5"/>
-  <text x="22" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="5" font-weight="bold" fill="white">AI</text>
+  <!-- Stylized A -->
+  <path d="M5 26L12.5 5h3L8 20h8L12.5 5h3L22 26h-3l-2-6H10l-2 6H5z" fill="url(#ag)"/>
+  <!-- Stripes -->
+  <rect x="5" y="22" width="17" height="1.2" rx="0.5" fill="#546E7A" opacity="0.6"/>
+  <rect x="5" y="24" width="17" height="1.2" rx="0.5" fill="#455A64" opacity="0.5"/>
+  <!-- AI hexagon -->
+  <polygon points="24,6 29,8.9 29,14.6 24,17.5 19,14.6 19,8.9" fill="url(#hg)" stroke="#2196F3" stroke-width="0.6"/>
+  <text x="24" y="13.8" text-anchor="middle" font-family="Arial,sans-serif" font-size="5.5" font-weight="bold" fill="white">AI</text>
   <!-- Circuit dots -->
-  <circle cx="27" cy="10" r="0.8" fill="#2196F3"/>
-  <circle cx="29" cy="12" r="0.6" fill="#2196F3" opacity="0.7"/>
-  <line x1="26" y1="10.3" x2="27" y2="10" stroke="#2196F3" stroke-width="0.4"/>
-  <line x1="27" y1="10" x2="29" y2="12" stroke="#2196F3" stroke-width="0.3" opacity="0.6"/>
+  <circle cx="30" cy="8" r="0.9" fill="#2196F3" opacity="0.9"/>
+  <circle cx="31" cy="11" r="0.7" fill="#2196F3" opacity="0.6"/>
+  <line x1="29" y1="8.9" x2="30" y2="8" stroke="#2196F3" stroke-width="0.4" opacity="0.7"/>
+  <line x1="30" y1="8" x2="31" y2="11" stroke="#2196F3" stroke-width="0.3" opacity="0.5"/>
 </svg>
