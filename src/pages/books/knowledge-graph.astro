@@ -12,6 +12,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
 
 const AMAZON_IT_URL = 'https://www.amazon.it/gp/product/B0GWRX64Z8/ref=ox_sc_act_title_1?smid=A1FPE5JXJST57&psc=1';
+const GITHUB_DISCUSSIONS_URL = 'https://github.com/orgs/agent-engineering-studio/discussions';
 
 const parts = [
   { number: 'I', title: 'Fondamenti dei Knowledge Graph', chapters: '1-4', desc: 'Teoria KG, modelli dati (RDF, Property Graph), query Cypher/SPARQL, ontologie OWL e ragionamento' },
@@ -21,15 +22,15 @@ const parts = [
   { number: 'VII+', title: 'Agent AI e Business', chapters: '25-32', desc: '7 agenti orchestrati con MAF, confronto framework, pricing, ROI, deployment cloud enterprise' },
 ];
 
-const stack = ['Python 3.11+', 'C# (.NET 9)', 'Neo4j', 'Redis for AI', 'Ollama', 'FastAPI', 'Docker', 'MCP', 'Microsoft Agent Framework'];
+const stack = ['Python 3.11+', 'Neo4j', 'Redis Stack', 'Ollama (qwen2.5:14b + nomic-embed-text)', 'FastMCP', 'Microsoft Agent Framework', 'FastAPI', 'Next.js', 'Docker Compose'];
 
 const highlights = [
-  { icon: '📖', label: '30+ capitoli + 3 appendici' },
-  { icon: '🎨', label: 'Full color' },
-  { icon: '💻', label: 'Codice funzionante e testato' },
-  { icon: '🏗️', label: 'Architetture reali enterprise' },
-  { icon: '🤖', label: 'Multi-agent orchestration' },
+  { icon: '📖', label: '500+ pagine full color' },
+  { icon: '💻', label: 'Codice Python eseguibile' },
+  { icon: '🏗️', label: 'Architetture enterprise reali' },
+  { icon: '🤖', label: '7 agenti orchestrati con MAF' },
   { icon: '🔗', label: 'MCP + Knowledge Graph' },
+  { icon: '📊', label: 'Caso enterprise 18 mesi, ROI reale' },
 ];
 
 const formats = [
@@ -41,7 +42,7 @@ const formats = [
 
 <BaseLayout
   title="AI che Ragiona — Agent Engineering Studio"
-  description="Dalla teoria dei Knowledge Graph a una pipeline Graph-RAG in produzione: Neo4j, Redis, Ollama, Model Context Protocol e agenti orchestrati con Microsoft Agent Framework. Codice eseguibile con un docker compose up."
+  description="Oltre 500 pagine di codice Python eseguibile per costruire Knowledge Graph enterprise, pipeline Graph-RAG ibride, server MCP e crew di agenti orchestrati con Microsoft Agent Framework. Dalla teoria al deployment, senza scorciatoie."
 >
   <main>
     <!-- Hero -->
@@ -51,14 +52,14 @@ const formats = [
 
         <div class="book-hero__layout">
           <div class="book-hero__info">
-            <span class="badge-new">Aprile 2026</span>
+            <span class="badge-new">Edizione 2026</span>
             <h1 class="book-hero__title">
               AI che Ragiona<br/>
-              <span class="accent">Sistemi Intelligenti con Grafi, RAG e Agenti</span>
+              <span class="accent">Da sviluppatore a Solution Architect</span>
             </h1>
             <p class="book-hero__subtitle">
-              Costruire Sistemi Intelligenti con Grafi, RAG e Agenti in Produzione
-              con Python, Neo4j e Microsoft Agent Framework.
+              Knowledge Graph, Graph-RAG e Agenti Multi-Modello in Produzione
+              con Python, Neo4j, MCP e Microsoft Agent Framework.
             </p>
             <p class="book-hero__author">
               di <strong>Giuseppe Zileni</strong> — AI Senior Software Architect @ Hevolus Innovation
@@ -128,28 +129,32 @@ const formats = [
       <div class="container">
         <h2 class="section-title">Di cosa parla il libro</h2>
         <div class="description__content">
-          <p>
-            La domanda non è <em>"cos'è un Knowledge Graph?"</em> — a quella risponde Wikipedia.
-            La domanda è: <strong>come costruisco un sistema che funziona davvero, in produzione,
-            con dati reali, e che un'azienda è disposta a pagare?</strong>
+          <p class="lead">
+            <em>Le chatbot rispondono. I sistemi che ragionano decidono.</em>
           </p>
           <p>
-            Il libro colma il divario tra la letteratura accademica sui KG — eccellente ma lontana
-            dalla pratica — e la documentazione dei singoli tool, ottima per il componente ma raramente
-            in grado di mostrare come i pezzi si incastrano in un sistema coerente.
+            La maggior parte dei libri sull'AI si ferma al notebook Jupyter. <strong>Questo no.</strong>
+            Ogni riga di codice è stata scritta, eseguita e messa in produzione — puoi farlo anche tu,
+            sulla tua macchina, stasera. Fai <code>git clone</code> del repository e nel giro di un caffè
+            avrai il tuo primo Knowledge Graph in esecuzione.
           </p>
           <p>
-            Il percorso è completo: modelli dati (RDF, Property Graph), ontologie e ragionamento,
-            pipeline <strong>Graph-RAG</strong> con ricerca ibrida, <strong>Model Context Protocol</strong>
-            per esporre il KG come servizio cognitivo, e orchestrazione <strong>multi-agente</strong>
-            con Microsoft Agent Framework — il successore unificato di Semantic Kernel e AutoGen.
+            <strong>AI che Ragiona</strong> colma il divario fra teoria accademica e sistema enterprise
+            che paga le bollette. Oltre <strong>500 pagine</strong> di codice Python eseguibile,
+            architetture di produzione, calcoli di ROI difendibili davanti a un CFO e uno
+            <strong>studio di caso end-to-end da 18 mesi</strong>.
+          </p>
+          <p>
+            Dai <strong>Knowledge Graph</strong> — la stessa tecnologia dietro al grafo Google da 1,6
+            trilioni di triple — alle due evoluzioni che nel 2025-2026 ridefiniscono come l'AI viene
+            progettata e venduta: il <strong>Model Context Protocol</strong> di Anthropic e
+            l'<strong>orchestrazione multi-agente</strong> con Microsoft Agent Framework.
             Tutto eseguibile con un singolo <code>docker compose up</code>.
           </p>
           <p>
-            Pensato per <strong>sviluppatori Python e C#</strong>, data engineer e AI engineer che
-            vogliono costruire un KG reale, ma anche per <strong>CTO e product manager</strong> che
-            devono valutare il potenziale dei Knowledge Graph, stimare il ROI e presentare metriche
-            al board.
+            Pensato per <strong>developer Python, AI/ML engineer e architect</strong> che cercano codice
+            completo e pattern di produzione, ma anche per <strong>CTO, PM, consulenti AI e founder</strong>
+            che vogliono casi d'uso per settore, ROI difendibili, modello di pricing e go-to-market.
           </p>
         </div>
       </div>
@@ -226,6 +231,33 @@ const formats = [
             Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- Community / Discussions -->
+    <section class="community">
+      <div class="container">
+        <a
+          href={GITHUB_DISCUSSIONS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="community__card"
+        >
+          <div class="community__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+          </div>
+          <div class="community__body">
+            <span class="community__eyebrow">Community</span>
+            <h3 class="community__title">Unisciti alla discussione</h3>
+            <p class="community__desc">
+              Domande sul codice, idee, segnalazioni, casi d'uso reali: la conversazione
+              continua sulle GitHub Discussions di Agent Engineering Studio.
+            </p>
+          </div>
+          <div class="community__arrow" aria-hidden="true">→</div>
+        </a>
       </div>
     </section>
   </main>
@@ -462,6 +494,21 @@ const formats = [
     margin-bottom: var(--space-md);
   }
 
+  .description__content p.lead {
+    font-size: 1.15rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
+  }
+
+  .description__content p.lead em {
+    background: linear-gradient(90deg, var(--color-accent), #9c5bff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+
   .description__content strong {
     color: var(--color-text);
   }
@@ -607,6 +654,96 @@ const formats = [
     gap: var(--space-md);
   }
 
+  /* ── Community / Discussions ── */
+  .community {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .community__card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-xl);
+    background:
+      radial-gradient(circle at top left, rgba(33, 150, 243, 0.12), transparent 60%),
+      radial-gradient(circle at bottom right, rgba(156, 91, 255, 0.12), transparent 60%),
+      var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  .community__card:hover {
+    border-color: rgba(33, 150, 243, 0.4);
+    box-shadow: 0 0 28px var(--color-accent-glow);
+    transform: translateY(-2px);
+  }
+
+  .community__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    color: var(--color-text);
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.18), rgba(156, 91, 255, 0.18));
+    border: 1px solid rgba(33, 150, 243, 0.35);
+    transition: transform var(--transition-base);
+  }
+
+  .community__card:hover .community__icon {
+    transform: rotate(-6deg) scale(1.05);
+  }
+
+  .community__body {
+    flex: 1;
+  }
+
+  .community__eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .community__title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .community__desc {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  .community__arrow {
+    flex-shrink: 0;
+    font-size: 1.4rem;
+    color: var(--color-accent);
+    transition: transform var(--transition-base);
+  }
+
+  .community__card:hover .community__arrow {
+    transform: translateX(4px);
+  }
+
   /* ── Responsive ── */
   @media (max-width: 700px) {
     .book-hero__layout {
@@ -618,5 +755,12 @@ const formats = [
     .book-hero__actions { justify-content: center; }
     .cover-3d { width: 200px; }
     .formats__grid { grid-template-columns: 1fr; }
+
+    .community__card {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .community__arrow { display: none; }
   }
 </style>
