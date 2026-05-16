@@ -1,7 +1,7 @@
 ---
 /*
  * support.astro — Pagina /support
- * Tier di supporto, milestone, piattaforme (BMC, GitHub Sponsors, Stripe), FAQ.
+ * Tier di supporto, socio fondatore, milestone, piattaforme (BMC, GitHub Sponsors, Stripe), FAQ.
  * Per aggiornare i link Stripe: cerca "STRIPE_LINK" e sostituisci con il tuo Payment Link.
  */
 
@@ -85,7 +85,7 @@ const tiers = [
       'Co-authorship su white paper',
       'Workshop privato per il team (mezza giornata)',
       'Progetto dedicato su richiesta',
-      'Potenziale deducibilità fiscale (ETS in arrivo)',
+      'Potenziale deducibilità fiscale (dopo registrazione RUNTS)',
     ],
     cta: 'Contatta per partnership',
     href: 'mailto:giuseppe.zileni@hevolus.it?subject=Institutional%20Partner%20%E2%80%94%20Agent%20Engineering%20Studio',
@@ -96,41 +96,53 @@ const tiers = [
 
 const milestones = [
   {
-    supporters: '10 supporter attivi',
+    trigger: '3 soci fondatori',
+    unlock: 'Costituzione APS',
+    desc: 'Con tre soci fondatori Agent Engineering Studio diventa Associazione di Promozione Sociale (D.Lgs. 117/2017). Statuto, assemblea costitutiva, codice fiscale dell\'ente. Il laboratorio smette di essere un progetto personale e diventa un\'istituzione.',
+    done: false,
+    type: 'people',
+  },
+  {
+    trigger: '10 supporter attivi',
     unlock: 'Demo live sempre online',
     desc: 'Infrastruttura cloud (Aruba / Azure) per tenere i PoC pubblici sempre accessibili — Knowledge Graph, PA Geo Italia, Finance AI.',
     done: false,
+    type: 'money',
   },
   {
-    supporters: '25 supporter attivi',
+    trigger: '25 supporter attivi',
     unlock: 'Workshop mensili gratuiti',
     desc: 'Webinar aperti alla community italiana su agenti AI, MCP server, Graph-RAG e orchestrazione multi-agent.',
     done: false,
+    type: 'money',
   },
   {
-    supporters: '50 supporter attivi',
-    unlock: 'Costituzione APS',
-    desc: 'Agent Engineering Studio diventa Associazione di Promozione Sociale: le donazioni di imprese diventano deducibili fino al 10% del reddito dichiarato, quelle di persone fisiche detraibili al 30%.',
+    trigger: 'APS costituita + attività stabile',
+    unlock: 'Registrazione RUNTS',
+    desc: 'Iscrizione al Registro Unico Nazionale del Terzo Settore: le donazioni di imprese diventano deducibili fino al 10% del reddito dichiarato, quelle di persone fisiche detraibili al 30% (art. 83 D.Lgs. 117/2017).',
     done: false,
+    type: 'legal',
   },
   {
-    supporters: '100 supporter attivi',
+    trigger: '100 supporter attivi',
     unlock: 'AI Agent Day Italia',
     desc: 'Primo evento pubblico dedicato agli agenti AI in Italia: hackathon, talk tecnici, demo dei PoC — ingresso gratuito per i partecipanti.',
     done: false,
+    type: 'money',
   },
   {
-    supporters: '1 partner istituzionale',
+    trigger: '1 partner istituzionale',
     unlock: 'PA Geo Italia — Pilota pubblico',
     desc: 'Co-sviluppo con un ente pubblico pilota dello strumento open per interrogare dati territoriali italiani (ISTAT, CKAN, OpenStreetMap) in linguaggio naturale. 100% on-premise, sovranità del dato garantita.',
     done: false,
+    type: 'partner',
   },
 ];
 ---
 
 <BaseLayout
   title="Supporta il laboratorio — Agent Engineering Studio"
-  description="Sostieni il laboratorio aperto su agenti AI: proof-of-concept open source, libri tecnici, strumenti per la PA e la community italiana. Tier da 5€ a partner istituzionale."
+  description="Sostieni il laboratorio aperto su agenti AI: diventa socio fondatore, supporter o partner istituzionale. Proof-of-concept open source, libri tecnici, strumenti per la PA e la community italiana."
   canonical="https://agentengineering.it/support"
 >
   <main class="support-page">
@@ -151,14 +163,22 @@ const milestones = [
         <div class="support-hero__label">Supporta il laboratorio</div>
         <h1 class="support-hero__title">Costruito in aperto.<br/>Sostenuto dalla community.</h1>
         <p class="support-hero__desc">
-          Agent Engineering Studio è un laboratorio indipendente: niente VC, niente paywall, niente sponsor nascosti.
+          Agent Engineering Studio è un laboratorio indipendente su agenti AI: niente VC, niente paywall, niente sponsor nascosti.
           Produce proof-of-concept aperti, libri tecnici, strumenti per la Pubblica Amministrazione
-          e materiale formativo gratuito sugli agenti AI.
+          e materiale formativo gratuito per la community italiana.
         </p>
         <p class="support-hero__desc">
-          Se qualcosa di quello che trovi qui ti è stato utile — un repo, un libro, un MCP server —
-          considera di sostenere il lavoro. Ogni contributo va direttamente a infrastruttura, eventi e nuovi progetti.
+          Il laboratorio nasce come progetto personale con un obiettivo dichiarato: diventare un'Associazione di Promozione Sociale.
+          Per farlo servono soci fondatori, sostenitori e partner. Se condividi la missione, c'è un posto per te — a qualsiasi livello.
         </p>
+        <div class="support-hero__cta-group">
+          <a href="#socio-fondatore" class="support-hero__cta support-hero__cta--primary">
+            Diventa socio fondatore
+          </a>
+          <a href="#tiers" class="support-hero__cta support-hero__cta--secondary">
+            Supporta economicamente
+          </a>
+        </div>
       </div>
     </section>
 
@@ -201,10 +221,74 @@ const milestones = [
       </div>
     </section>
 
-    <!-- Tiers -->
-    <section class="tiers-section animate-in animate-delay-2">
+    <!-- Founding Member -->
+    <section class="founding-section animate-in animate-delay-2" id="socio-fondatore" aria-label="Diventa socio fondatore">
       <div class="container">
-        <h2 class="section-title">Scegli il tuo livello di supporto</h2>
+        <div class="founding-card">
+          <div class="founding-header">
+            <div class="founding-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <div class="founding-label">Posti limitati — cerchiamo 2 persone</div>
+              <h2 class="founding-title">Diventa socio fondatore</h2>
+            </div>
+          </div>
+
+          <p class="founding-desc">
+            Per costituire l'APS servono 3 soci fondatori. Al momento siamo in 1.
+            Cerchiamo 2 persone che condividano la visione e vogliano co-costruire il laboratorio dall'interno,
+            non solo supportarlo economicamente.
+          </p>
+
+          <div class="founding-grid">
+            <div class="founding-col">
+              <div class="founding-col__title">Cosa chiediamo</div>
+              <ul class="founding-list">
+                <li>Condivisione della missione educativa e open source del laboratorio</li>
+                <li>Partecipazione alle assemblee associative (trimestrali, anche online)</li>
+                <li>Contributo attivo ad almeno un progetto del laboratorio</li>
+                <li>Disponibilità a comparire come socio fondatore nello statuto</li>
+              </ul>
+            </div>
+            <div class="founding-col">
+              <div class="founding-col__title">Cosa ottieni</div>
+              <ul class="founding-list">
+                <li>Voce in capitolo sulle decisioni strategiche dell'associazione</li>
+                <li>Nominato come socio fondatore nel sito e nei documenti ufficiali</li>
+                <li>Accesso completo a tutti i materiali e repo del laboratorio</li>
+                <li>Co-decisione sulle priorità dei progetti e sull'uso dei fondi</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="founding-note">
+            Non è richiesta una competenza tecnica specifica. Cerchiamo persone con background diversi:
+            sviluppatori, designer, esperti di PA, giuristi, comunicatori. La diversità è un asset per un'associazione.
+          </p>
+
+          <a
+            href="mailto:giuseppe.zileni@hevolus.it?subject=Socio%20Fondatore%20%E2%80%94%20Agent%20Engineering%20Studio"
+            class="founding-cta"
+          >
+            Scrivimi — giuseppe.zileni@hevolus.it
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tiers -->
+    <section class="tiers-section animate-in animate-delay-3" id="tiers">
+      <div class="container">
+        <h2 class="section-title">Supporto economico — scegli il tuo livello</h2>
         <div class="tiers-grid">
           {tiers.map((tier) => (
             <div class={`tier-card ${tier.highlight ? 'tier-card--highlight' : ''}`}>
@@ -239,7 +323,7 @@ const milestones = [
     </section>
 
     <!-- Platforms -->
-    <section class="platforms-section animate-in animate-delay-3">
+    <section class="platforms-section animate-in animate-delay-4">
       <div class="container">
         <h2 class="section-title">Come supportare</h2>
         <div class="platforms-grid">
@@ -280,22 +364,23 @@ const milestones = [
     </section>
 
     <!-- Milestones -->
-    <section class="milestones-section animate-in animate-delay-4">
+    <section class="milestones-section animate-in animate-delay-5">
       <div class="container">
-        <h2 class="section-title">Milestone — Cosa sbloccheremo insieme</h2>
+        <h2 class="section-title">Milestone — La strada verso l'APS</h2>
         <p class="section-subtitle">
-          Il supporto collettivo sblocca obiettivi concreti. Ogni milestone è trasparente e verificabile.
-          Quando una viene raggiunta, lo annunciamo sulla newsletter e sul sito.
+          Ogni tappa è trasparente e verificabile. Quando una viene raggiunta, lo annunciamo sulla newsletter e sul sito.
         </p>
         <div class="milestones-list" role="list">
           {milestones.map((m, i) => (
             <div class={`milestone-row ${m.done ? 'milestone-row--done' : ''}`} role="listitem">
               <div class="milestone-step" aria-hidden="true">
-                <div class="milestone-dot">{m.done ? '✓' : (i + 1)}</div>
+                <div class={`milestone-dot milestone-dot--${m.type}`}>
+                  {m.done ? '✓' : (i + 1)}
+                </div>
                 {i < milestones.length - 1 && <div class="milestone-line" />}
               </div>
               <div class="milestone-content">
-                <div class="milestone-trigger">{m.supporters}</div>
+                <div class={`milestone-trigger milestone-trigger--${m.type}`}>{m.trigger}</div>
                 <div class="milestone-unlock">→ {m.unlock}</div>
                 <div class="milestone-desc">{m.desc}</div>
               </div>
@@ -306,7 +391,7 @@ const milestones = [
     </section>
 
     <!-- Institutional -->
-    <section class="institutional-section animate-in animate-delay-5">
+    <section class="institutional-section animate-in animate-delay-6">
       <div class="container">
         <div class="institutional-card">
           <h2 class="institutional-title">Per aziende e Pubblica Amministrazione</h2>
@@ -320,7 +405,7 @@ const milestones = [
               <p>
                 Workshop privato per il tuo team su agenti AI e MCP (mezza giornata).
                 Logo sul sito come partner. Co-authorship su white paper tecnici.
-                Consulenza tecnica prioritaria. Con la futura APS, la quota è
+                Consulenza tecnica prioritaria. Con la registrazione RUNTS dell'APS, la quota diventerà
                 fiscalmente deducibile per le imprese fino al 10% del reddito dichiarato.
               </p>
             </div>
@@ -350,13 +435,21 @@ const milestones = [
         <h2 class="section-title">Domande frequenti</h2>
         <div class="faq-list">
           <div class="faq-item">
+            <div class="faq-q">Cos'è esattamente Agent Engineering Studio in questo momento?</div>
+            <div class="faq-a">
+              Un progetto personale open source con l'obiettivo dichiarato di diventare un'Associazione di Promozione Sociale.
+              Opera in modo trasparente, produce materiale educativo gratuito e cerca i soci fondatori necessari alla costituzione formale.
+              Le donazioni ricevute ora sono contributi volontari a un progetto educativo, non compensi professionali.
+            </div>
+          </div>
+          <div class="faq-item">
             <div class="faq-q">Le donazioni sono deducibili fiscalmente?</div>
             <div class="faq-a">
-              Al momento no, poiché il laboratorio opera come persona fisica.
-              Quando raggiungeremo i 50 supporter attiveremo la costituzione dell'APS
-              (Associazione di Promozione Sociale): da quel momento le imprese potranno
-              dedurre le donazioni fino al 10% del reddito dichiarato,
-              e le persone fisiche detrarre il 30% di quanto donato (art. 83 D.Lgs. 117/2017).
+              Al momento no. La deducibilità fiscale si attiva in due fasi:
+              prima con la costituzione dell'APS (che richiede 3 soci fondatori),
+              poi con la registrazione al RUNTS (Registro Unico Nazionale del Terzo Settore).
+              Solo dopo la registrazione RUNTS le imprese potranno dedurre fino al 10% del reddito
+              e le persone fisiche detrarre il 30% (art. 83 D.Lgs. 117/2017).
             </div>
           </div>
           <div class="faq-item">
@@ -462,6 +555,39 @@ const milestones = [
     line-height: 1.7;
   }
 
+  .support-hero__cta-group {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-xl);
+  }
+
+  .support-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .support-hero__cta--primary {
+    background: var(--color-cta);
+    color: #fff;
+  }
+  .support-hero__cta--primary:hover { background: var(--color-cta-hover); transform: translateY(-1px); color: #fff; }
+
+  .support-hero__cta--secondary {
+    background: rgba(33, 150, 243, 0.08);
+    color: var(--color-accent);
+    border: 1px solid rgba(33, 150, 243, 0.25);
+  }
+  .support-hero__cta--secondary:hover { background: rgba(33, 150, 243, 0.16); color: var(--color-accent); }
+
   /* ── Section titles ── */
   .section-title {
     font-family: var(--font-heading);
@@ -501,6 +627,133 @@ const milestones = [
   .fund-icon { font-size: 1.5rem; display: block; margin-bottom: var(--space-sm); }
   .fund-name { font-weight: 600; font-size: 0.9rem; color: var(--color-text); margin-bottom: var(--space-xs); }
   .fund-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5; }
+
+  /* ── Founding Member ── */
+  .founding-section { padding: var(--space-2xl) 0; }
+
+  .founding-card {
+    background: rgba(245, 166, 35, 0.04);
+    border: 1px solid rgba(245, 166, 35, 0.25);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-2xl);
+  }
+
+  .founding-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .founding-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: rgba(245, 166, 35, 0.12);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-cta);
+  }
+
+  .founding-label {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-cta);
+    margin-bottom: 4px;
+  }
+
+  .founding-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .founding-desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: var(--space-xl);
+    max-width: 620px;
+  }
+
+  .founding-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .founding-col {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+  }
+
+  .founding-col__title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .founding-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .founding-list li {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .founding-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-cta);
+    font-size: 0.75rem;
+  }
+
+  .founding-note {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    border-left: 3px solid rgba(245, 166, 35, 0.3);
+  }
+
+  .founding-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-cta);
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .founding-cta:hover { background: var(--color-cta-hover); transform: translateY(-1px); color: #fff; }
 
   /* ── Tiers ── */
   .tiers-section { padding: var(--space-2xl) 0; }
@@ -570,7 +823,6 @@ const milestones = [
   }
 
   .tier-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5; }
-
   .tier-perks { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
 
   .tier-perk {
@@ -692,6 +944,9 @@ const milestones = [
     flex-shrink: 0;
   }
 
+  .milestone-dot--people { border-color: var(--color-cta); color: var(--color-cta); }
+  .milestone-dot--legal  { border-color: var(--color-success); color: var(--color-success); }
+
   .milestone-row--done .milestone-dot {
     background: var(--color-success);
     border-color: var(--color-success);
@@ -716,6 +971,9 @@ const milestones = [
     color: var(--color-accent);
     margin-bottom: 4px;
   }
+
+  .milestone-trigger--people { color: var(--color-cta); }
+  .milestone-trigger--legal  { color: var(--color-success); }
 
   .milestone-unlock {
     font-weight: 700;
@@ -820,6 +1078,10 @@ const milestones = [
     .platforms-grid { grid-template-columns: 1fr; }
     .funds-grid { grid-template-columns: 1fr 1fr; }
     .institutional-card { padding: var(--space-lg); }
+    .founding-card { padding: var(--space-lg); }
+    .founding-grid { grid-template-columns: 1fr; }
+    .founding-header { flex-direction: column; }
+    .support-hero__cta-group { flex-direction: column; align-items: center; }
   }
 
   @media (max-width: 400px) {
