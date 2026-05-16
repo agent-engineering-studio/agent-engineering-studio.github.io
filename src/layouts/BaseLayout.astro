@@ -8,15 +8,16 @@
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
 }
 
 const {
   title = 'Agent Engineering Studio — Laboratorio & community su agenti AI',
   description = 'Laboratorio aperto di sperimentazione, formazione e divulgazione su agenti AI: proof-of-concept, progetti open-source e materiale didattico.',
+  canonical = 'https://agentengineering.it/',
 } = Astro.props;
 
-const canonicalUrl = 'https://agentengeering.it/';
-const ogImage = new URL('/logo-horizontal.png', canonicalUrl).href;
+const ogImage = new URL('/logo-horizontal.png', canonical).href;
 ---
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ const ogImage = new URL('/logo-horizontal.png', canonicalUrl).href;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href={canonicalUrl} />
+  <link rel="canonical" href={canonical} />
   <meta name="theme-color" content="#0a0e17" />
 
   <!-- Favicon -->
@@ -37,7 +38,7 @@ const ogImage = new URL('/logo-horizontal.png', canonicalUrl).href;
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:site_name" content="Agent Engineering Studio" />
 
@@ -82,8 +83,8 @@ const ogImage = new URL('/logo-horizontal.png', canonicalUrl).href;
 
   <!-- Easter egg console message -->
   <script is:inline>
-    console.log('%c\uD83D\uDD2C Agent Engineering Studio', 'font-size:16px;font-weight:bold;color:#2196F3');
-    console.log('%cVuoi contribuire? \u2192 github.com/agent-engineering-studio', 'font-size:12px;color:#e0e6ed');
+    console.log('%c🔬 Agent Engineering Studio', 'font-size:16px;font-weight:bold;color:#2196F3');
+    console.log('%cVuoi contribuire? → github.com/agent-engineering-studio', 'font-size:12px;color:#e0e6ed');
   </script>
 </body>
 </html>

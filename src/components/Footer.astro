@@ -16,6 +16,8 @@
       &middot; Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
     </p>
     <p class="footer__links">
+      <a href="/support" class="footer__link footer__link--support">&#10084;&#65039; Supporta il progetto</a>
+      <span class="footer__sep" aria-hidden="true">&middot;</span>
       <a href="#" class="footer__link">Privacy Policy</a>
     </p>
   </div>
@@ -71,15 +73,35 @@
 
   .footer__links {
     font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer__sep {
+    color: var(--color-border);
   }
 
   .footer__link {
     color: var(--color-text-muted);
     text-decoration: underline;
     text-underline-offset: 2px;
+    transition: color var(--transition-fast);
   }
 
   .footer__link:hover {
     color: var(--color-accent);
+  }
+
+  .footer__link--support {
+    color: var(--color-cta);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .footer__link--support:hover {
+    color: var(--color-cta-hover);
   }
 </style>
