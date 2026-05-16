@@ -1,12 +1,57 @@
 ---
 /*
  * support.astro — Pagina /support
- * Tier di supporto, socio fondatore, milestone, piattaforme (BMC, GitHub Sponsors, Stripe), FAQ.
+ * Architettura: missione → 3 modi per partecipare → dettagli → milestone → FAQ
  * Per aggiornare i link Stripe: cerca "STRIPE_LINK" e sostituisci con il tuo Payment Link.
  */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+
+const paths = [
+  {
+    id: 'costruisci',
+    icon: '🔧',
+    color: 'cta',
+    label: 'Costruisci',
+    title: 'Entra nel laboratorio',
+    tagline: 'Per chi vuole fare, non solo supportare.',
+    desc: 'Diventa socio fondatore. Partecipa alle decisioni, porta la tua competenza — qualunque essa sia — e aiuta a costruire qualcosa che dura.',
+    cta: 'Scopri come →',
+    href: '#costruisci-detail',
+  },
+  {
+    id: 'finanzia',
+    icon: '⚡',
+    color: 'accent',
+    label: 'Finanzia',
+    title: 'Tieni vivi i progetti',
+    tagline: 'Per chi vuole che questo lavoro esista.',
+    desc: 'Le tue donazioni pagano server, workshop e sviluppo. Ogni euro va direttamente a far girare i PoC, formare persone e avanzare verso l\'APS.',
+    cta: 'Scegli il tuo livello →',
+    href: '#finanzia-detail',
+  },
+  {
+    id: 'collabora',
+    icon: '🤝',
+    color: 'success',
+    label: 'Collabora',
+    title: 'Partnership istituzionale',
+    tagline: 'Per aziende e Pubblica Amministrazione.',
+    desc: 'Co-sviluppa strumenti AI su open data italiani. Ottieni visibilità, workshop dedicati e — con la futura APS — deducibilità fiscale.',
+    cta: 'Scrivimi →',
+    href: 'mailto:giuseppe.zileni@hevolus.it?subject=Partnership%20%E2%80%94%20Agent%20Engineering%20Studio',
+  },
+];
+
+const profiles = [
+  { icon: '💻', label: 'Sviluppatore / engineer', desc: 'Contribuisci al codice, alle architetture, ai MCP server e ai PoC.' },
+  { icon: '📊', label: 'Data scientist / analyst', desc: 'Lavoriamo con open data ISTAT, CKAN, OpenStreetMap — il tuo mondo.' },
+  { icon: '⚖️', label: 'Giurista / esperto terzo settore', desc: 'Ci serve chi conosce APS, ETS, RUNTS e il Codice del Terzo Settore.' },
+  { icon: '🏛️', label: 'Professionista PA', desc: 'Definisci le specifiche degli strumenti che usi ogni giorno.' },
+  { icon: '✍️', label: 'Comunicatore / educator', desc: 'Aiutaci a spiegare AI e open data in italiano, con chiarezza.' },
+  { icon: '🎨', label: 'Designer / UX', desc: 'Gli strumenti open devono essere usabili. Il design conta.' },
+];
 
 const tiers = [
   {
@@ -14,11 +59,8 @@ const tiers = [
     name: 'Caffè',
     price: '5 €',
     cadence: 'una tantum',
-    desc: 'Il gesto più semplice. Grazie per un articolo, un libro, un repo che ti ha fatto risparmiare tempo.',
-    perks: [
-      'Nome nella lista Supporter sul sito',
-      'Accesso alla newsletter del lab',
-    ],
+    what: 'Una sessione di test su Azure o un\'ora di CDN per i PoC pubblici.',
+    perks: ['Nome nella lista Supporter sul sito', 'Newsletter del lab'],
     cta: 'Offri un caffè',
     href: 'https://www.buymeacoffee.com/f9t3zol',
     platform: 'Buy Me a Coffee',
@@ -29,12 +71,8 @@ const tiers = [
     name: 'Supporter',
     price: '10 €',
     cadence: '/mese',
-    desc: 'Fai parte della community che tiene vivo il laboratorio. Ogni mese.',
-    perks: [
-      'Newsletter anticipata con lab notes',
-      'Badge Supporter su GitHub',
-      'Accesso al canale Discord riservato',
-    ],
+    what: 'Copre dominio, CDN e costi base di repository. Il minimo per tenere tutto online.',
+    perks: ['Newsletter anticipata con lab notes', 'Badge Supporter su GitHub', 'Canale Discord riservato'],
     cta: 'Diventa Supporter',
     href: 'https://github.com/sponsors/gzileni',
     platform: 'GitHub Sponsors',
@@ -45,13 +83,8 @@ const tiers = [
     name: 'Lab Member',
     price: '25 €',
     cadence: '/mese',
-    desc: 'Accesso privilegiato ai lavori in corso: repo privati, anteprime e sessioni Q&A mensili.',
-    perks: [
-      'Accesso anticipato ai repo privati',
-      'Sessioni mensili Q&A con Giuseppe',
-      'PDF degli appunti tecnici inediti',
-      'Voto sulle priorità dei prossimi PoC',
-    ],
+    what: 'Un workshop gratuito per 30 persone ogni mese. O un mese di compute per il Knowledge Graph.',
+    perks: ['Accesso ai repo privati in anteprima', 'Q&A mensile con Giuseppe', 'Appunti tecnici inediti in PDF', 'Voto sulle priorità dei PoC'],
     cta: 'Diventa Lab Member',
     href: 'https://github.com/sponsors/gzileni',
     platform: 'GitHub Sponsors',
@@ -62,13 +95,8 @@ const tiers = [
     name: 'Builder',
     price: '50 €',
     cadence: '/mese',
-    desc: 'Per chi usa il lavoro del lab nei propri progetti professionali e vuole un collegamento diretto.',
-    perks: [
-      'Tutto Lab Member incluso',
-      '1 ora/mese di consulenza tecnica',
-      'Copia anticipata dei libri in PDF',
-      'Ringraziamento nei repo e nei libri',
-    ],
+    what: 'Un mese completo di server per PA Geo Italia + Knowledge Graph + CI/CD.',
+    perks: ['Tutto Lab Member incluso', '1 ora/mese di consulenza tecnica', 'Libri in PDF in anteprima', 'Ringraziamento nei repo e nei libri'],
     cta: 'Diventa Builder',
     href: 'https://github.com/sponsors/gzileni',
     platform: 'GitHub Sponsors',
@@ -76,20 +104,14 @@ const tiers = [
   },
   {
     emoji: '🏛️',
-    name: 'Institutional Partner',
+    name: 'Institutional',
     price: '500 €',
     cadence: '/anno',
-    desc: 'Per aziende, PA ed enti che vogliono co-costruire, avere visibilità e partecipare attivamente.',
-    perks: [
-      'Logo come partner sul sito',
-      'Co-authorship su white paper',
-      'Workshop privato per il team (mezza giornata)',
-      'Progetto dedicato su richiesta',
-      'Potenziale deducibilità fiscale (dopo registrazione RUNTS)',
-    ],
-    cta: 'Contatta per partnership',
+    what: 'Il pilota PA Geo Italia per il tuo ente, o un workshop privato per il tuo team.',
+    perks: ['Logo partner sul sito', 'Workshop privato (mezza giornata)', 'Co-authorship su white paper', 'Progetto dedicato su richiesta', 'Deducibilità fiscale dopo RUNTS'],
+    cta: 'Contattami',
     href: 'mailto:giuseppe.zileni@hevolus.it?subject=Institutional%20Partner%20%E2%80%94%20Agent%20Engineering%20Studio',
-    platform: 'Contatto diretto + fattura',
+    platform: 'Fattura via Stripe',
     highlight: false,
   },
 ];
@@ -98,51 +120,44 @@ const milestones = [
   {
     trigger: '3 soci fondatori',
     unlock: 'Costituzione APS',
-    desc: 'Con tre soci fondatori Agent Engineering Studio diventa Associazione di Promozione Sociale (D.Lgs. 117/2017). Statuto, assemblea costitutiva, codice fiscale dell\'ente. Il laboratorio smette di essere un progetto personale e diventa un\'istituzione.',
-    done: false,
+    desc: 'Con tre soci fondatori Agent Engineering Studio diventa Associazione di Promozione Sociale. Statuto, assemblea costitutiva, codice fiscale dell\'ente. Il laboratorio smette di essere un progetto personale.',
     type: 'people',
+    done: false,
   },
   {
     trigger: '10 supporter attivi',
-    unlock: 'Demo live sempre online',
-    desc: 'Infrastruttura cloud (Aruba / Azure) per tenere i PoC pubblici sempre accessibili — Knowledge Graph, PA Geo Italia, Finance AI.',
-    done: false,
+    unlock: 'Infrastruttura stabile',
+    desc: 'Server cloud dedicati per tenere sempre online i PoC: Knowledge Graph, PA Geo Italia, Finance AI. Demo sempre accessibili, non solo quando c\'è tempo di farle girare.',
     type: 'money',
-  },
-  {
-    trigger: '25 supporter attivi',
-    unlock: 'Workshop mensili gratuiti',
-    desc: 'Webinar aperti alla community italiana su agenti AI, MCP server, Graph-RAG e orchestrazione multi-agent.',
     done: false,
-    type: 'money',
   },
   {
     trigger: 'APS costituita + attività stabile',
-    unlock: 'Registrazione RUNTS',
-    desc: 'Iscrizione al Registro Unico Nazionale del Terzo Settore: le donazioni di imprese diventano deducibili fino al 10% del reddito dichiarato, quelle di persone fisiche detraibili al 30% (art. 83 D.Lgs. 117/2017).',
-    done: false,
+    unlock: 'Registrazione RUNTS → deducibilità fiscale',
+    desc: 'Iscrizione al Registro Unico Nazionale del Terzo Settore. Da questo momento le imprese possono dedurre le donazioni fino al 10% del reddito, le persone fisiche detrarre il 30% (art. 83 D.Lgs. 117/2017).',
     type: 'legal',
+    done: false,
+  },
+  {
+    trigger: '1 partner istituzionale',
+    unlock: 'PA Geo Italia — primo pilota pubblico',
+    desc: 'Co-sviluppo con un ente pubblico pilota: strumento open per interrogare dati territoriali italiani in linguaggio naturale. 100% on-premise, zero lock-in, zero licenze.',
+    type: 'partner',
+    done: false,
   },
   {
     trigger: '100 supporter attivi',
     unlock: 'AI Agent Day Italia',
-    desc: 'Primo evento pubblico dedicato agli agenti AI in Italia: hackathon, talk tecnici, demo dei PoC — ingresso gratuito per i partecipanti.',
-    done: false,
+    desc: 'Primo evento pubblico in Italia dedicato agli agenti AI: hackathon, talk tecnici, demo dei PoC — ingresso gratuito per tutti i partecipanti.',
     type: 'money',
-  },
-  {
-    trigger: '1 partner istituzionale',
-    unlock: 'PA Geo Italia — Pilota pubblico',
-    desc: 'Co-sviluppo con un ente pubblico pilota dello strumento open per interrogare dati territoriali italiani (ISTAT, CKAN, OpenStreetMap) in linguaggio naturale. 100% on-premise, sovranità del dato garantita.',
     done: false,
-    type: 'partner',
   },
 ];
 ---
 
 <BaseLayout
-  title="Supporta il laboratorio — Agent Engineering Studio"
-  description="Sostieni il laboratorio aperto su agenti AI: diventa socio fondatore, supporter o partner istituzionale. Proof-of-concept open source, libri tecnici, strumenti per la PA e la community italiana."
+  title="Partecipa — Agent Engineering Studio"
+  description="Costruiamo strumenti AI open source sugli open data italiani. Entra come socio fondatore, sostieni i progetti o collabora istituzionalmente."
   canonical="https://agentengineering.it/support"
 >
   <main class="support-page">
@@ -158,147 +173,162 @@ const milestones = [
     </div>
 
     <!-- Hero -->
-    <section class="support-hero animate-in">
+    <section class="hero animate-in">
       <div class="container">
-        <div class="support-hero__label">Supporta il laboratorio</div>
-        <h1 class="support-hero__title">Costruito in aperto.<br/>Sostenuto dalla community.</h1>
-        <p class="support-hero__desc">
-          Agent Engineering Studio è un laboratorio indipendente su agenti AI: niente VC, niente paywall, niente sponsor nascosti.
-          Produce proof-of-concept aperti, libri tecnici, strumenti per la Pubblica Amministrazione
-          e materiale formativo gratuito per la community italiana.
+        <div class="hero__label">Laboratorio aperto su AI e open data</div>
+        <h1 class="hero__title">
+          Costruiamo strumenti AI<br/>sugli open data italiani.<br/>
+          <span class="hero__title--dim">Insieme.</span>
+        </h1>
+        <p class="hero__desc">
+          Agent Engineering Studio è un laboratorio indipendente: produce proof-of-concept open source,
+          libri tecnici e strumenti per la Pubblica Amministrazione usando AI e open data italiani —
+          ISTAT, CKAN, OpenStreetMap, dati regionali.
         </p>
-        <p class="support-hero__desc">
-          Il laboratorio nasce come progetto personale con un obiettivo dichiarato: diventare un'Associazione di Promozione Sociale.
-          Per farlo servono soci fondatori, sostenitori e partner. Se condividi la missione, c'è un posto per te — a qualsiasi livello.
+        <p class="hero__desc">
+          L'obiettivo è diventare un'Associazione di Promozione Sociale.
+          Per arrivarci servono persone, risorse e partner. Puoi contribuire in tre modi.
         </p>
-        <div class="support-hero__cta-group">
-          <a href="#socio-fondatore" class="support-hero__cta support-hero__cta--primary">
-            Diventa socio fondatore
-          </a>
-          <a href="#tiers" class="support-hero__cta support-hero__cta--secondary">
-            Supporta economicamente
-          </a>
+      </div>
+    </section>
+
+    <!-- 3 paths -->
+    <section class="paths-section animate-in animate-delay-1" aria-label="Come partecipare">
+      <div class="container">
+        <div class="paths-grid">
+          {paths.map((p) => (
+            <a href={p.href} class={`path-card path-card--${p.color}`}>
+              <div class={`path-card__tag path-card__tag--${p.color}`}>{p.label}</div>
+              <div class="path-card__icon" aria-hidden="true">{p.icon}</div>
+              <div class="path-card__title">{p.title}</div>
+              <div class="path-card__tagline">{p.tagline}</div>
+              <p class="path-card__desc">{p.desc}</p>
+              <div class={`path-card__cta path-card__cta--${p.color}`}>{p.cta}</div>
+            </a>
+          ))}
         </div>
       </div>
     </section>
 
-    <!-- Use of funds -->
-    <section class="use-of-funds animate-in animate-delay-1">
+    <!-- ── PATH 1: Costruisci ── -->
+    <section class="section-detail animate-in animate-delay-2" id="costruisci-detail">
       <div class="container">
-        <h2 class="section-title">A cosa servono i fondi</h2>
+        <div class="detail-header detail-header--cta">
+          <span class="detail-tag detail-tag--cta">🔧 Costruisci</span>
+          <h2 class="detail-title">Diventa socio fondatore</h2>
+          <p class="detail-subtitle">
+            Servono 3 soci per costituire l'APS. Siamo in 1. Cerchiamo 2 persone
+            con qualsiasi background che vogliano essere dentro — non solo finanziatori.
+          </p>
+        </div>
+
+        <div class="profiles-grid">
+          {profiles.map((p) => (
+            <div class="profile-card">
+              <span class="profile-icon" aria-hidden="true">{p.icon}</span>
+              <div class="profile-label">{p.label}</div>
+              <div class="profile-desc">{p.desc}</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="founding-ask">
+          <div class="founding-ask__col">
+            <div class="founding-ask__head">Cosa chiediamo</div>
+            <ul>
+              <li>Condivisione della missione educativa e open source</li>
+              <li>Partecipazione alle assemblee trimestrali (anche online)</li>
+              <li>Contributo attivo ad almeno un progetto del laboratorio</li>
+              <li>Disponibilità a comparire come socio fondatore nello statuto</li>
+            </ul>
+          </div>
+          <div class="founding-ask__col">
+            <div class="founding-ask__head">Cosa ottieni</div>
+            <ul>
+              <li>Co-decisione su strategia, priorità e uso dei fondi</li>
+              <li>Nominato come socio fondatore nel sito e nei documenti</li>
+              <li>Accesso completo a tutti i materiali e repo del laboratorio</li>
+              <li>Un progetto reale su cui mettere il tuo nome</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="founding-cta-wrap">
+          <a
+            href="mailto:giuseppe.zileni@hevolus.it?subject=Socio%20Fondatore%20%E2%80%94%20Agent%20Engineering%20Studio"
+            class="btn btn--cta"
+          >
+            Scrivimi — raccontami chi sei e cosa fai
+          </a>
+          <p class="founding-hint">
+            Nessun requisito tecnico obbligatorio. Serve la voglia di costruire qualcosa insieme.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PATH 2: Finanzia ── -->
+    <section class="section-detail animate-in animate-delay-3" id="finanzia-detail">
+      <div class="container">
+        <div class="detail-header detail-header--accent">
+          <span class="detail-tag detail-tag--accent">⚡ Finanzia</span>
+          <h2 class="detail-title">Tieni vivi i progetti</h2>
+          <p class="detail-subtitle">
+            I fondi vanno direttamente a infrastruttura, workshop e sviluppo.
+            Non stai donando a un ente astratto: stai rendendo possibili cose concrete.
+          </p>
+        </div>
+
         <div class="funds-grid">
           <div class="fund-card">
             <span class="fund-icon" aria-hidden="true">☁️</span>
-            <div class="fund-name">Infrastruttura cloud</div>
-            <div class="fund-desc">Aruba / Azure per hosting, CI/CD e container runtime dei PoC pubblici</div>
-          </div>
-          <div class="fund-card">
-            <span class="fund-icon" aria-hidden="true">📚</span>
-            <div class="fund-name">Libri & contenuti</div>
-            <div class="fund-desc">Produzione e stampa di nuovi volumi tecnici, parte rilasciata gratuitamente alla community</div>
+            <div class="fund-name">Server e cloud</div>
+            <div class="fund-desc">Aruba / Azure per tenere sempre online Knowledge Graph, PA Geo Italia e Finance AI</div>
           </div>
           <div class="fund-card">
             <span class="fund-icon" aria-hidden="true">🎓</span>
             <div class="fund-name">Workshop gratuiti</div>
-            <div class="fund-desc">Formazione aperta su agenti AI, MCP, Graph-RAG — gratuita per studenti e PA</div>
+            <div class="fund-desc">Webinar su agenti AI, MCP, Graph-RAG — aperti e gratuiti per la community italiana</div>
+          </div>
+          <div class="fund-card">
+            <span class="fund-icon" aria-hidden="true">📚</span>
+            <div class="fund-name">Libri tecnici open</div>
+            <div class="fund-desc">Produzione e distribuzione gratuita di volumi su AI engineering, in italiano</div>
           </div>
           <div class="fund-card">
             <span class="fund-icon" aria-hidden="true">🗺️</span>
             <div class="fund-name">PA Geo Italia</div>
-            <div class="fund-desc">Strumento open per interrogare dati ISTAT, CKAN e OpenStreetMap in linguaggio naturale</div>
+            <div class="fund-desc">Strumento open per interrogare dati ISTAT, CKAN e OpenStreetMap — 100% on-premise</div>
           </div>
           <div class="fund-card">
-            <span class="fund-icon" aria-hidden="true">🤝</span>
+            <span class="fund-icon" aria-hidden="true">🤖</span>
             <div class="fund-name">OPENAgora</div>
-            <div class="fund-desc">Civic tech per startup e PA che sfruttano gli open data regionali con agenti AI</div>
+            <div class="fund-desc">Civic tech per PA e startup pugliesi sugli open data regionali con agenti AI</div>
           </div>
           <div class="fund-card">
-            <span class="fund-icon" aria-hidden="true">🎪</span>
-            <div class="fund-name">Evento community</div>
-            <div class="fund-desc">AI Agent Day: hackathon, talk tecnici e demo — aperto e gratuito per i partecipanti</div>
+            <span class="fund-icon" aria-hidden="true">🏛️</span>
+            <div class="fund-name">Costituzione APS</div>
+            <div class="fund-desc">Spese notarili, registrazione RUNTS e avvio formale dell'associazione</div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Founding Member -->
-    <section class="founding-section animate-in animate-delay-2" id="socio-fondatore" aria-label="Diventa socio fondatore">
-      <div class="container">
-        <div class="founding-card">
-          <div class="founding-header">
-            <div class="founding-icon" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
-            <div>
-              <div class="founding-label">Posti limitati — cerchiamo 2 persone</div>
-              <h2 class="founding-title">Diventa socio fondatore</h2>
-            </div>
-          </div>
-
-          <p class="founding-desc">
-            Per costituire l'APS servono 3 soci fondatori. Al momento siamo in 1.
-            Cerchiamo 2 persone che condividano la visione e vogliano co-costruire il laboratorio dall'interno,
-            non solo supportarlo economicamente.
-          </p>
-
-          <div class="founding-grid">
-            <div class="founding-col">
-              <div class="founding-col__title">Cosa chiediamo</div>
-              <ul class="founding-list">
-                <li>Condivisione della missione educativa e open source del laboratorio</li>
-                <li>Partecipazione alle assemblee associative (trimestrali, anche online)</li>
-                <li>Contributo attivo ad almeno un progetto del laboratorio</li>
-                <li>Disponibilità a comparire come socio fondatore nello statuto</li>
-              </ul>
-            </div>
-            <div class="founding-col">
-              <div class="founding-col__title">Cosa ottieni</div>
-              <ul class="founding-list">
-                <li>Voce in capitolo sulle decisioni strategiche dell'associazione</li>
-                <li>Nominato come socio fondatore nel sito e nei documenti ufficiali</li>
-                <li>Accesso completo a tutti i materiali e repo del laboratorio</li>
-                <li>Co-decisione sulle priorità dei progetti e sull'uso dei fondi</li>
-              </ul>
-            </div>
-          </div>
-
-          <p class="founding-note">
-            Non è richiesta una competenza tecnica specifica. Cerchiamo persone con background diversi:
-            sviluppatori, designer, esperti di PA, giuristi, comunicatori. La diversità è un asset per un'associazione.
-          </p>
-
-          <a
-            href="mailto:giuseppe.zileni@hevolus.it?subject=Socio%20Fondatore%20%E2%80%94%20Agent%20Engineering%20Studio"
-            class="founding-cta"
-          >
-            Scrivimi — giuseppe.zileni@hevolus.it
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tiers -->
-    <section class="tiers-section animate-in animate-delay-3" id="tiers">
-      <div class="container">
-        <h2 class="section-title">Supporto economico — scegli il tuo livello</h2>
         <div class="tiers-grid">
           {tiers.map((tier) => (
             <div class={`tier-card ${tier.highlight ? 'tier-card--highlight' : ''}`}>
               {tier.highlight && <div class="tier-badge">Più scelto</div>}
-              <div class="tier-emoji" aria-hidden="true">{tier.emoji}</div>
-              <div class="tier-name">{tier.name}</div>
-              <div class="tier-price">
-                {tier.price}<span class="tier-cadence">{tier.cadence}</span>
+              <div class="tier-top">
+                <span class="tier-emoji" aria-hidden="true">{tier.emoji}</span>
+                <div>
+                  <div class="tier-name">{tier.name}</div>
+                  <div class="tier-price">
+                    {tier.price}<span class="tier-cadence">{tier.cadence}</span>
+                  </div>
+                </div>
               </div>
-              <p class="tier-desc">{tier.desc}</p>
+              <div class="tier-what">
+                <span class="tier-what__label">Cosa rendi possibile</span>
+                {tier.what}
+              </div>
               <ul class="tier-perks" aria-label={`Vantaggi ${tier.name}`}>
                 {tier.perks.map((perk) => (
                   <li class="tier-perk">
@@ -319,46 +349,82 @@ const milestones = [
             </div>
           ))}
         </div>
+
+        <!-- Platforms -->
+        <div class="platforms-strip">
+          <div class="platform-item">
+            <span class="platform-item__logo platform-item__logo--bmc">☕</span>
+            <div>
+              <div class="platform-item__name">Buy Me a Coffee</div>
+              <a href="https://www.buymeacoffee.com/f9t3zol" target="_blank" rel="noopener noreferrer" class="platform-item__link">buymeacoffee.com/f9t3zol</a>
+            </div>
+          </div>
+          <div class="platform-sep" aria-hidden="true">·</div>
+          <div class="platform-item">
+            <span class="platform-item__logo platform-item__logo--gh">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </span>
+            <div>
+              <div class="platform-item__name">GitHub Sponsors</div>
+              <a href="https://github.com/sponsors/gzileni" target="_blank" rel="noopener noreferrer" class="platform-item__link">github.com/sponsors/gzileni</a>
+            </div>
+          </div>
+          <div class="platform-sep" aria-hidden="true">·</div>
+          <div class="platform-item">
+            <span class="platform-item__logo platform-item__logo--stripe">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/>
+              </svg>
+            </span>
+            <div>
+              <div class="platform-item__name">Stripe — Fattura</div>
+              <a href="mailto:giuseppe.zileni@hevolus.it?subject=Institutional%20Partner" class="platform-item__link">Su richiesta per Institutional</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Platforms -->
-    <section class="platforms-section animate-in animate-delay-4">
+    <!-- ── PATH 3: Collabora (PA + Aziende) ── -->
+    <section class="section-detail animate-in animate-delay-4" id="collabora-detail">
       <div class="container">
-        <h2 class="section-title">Come supportare</h2>
-        <div class="platforms-grid">
-          <div class="platform-card">
-            <div class="platform-logo platform-logo--bmc" aria-hidden="true">☕</div>
-            <div class="platform-name">Buy Me a Coffee</div>
-            <div class="platform-desc">Contributi una tantum rapidi. Zero iscrizioni. Ideale per il tier Caffè o per supporto occasionale.</div>
-            <a href="https://www.buymeacoffee.com/f9t3zol" target="_blank" rel="noopener noreferrer" class="platform-link">
-              buymeacoffee.com/f9t3zol →
-            </a>
+        <div class="detail-header detail-header--success">
+          <span class="detail-tag detail-tag--success">🤝 Collabora</span>
+          <h2 class="detail-title">Partnership istituzionale</h2>
+          <p class="detail-subtitle">
+            Per aziende e PA che vogliono co-costruire strumenti, non solo finanziarli.
+          </p>
+        </div>
+
+        <div class="collab-grid">
+          <div class="collab-card">
+            <div class="collab-card__head">💼 Aziende</div>
+            <p>
+              Workshop privato su agenti AI e MCP per il tuo team (mezza giornata).
+              Logo sul sito come partner. Co-authorship su white paper tecnici.
+              Con la registrazione RUNTS dell'APS, la quota diventerà fiscalmente
+              deducibile fino al 10% del reddito dichiarato.
+            </p>
           </div>
-          <div class="platform-card">
-            <div class="platform-logo platform-logo--gh" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-              </svg>
-            </div>
-            <div class="platform-name">GitHub Sponsors</div>
-            <div class="platform-desc">Abbonamenti mensili con tier. Perfetto per Supporter, Lab Member e Builder. Gestione semplice dal tuo account GitHub.</div>
-            <a href="https://github.com/sponsors/gzileni" target="_blank" rel="noopener noreferrer" class="platform-link">
-              github.com/sponsors/gzileni →
-            </a>
+          <div class="collab-card">
+            <div class="collab-card__head">🏛️ Pubblica Amministrazione</div>
+            <p>
+              PA Geo Italia è 100% open source e on-premise: i tuoi dati non escono mai dal tuo server.
+              Usa solo open data pubblici italiani — ISTAT, CKAN, OpenStreetMap.
+              Un ente co-finanziatore ottiene una versione pilota dedicata e voce nelle specifiche funzionali.
+            </p>
           </div>
-          <div class="platform-card">
-            <div class="platform-logo platform-logo--stripe" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/>
-              </svg>
-            </div>
-            <div class="platform-name">Stripe — Fattura</div>
-            <div class="platform-desc">Per aziende e PA che necessitano di fattura. Riservato al tier Institutional Partner. Pagamento sicuro con emissione fattura.</div>
-            <a href="mailto:giuseppe.zileni@hevolus.it?subject=Institutional%20Partner%20%E2%80%94%20Agent%20Engineering%20Studio" class="platform-link">
-              Richiedi link di pagamento →
-            </a>
-          </div>
+        </div>
+
+        <div style="text-align:center; margin-top: var(--space-xl)">
+          <a
+            href="mailto:giuseppe.zileni@hevolus.it?subject=Partnership%20%E2%80%94%20Agent%20Engineering%20Studio"
+            class="btn btn--success"
+          >
+            Parliamoci — giuseppe.zileni@hevolus.it
+          </a>
         </div>
       </div>
     </section>
@@ -366,9 +432,9 @@ const milestones = [
     <!-- Milestones -->
     <section class="milestones-section animate-in animate-delay-5">
       <div class="container">
-        <h2 class="section-title">Milestone — La strada verso l'APS</h2>
+        <h2 class="section-title">La strada verso l'APS</h2>
         <p class="section-subtitle">
-          Ogni tappa è trasparente e verificabile. Quando una viene raggiunta, lo annunciamo sulla newsletter e sul sito.
+          Ogni tappa è trasparente. Quando una viene raggiunta, lo annunciamo sulla newsletter.
         </p>
         <div class="milestones-list" role="list">
           {milestones.map((m, i) => (
@@ -390,102 +456,48 @@ const milestones = [
       </div>
     </section>
 
-    <!-- Institutional -->
-    <section class="institutional-section animate-in animate-delay-6">
-      <div class="container">
-        <div class="institutional-card">
-          <h2 class="institutional-title">Per aziende e Pubblica Amministrazione</h2>
-          <p class="institutional-desc">
-            Il tier Institutional Partner è una collaborazione concreta, non una donazione generica.
-            Pensato per CEO, CTO e dirigenti di ente pubblico che vogliono partecipare attivamente.
-          </p>
-          <div class="institutional-grid">
-            <div class="institutional-item">
-              <div class="institutional-item__head">💼 Aziende</div>
-              <p>
-                Workshop privato per il tuo team su agenti AI e MCP (mezza giornata).
-                Logo sul sito come partner. Co-authorship su white paper tecnici.
-                Consulenza tecnica prioritaria. Con la registrazione RUNTS dell'APS, la quota diventerà
-                fiscalmente deducibile per le imprese fino al 10% del reddito dichiarato.
-              </p>
-            </div>
-            <div class="institutional-item">
-              <div class="institutional-item__head">🏛️ Pubblica Amministrazione</div>
-              <p>
-                PA Geo Italia è 100% open source, on-premise, a sovranità del dato garantita.
-                Nessuna dipendenza da cloud USA. Usa solo open data italiani: ISTAT, CKAN, OpenStreetMap.
-                Un ente che co-finanzia il progetto ottiene una versione pilota dedicata
-                e il diritto di contribuire alle specifiche funzionali.
-              </p>
-            </div>
-          </div>
-          <a
-            href="mailto:giuseppe.zileni@hevolus.it?subject=Institutional%20Partner%20%E2%80%94%20Agent%20Engineering%20Studio"
-            class="institutional-cta"
-          >
-            Parliamoci — scrivi a giuseppe.zileni@hevolus.it
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- FAQ -->
     <section class="faq-section animate-in animate-delay-6">
       <div class="container">
         <h2 class="section-title">Domande frequenti</h2>
         <div class="faq-list">
           <div class="faq-item">
-            <div class="faq-q">Cos'è esattamente Agent Engineering Studio in questo momento?</div>
+            <div class="faq-q">A cosa vado a donare, se l'associazione non esiste ancora?</div>
             <div class="faq-a">
-              Un progetto personale open source con l'obiettivo dichiarato di diventare un'Associazione di Promozione Sociale.
-              Opera in modo trasparente, produce materiale educativo gratuito e cerca i soci fondatori necessari alla costituzione formale.
-              Le donazioni ricevute ora sono contributi volontari a un progetto educativo, non compensi professionali.
+              Stai finanziando il lavoro del laboratorio: server, workshop, sviluppo dei PoC e le spese
+              per la costituzione dell'APS. Non è una donazione a un ente — è un contributo volontario
+              a un progetto educativo open source con obiettivi dichiarati e verificabili.
             </div>
           </div>
           <div class="faq-item">
             <div class="faq-q">Le donazioni sono deducibili fiscalmente?</div>
             <div class="faq-a">
-              Al momento no. La deducibilità fiscale si attiva in due fasi:
-              prima con la costituzione dell'APS (che richiede 3 soci fondatori),
-              poi con la registrazione al RUNTS (Registro Unico Nazionale del Terzo Settore).
-              Solo dopo la registrazione RUNTS le imprese potranno dedurre fino al 10% del reddito
-              e le persone fisiche detrarre il 30% (art. 83 D.Lgs. 117/2017).
+              Al momento no. La deducibilità si attiva in due fasi: prima con la costituzione dell'APS
+              (3 soci fondatori), poi con la registrazione RUNTS. Solo dopo il RUNTS le imprese potranno
+              dedurre fino al 10% del reddito e le persone fisiche detrarre il 30%
+              (art. 83 D.Lgs. 117/2017).
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q">Posso cancellare l'abbonamento mensile in qualsiasi momento?</div>
+            <div class="faq-q">Non sono sviluppatore. Posso diventare socio fondatore?</div>
             <div class="faq-a">
-              Sì, senza penali. GitHub Sponsors e Buy Me a Coffee permettono di
-              gestire o cancellare l'abbonamento direttamente dalla propria dashboard
-              senza preavviso.
+              Sì, esplicitamente. Cerchiamo competenze diverse: giuristi, esperti di PA, comunicatori,
+              designer, educator, data analyst. Un laboratorio che produce strumenti per la PA e la
+              community ha bisogno di persone che conoscono quei mondi dall'interno.
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q">Il codice rimarrà open source anche con i fondi?</div>
+            <div class="faq-q">Posso cancellare l'abbonamento mensile?</div>
             <div class="faq-a">
-              Sì, senza eccezioni. Tutti i repository esistenti e futuri restano
-              pubblicati con licenza Apache 2.0 su GitHub. Il supporto finanziario
-              non cambia la natura open del laboratorio — la accelera.
+              Sì, in qualsiasi momento senza penali. GitHub Sponsors e Buy Me a Coffee permettono di
+              gestire o cancellare l'abbonamento direttamente dalla propria dashboard.
             </div>
           </div>
           <div class="faq-item">
-            <div class="faq-q">Come funziona il tier Institutional per la PA?</div>
+            <div class="faq-q">Il codice rimarrà open source?</div>
             <div class="faq-a">
-              Il pagamento avviene tramite link Stripe con emissione di fattura.
-              Per enti pubblici che necessitano di un contratto formale,
-              possiamo strutturare un accordo di collaborazione.
-              Scrivi a giuseppe.zileni@hevolus.it con oggetto "Institutional Partner"
-              e descrivi il tuo ente e le tue esigenze.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q">Cos'è PA Geo Italia e perché è rilevante per un comune?</div>
-            <div class="faq-a">
-              PA Geo Italia è uno strumento open source che permette agli impiegati
-              comunali di fare domande in linguaggio naturale sui dati territoriali italiani
-              (ISTAT, CKAN, OpenStreetMap) e ottenere mappe, tabelle e report.
-              Gira completamente on-premise in Docker Compose: i dati non escono mai dal tuo server.
-              Zero licenze, zero cloud USA, zero lock-in.
+              Sì, senza eccezioni. Tutti i repository esistenti e futuri restano Apache 2.0 su GitHub.
+              I fondi non cambiano la natura open — la rendono sostenibile.
             </div>
           </div>
         </div>
@@ -497,594 +509,443 @@ const milestones = [
 </BaseLayout>
 
 <style>
-  .support-page {
-    min-height: 100vh;
-  }
+  .support-page { min-height: 100vh; }
 
   /* ── Back nav ── */
-  .back-nav {
-    padding-top: var(--space-xl);
-    padding-bottom: 0;
-  }
-
+  .back-nav { padding-top: var(--space-xl); padding-bottom: 0; }
   .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
-    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--color-text-muted); font-size: 0.85rem; text-decoration: none;
     transition: color var(--transition-fast);
   }
-
   .back-link:hover { color: var(--color-accent); }
 
   /* ── Hero ── */
-  .support-hero {
-    padding: var(--space-2xl) 0 var(--space-xl);
-    text-align: center;
-  }
+  .hero { padding: var(--space-2xl) 0 var(--space-xl); text-align: center; }
 
-  .support-hero__label {
+  .hero__label {
     display: inline-block;
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: var(--space-md);
+    font-family: var(--font-heading); font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--color-accent); margin-bottom: var(--space-md);
     padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(33, 150, 243, 0.3);
-    border-radius: 4px;
+    border: 1px solid rgba(33,150,243,0.3); border-radius: 4px;
   }
 
-  .support-hero__title {
+  .hero__title {
     font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 1.25;
-    margin-bottom: var(--space-lg);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700; color: var(--color-text);
+    line-height: 1.2; margin-bottom: var(--space-lg);
   }
 
-  .support-hero__desc {
-    max-width: 620px;
-    margin: 0 auto var(--space-md);
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    line-height: 1.7;
+  .hero__title--dim { color: var(--color-text-muted); }
+
+  .hero__desc {
+    max-width: 600px; margin: 0 auto var(--space-md);
+    font-size: 1rem; color: var(--color-text-muted); line-height: 1.7;
   }
 
-  .support-hero__cta-group {
-    display: flex;
-    gap: var(--space-sm);
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: var(--space-xl);
+  /* ── 3 Paths ── */
+  .paths-section { padding: var(--space-xl) 0 var(--space-2xl); }
+
+  .paths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
   }
 
-  .support-hero__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.7rem 1.6rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
+  .path-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl) var(--space-lg);
     text-decoration: none;
+    display: flex; flex-direction: column; gap: var(--space-sm);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .path-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .path-card--cta:hover    { border-color: var(--color-cta); }
+  .path-card--accent:hover { border-color: var(--color-accent); }
+  .path-card--success:hover { border-color: var(--color-success); }
+
+  .path-card__tag {
+    font-family: var(--font-heading); font-size: 0.65rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 2px 8px; border-radius: 3px; width: fit-content;
+  }
+
+  .path-card__tag--cta    { background: rgba(245,166,35,0.15); color: var(--color-cta); }
+  .path-card__tag--accent { background: rgba(33,150,243,0.12); color: var(--color-accent); }
+  .path-card__tag--success { background: rgba(52,211,153,0.12); color: var(--color-success); }
+
+  .path-card__icon { font-size: 2rem; margin: var(--space-sm) 0; }
+
+  .path-card__title {
+    font-family: var(--font-heading); font-size: 1.05rem;
+    font-weight: 700; color: var(--color-text);
+  }
+
+  .path-card__tagline {
+    font-size: 0.78rem; color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .path-card__desc {
+    font-size: 0.82rem; color: var(--color-text-muted);
+    line-height: 1.6; flex: 1; margin: 0;
+  }
+
+  .path-card__cta {
+    font-family: var(--font-heading); font-size: 0.75rem;
+    font-weight: 700; margin-top: var(--space-sm);
+  }
+
+  .path-card__cta--cta    { color: var(--color-cta); }
+  .path-card__cta--accent { color: var(--color-accent); }
+  .path-card__cta--success { color: var(--color-success); }
+
+  /* ── Section details shared ── */
+  .section-detail { padding: var(--space-2xl) 0; border-top: 1px solid var(--color-border); }
+
+  .detail-header { text-align: center; margin-bottom: var(--space-2xl); }
+
+  .detail-tag {
+    display: inline-block;
+    font-family: var(--font-heading); font-size: 0.72rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 0.25rem 0.75rem; border-radius: 4px; margin-bottom: var(--space-md);
+  }
+
+  .detail-tag--cta    { background: rgba(245,166,35,0.15); color: var(--color-cta); }
+  .detail-tag--accent { background: rgba(33,150,243,0.12); color: var(--color-accent); }
+  .detail-tag--success { background: rgba(52,211,153,0.12); color: var(--color-success); }
+
+  .detail-title {
+    font-family: var(--font-heading); font-size: 1.5rem;
+    font-weight: 700; color: var(--color-text); margin-bottom: var(--space-sm);
+  }
+
+  .detail-subtitle {
+    max-width: 560px; margin: 0 auto;
+    font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.65;
+  }
+
+  /* ── Profiles grid ── */
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .profile-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--space-md);
+  }
+
+  .profile-icon { font-size: 1.3rem; display: block; margin-bottom: 6px; }
+  .profile-label { font-size: 0.82rem; font-weight: 700; color: var(--color-text); margin-bottom: 4px; }
+  .profile-desc { font-size: 0.76rem; color: var(--color-text-muted); line-height: 1.5; }
+
+  /* ── Founding ask ── */
+  .founding-ask {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .founding-ask__col {
+    background: var(--color-bg-card);
+    border: 1px solid rgba(245,166,35,0.2);
+    border-radius: var(--border-radius); padding: var(--space-lg);
+  }
+
+  .founding-ask__head {
+    font-weight: 700; font-size: 0.85rem; color: var(--color-cta);
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-xs); border-bottom: 1px solid var(--color-border);
+  }
+
+  .founding-ask__col ul {
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+
+  .founding-ask__col li {
+    font-size: 0.82rem; color: var(--color-text-muted);
+    line-height: 1.5; padding-left: 1rem; position: relative;
+  }
+
+  .founding-ask__col li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--color-cta); font-size: 0.75rem;
+  }
+
+  .founding-cta-wrap { text-align: center; }
+
+  .founding-hint {
+    font-size: 0.8rem; color: var(--color-text-muted);
+    margin-top: var(--space-sm); font-style: italic;
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.75rem 1.8rem; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 600; text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
   }
 
-  .support-hero__cta--primary {
-    background: var(--color-cta);
-    color: #fff;
-  }
-  .support-hero__cta--primary:hover { background: var(--color-cta-hover); transform: translateY(-1px); color: #fff; }
+  .btn--cta { background: var(--color-cta); color: #fff; }
+  .btn--cta:hover { background: var(--color-cta-hover); transform: translateY(-1px); color: #fff; }
 
-  .support-hero__cta--secondary {
-    background: rgba(33, 150, 243, 0.08);
-    color: var(--color-accent);
-    border: 1px solid rgba(33, 150, 243, 0.25);
-  }
-  .support-hero__cta--secondary:hover { background: rgba(33, 150, 243, 0.16); color: var(--color-accent); }
+  .btn--success { background: var(--color-success); color: #0a0e17; }
+  .btn--success:hover { opacity: 0.9; transform: translateY(-1px); color: #0a0e17; }
 
-  /* ── Section titles ── */
-  .section-title {
-    font-family: var(--font-heading);
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: var(--space-md);
-    text-align: center;
-  }
-
-  .section-subtitle {
-    text-align: center;
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
-    max-width: 560px;
-    margin: 0 auto var(--space-xl);
-    line-height: 1.6;
-  }
-
-  /* ── Use of funds ── */
-  .use-of-funds { padding: var(--space-2xl) 0; }
-
+  /* ── Funds grid ── */
   .funds-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-md);
-    margin-top: var(--space-xl);
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: var(--space-sm); margin-bottom: var(--space-xl);
   }
 
   .fund-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-lg);
+    background: var(--color-bg-card); border: 1px solid var(--color-border);
+    border-radius: var(--border-radius); padding: var(--space-md);
   }
 
-  .fund-icon { font-size: 1.5rem; display: block; margin-bottom: var(--space-sm); }
-  .fund-name { font-weight: 600; font-size: 0.9rem; color: var(--color-text); margin-bottom: var(--space-xs); }
-  .fund-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5; }
-
-  /* ── Founding Member ── */
-  .founding-section { padding: var(--space-2xl) 0; }
-
-  .founding-card {
-    background: rgba(245, 166, 35, 0.04);
-    border: 1px solid rgba(245, 166, 35, 0.25);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-2xl);
-  }
-
-  .founding-header {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-md);
-    margin-bottom: var(--space-lg);
-  }
-
-  .founding-icon {
-    flex-shrink: 0;
-    width: 52px;
-    height: 52px;
-    background: rgba(245, 166, 35, 0.12);
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-cta);
-  }
-
-  .founding-label {
-    font-family: var(--font-heading);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-cta);
-    margin-bottom: 4px;
-  }
-
-  .founding-title {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .founding-desc {
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin-bottom: var(--space-xl);
-    max-width: 620px;
-  }
-
-  .founding-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-lg);
-  }
-
-  .founding-col {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: var(--space-lg);
-  }
-
-  .founding-col__title {
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: var(--color-text);
-    margin-bottom: var(--space-sm);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .founding-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0;
-    margin: 0;
-  }
-
-  .founding-list li {
-    font-size: 0.82rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .founding-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--color-cta);
-    font-size: 0.75rem;
-  }
-
-  .founding-note {
-    font-size: 0.82rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    font-style: italic;
-    margin-bottom: var(--space-xl);
-    padding: var(--space-md);
-    border-left: 3px solid rgba(245, 166, 35, 0.3);
-  }
-
-  .founding-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-heading);
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #fff;
-    background: var(--color-cta);
-    text-decoration: none;
-    padding: 0.7rem 1.4rem;
-    border-radius: 8px;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-
-  .founding-cta:hover { background: var(--color-cta-hover); transform: translateY(-1px); color: #fff; }
+  .fund-icon { font-size: 1.3rem; display: block; margin-bottom: 6px; }
+  .fund-name { font-weight: 600; font-size: 0.85rem; color: var(--color-text); margin-bottom: 4px; }
+  .fund-desc { font-size: 0.76rem; color: var(--color-text-muted); line-height: 1.5; }
 
   /* ── Tiers ── */
-  .tiers-section { padding: var(--space-2xl) 0; }
-
   .tiers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--space-md);
-    margin-top: var(--space-xl);
-    align-items: start;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: var(--space-md); align-items: start;
+    margin-bottom: var(--space-xl);
   }
 
   .tier-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-lg);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    background: var(--color-bg-card); border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg); padding: var(--space-lg);
+    position: relative; display: flex; flex-direction: column; gap: var(--space-sm);
   }
 
   .tier-card--highlight {
     border-color: var(--color-accent);
-    background: rgba(33, 150, 243, 0.06);
+    background: rgba(33,150,243,0.06);
   }
 
   .tier-badge {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--color-accent);
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 2px 10px;
-    border-radius: 4px;
-    white-space: nowrap;
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--color-accent); color: #fff;
+    font-family: var(--font-heading); font-size: 0.62rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 2px 10px; border-radius: 4px; white-space: nowrap;
   }
 
-  .tier-emoji { font-size: 1.8rem; }
+  .tier-top { display: flex; align-items: center; gap: var(--space-sm); }
+  .tier-emoji { font-size: 1.6rem; flex-shrink: 0; }
 
   .tier-name {
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-text);
+    font-family: var(--font-heading); font-size: 0.85rem;
+    font-weight: 700; color: var(--color-text);
   }
 
   .tier-price {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--color-accent);
-    font-family: var(--font-heading);
+    font-size: 1.3rem; font-weight: 800;
+    color: var(--color-accent); font-family: var(--font-heading);
   }
 
   .tier-cadence {
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--color-text-muted);
-    margin-left: 2px;
+    font-size: 0.76rem; font-weight: 400;
+    color: var(--color-text-muted); margin-left: 2px;
   }
 
-  .tier-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5; }
-  .tier-perks { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+  .tier-what {
+    background: rgba(33,150,243,0.06); border-radius: 6px;
+    padding: 0.5rem 0.75rem; font-size: 0.76rem;
+    color: var(--color-text-muted); line-height: 1.5;
+  }
+
+  .tier-what__label {
+    display: block; font-family: var(--font-heading); font-size: 0.6rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--color-accent); margin-bottom: 3px;
+  }
+
+  .tier-perks { flex: 1; display: flex; flex-direction: column; gap: 0.35rem; }
 
   .tier-perk {
-    font-size: 0.78rem;
-    color: var(--color-text-muted);
-    display: flex;
-    gap: 0.4rem;
-    align-items: flex-start;
-    line-height: 1.4;
+    font-size: 0.75rem; color: var(--color-text-muted);
+    display: flex; gap: 0.35rem; align-items: flex-start; line-height: 1.4;
   }
 
-  .tier-perk__check {
-    color: var(--color-success);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+  .tier-perk__check { color: var(--color-success); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 
   .tier-platform {
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding-top: var(--space-xs);
-    border-top: 1px solid var(--color-border);
+    font-family: var(--font-heading); font-size: 0.6rem;
+    color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em;
+    padding-top: var(--space-xs); border-top: 1px solid var(--color-border);
   }
 
   .tier-btn {
-    display: block;
-    text-align: center;
-    padding: 0.55rem 1rem;
-    border-radius: var(--border-radius);
-    font-size: 0.82rem;
-    font-weight: 600;
+    display: block; text-align: center; padding: 0.5rem 1rem;
+    border-radius: var(--border-radius); font-size: 0.8rem; font-weight: 600;
     text-decoration: none;
-    transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+    transition: background var(--transition-fast), color var(--transition-fast);
   }
 
   .tier-btn--primary { background: var(--color-accent); color: #fff; }
-  .tier-btn--primary:hover { background: var(--color-accent-dark); transform: translateY(-1px); color: #fff; }
+  .tier-btn--primary:hover { background: var(--color-accent-dark); color: #fff; }
 
   .tier-btn--secondary {
-    background: rgba(33, 150, 243, 0.08);
-    color: var(--color-accent);
-    border: 1px solid rgba(33, 150, 243, 0.2);
+    background: rgba(33,150,243,0.08); color: var(--color-accent);
+    border: 1px solid rgba(33,150,243,0.2);
   }
-  .tier-btn--secondary:hover { background: rgba(33, 150, 243, 0.16); color: var(--color-accent); }
+  .tier-btn--secondary:hover { background: rgba(33,150,243,0.16); }
 
-  /* ── Platforms ── */
-  .platforms-section { padding: var(--space-2xl) 0; }
-
-  .platforms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: var(--space-md);
-    margin-top: var(--space-xl);
+  /* ── Platform strip ── */
+  .platforms-strip {
+    display: flex; align-items: center; justify-content: center;
+    gap: var(--space-lg); flex-wrap: wrap;
+    padding: var(--space-lg); background: var(--color-bg-card);
+    border: 1px solid var(--color-border); border-radius: var(--border-radius);
   }
 
-  .platform-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-lg);
+  .platform-sep { color: var(--color-border); font-size: 1.2rem; }
+
+  .platform-item { display: flex; align-items: center; gap: 0.6rem; }
+
+  .platform-item__logo {
+    width: 32px; height: 32px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
   }
 
-  .platform-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: var(--space-md);
+  .platform-item__logo--bmc    { background: rgba(255,129,63,0.15); color: #FF813F; }
+  .platform-item__logo--gh     { background: rgba(255,255,255,0.06); color: var(--color-text); }
+  .platform-item__logo--stripe { background: rgba(99,91,255,0.15); color: #635bff; }
+
+  .platform-item__name { font-size: 0.8rem; font-weight: 600; color: var(--color-text); }
+  .platform-item__link { font-family: var(--font-heading); font-size: 0.68rem; color: var(--color-accent); text-decoration: none; }
+  .platform-item__link:hover { color: var(--color-cta); }
+
+  /* ── Collab ── */
+  .collab-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);
   }
 
-  .platform-logo--bmc { background: rgba(255, 129, 63, 0.15); color: #FF813F; }
-  .platform-logo--gh { background: rgba(255, 255, 255, 0.06); color: var(--color-text); }
-  .platform-logo--stripe { background: rgba(99, 91, 255, 0.15); color: #635bff; }
+  .collab-card {
+    background: var(--color-bg-card); border: 1px solid rgba(52,211,153,0.15);
+    border-radius: var(--border-radius); padding: var(--space-lg);
+  }
 
-  .platform-name { font-weight: 700; font-size: 0.9rem; color: var(--color-text); margin-bottom: var(--space-xs); }
-  .platform-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5; margin-bottom: var(--space-md); }
-  .platform-link { font-family: var(--font-heading); font-size: 0.72rem; color: var(--color-accent); text-decoration: none; }
-  .platform-link:hover { color: var(--color-cta); }
+  .collab-card__head { font-weight: 700; font-size: 0.9rem; color: var(--color-text); margin-bottom: var(--space-sm); }
+  .collab-card p { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.65; margin: 0; }
+
+  /* ── Section title ── */
+  .section-title {
+    font-family: var(--font-heading); font-size: 1.3rem;
+    font-weight: 700; color: var(--color-text);
+    margin-bottom: var(--space-sm); text-align: center;
+  }
+
+  .section-subtitle {
+    text-align: center; color: var(--color-text-muted);
+    font-size: 0.9rem; max-width: 520px;
+    margin: 0 auto var(--space-xl); line-height: 1.6;
+  }
 
   /* ── Milestones ── */
-  .milestones-section { padding: var(--space-2xl) 0; }
+  .milestones-section { padding: var(--space-2xl) 0; border-top: 1px solid var(--color-border); }
 
   .milestones-list {
-    max-width: 640px;
-    margin: var(--space-xl) auto 0;
-    display: flex;
-    flex-direction: column;
+    max-width: 620px; margin: var(--space-xl) auto 0;
+    display: flex; flex-direction: column;
   }
 
   .milestone-row { display: flex; gap: var(--space-lg); }
 
   .milestone-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
+    display: flex; flex-direction: column;
+    align-items: center; flex-shrink: 0;
   }
 
   .milestone-dot {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 30px; height: 30px; border-radius: 50%;
     border: 2px solid var(--color-border);
     background: var(--color-bg-elevated);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--color-text-muted);
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading); font-size: 0.72rem;
+    font-weight: 700; color: var(--color-text-muted); flex-shrink: 0;
   }
 
-  .milestone-dot--people { border-color: var(--color-cta); color: var(--color-cta); }
-  .milestone-dot--legal  { border-color: var(--color-success); color: var(--color-success); }
+  .milestone-dot--people  { border-color: var(--color-cta); color: var(--color-cta); }
+  .milestone-dot--legal   { border-color: var(--color-success); color: var(--color-success); }
+  .milestone-dot--partner { border-color: var(--color-accent); color: var(--color-accent); }
 
   .milestone-row--done .milestone-dot {
-    background: var(--color-success);
-    border-color: var(--color-success);
-    color: #fff;
+    background: var(--color-success); border-color: var(--color-success); color: #fff;
   }
 
   .milestone-line {
-    width: 2px;
-    flex: 1;
-    min-height: 24px;
-    background: var(--color-border);
-    margin: 4px 0;
+    width: 2px; flex: 1; min-height: 20px;
+    background: var(--color-border); margin: 4px 0;
   }
 
   .milestone-content { padding-bottom: var(--space-xl); flex: 1; }
 
   .milestone-trigger {
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
-    margin-bottom: 4px;
+    font-family: var(--font-heading); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--color-accent); margin-bottom: 4px;
   }
 
-  .milestone-trigger--people { color: var(--color-cta); }
-  .milestone-trigger--legal  { color: var(--color-success); }
+  .milestone-trigger--people  { color: var(--color-cta); }
+  .milestone-trigger--legal   { color: var(--color-success); }
+  .milestone-trigger--partner { color: var(--color-accent); }
 
-  .milestone-unlock {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--color-text);
-    margin-bottom: var(--space-xs);
-  }
-
-  .milestone-desc { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.55; }
-
-  /* ── Institutional ── */
-  .institutional-section { padding: var(--space-2xl) 0; }
-
-  .institutional-card {
-    background: rgba(33, 150, 243, 0.04);
-    border: 1px solid rgba(33, 150, 243, 0.2);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-2xl);
-  }
-
-  .institutional-title {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: var(--space-md);
-    text-align: center;
-  }
-
-  .institutional-desc {
-    text-align: center;
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
-    max-width: 540px;
-    margin: 0 auto var(--space-xl);
-    line-height: 1.6;
-  }
-
-  .institutional-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
-  }
-
-  .institutional-item {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: var(--space-lg);
-  }
-
-  .institutional-item__head {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--color-text);
-    margin-bottom: var(--space-sm);
-  }
-
-  .institutional-item p { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.6; }
-
-  .institutional-cta {
-    display: block;
-    text-align: center;
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    color: var(--color-accent);
-    text-decoration: none;
-    padding: var(--space-md);
-    border: 1px solid rgba(33, 150, 243, 0.3);
-    border-radius: var(--border-radius);
-    transition: background var(--transition-fast), color var(--transition-fast);
-  }
-
-  .institutional-cta:hover { background: rgba(33, 150, 243, 0.08); color: var(--color-cta); }
+  .milestone-unlock { font-weight: 700; font-size: 0.92rem; color: var(--color-text); margin-bottom: var(--space-xs); }
+  .milestone-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.55; }
 
   /* ── FAQ ── */
-  .faq-section { padding: var(--space-2xl) 0 var(--space-3xl); }
+  .faq-section { padding: var(--space-2xl) 0 var(--space-3xl); border-top: 1px solid var(--color-border); }
 
   .faq-list {
-    max-width: 640px;
-    margin: var(--space-xl) auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
+    max-width: 620px; margin: var(--space-xl) auto 0;
+    display: flex; flex-direction: column; gap: var(--space-md);
   }
 
   .faq-item {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: var(--space-lg);
+    background: var(--color-bg-card); border: 1px solid var(--color-border);
+    border-radius: var(--border-radius); padding: var(--space-lg);
   }
 
-  .faq-q { font-weight: 700; font-size: 0.9rem; color: var(--color-text); margin-bottom: var(--space-sm); }
-  .faq-a { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.65; }
+  .faq-q { font-weight: 700; font-size: 0.88rem; color: var(--color-text); margin-bottom: var(--space-sm); }
+  .faq-a { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.65; }
 
   /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .paths-grid { grid-template-columns: 1fr; }
+    .founding-ask { grid-template-columns: 1fr; }
+    .collab-grid { grid-template-columns: 1fr; }
+    .platforms-strip { flex-direction: column; gap: var(--space-md); }
+    .platform-sep { display: none; }
+  }
+
   @media (max-width: 640px) {
     .tiers-grid { grid-template-columns: 1fr; }
-    .institutional-grid { grid-template-columns: 1fr; }
-    .platforms-grid { grid-template-columns: 1fr; }
+    .profiles-grid { grid-template-columns: 1fr 1fr; }
     .funds-grid { grid-template-columns: 1fr 1fr; }
-    .institutional-card { padding: var(--space-lg); }
-    .founding-card { padding: var(--space-lg); }
-    .founding-grid { grid-template-columns: 1fr; }
-    .founding-header { flex-direction: column; }
-    .support-hero__cta-group { flex-direction: column; align-items: center; }
   }
 
   @media (max-width: 400px) {
+    .profiles-grid { grid-template-columns: 1fr; }
     .funds-grid { grid-template-columns: 1fr; }
   }
 </style>
