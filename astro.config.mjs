@@ -1,5 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://agentengeering.it',
+  site: 'https://agentengineering.it',
+  legacy: {
+    collections: true,
+  },
 });
