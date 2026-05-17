@@ -1,8 +1,7 @@
 ---
 /*
  * Hero.astro — Sezione hero principale
- * Contiene logo, tagline e sottotitolo.
- * Per modificare i testi: aggiorna direttamente l'HTML qui sotto.
+ * Direzione: MCP server open-source per dati italiani / Wikimedia Italia
  */
 ---
 
@@ -14,62 +13,130 @@
         src="/logo-horizontal.png"
         alt="Agent Engineering Studio"
         class="hero__logo-img"
-        width="480"
-        height="120"
+        width="260"
+        height="60"
       />
     </div>
 
+    <!-- Tagline -->
     <p class="hero__tagline animate-in animate-delay-1">
-      Un laboratorio aperto per sperimentare con gli agenti AI.
+      MCP server open-source per i dati pubblici italiani.
     </p>
 
+    <!-- Sottotitolo -->
     <p class="hero__subtitle animate-in animate-delay-2">
-      Proof-of-concept, progetti open-source, appunti e materiale formativo &mdash; costruiti per imparare e condividere.
+      Costruiamo strumenti aperti per interrogare OpenStreetMap, ISTAT, CKAN e i dataset della PA in linguaggio naturale &mdash;
+      in collaborazione con la community <a href="https://wikimedia.it" target="_blank" rel="noopener noreferrer">Wikimedia Italia</a>
+      e <a href="https://www.openstreetmap.it" target="_blank" rel="noopener noreferrer">OpenStreetMap Italia</a>.
     </p>
+
+    <!-- Badge -->
+    <div class="hero__badges animate-in animate-delay-3">
+      <a href="https://github.com/agent-engineering-studio" target="_blank" rel="noopener noreferrer" class="hero__badge">Open Source</a>
+      <span class="hero__badge hero__badge--neutral">MIT License</span>
+      <span class="hero__badge hero__badge--neutral">&#127470;&#127481; Dati italiani</span>
+    </div>
+
+    <!-- CTA -->
+    <div class="hero__cta animate-in animate-delay-4">
+      <a href="https://github.com/agent-engineering-studio" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+        Esplora i repo
+      </a>
+      <a href="/blog" class="btn btn--secondary">
+        Leggi il blog
+      </a>
+    </div>
   </div>
 </header>
 
 <style>
   .hero {
-    padding: var(--space-4xl) 0 var(--space-3xl);
+    padding: var(--space-2xl) 0 var(--space-xl);
     text-align: center;
   }
 
   .hero__logo {
-    margin-bottom: var(--space-xl);
-    display: flex;
-    justify-content: center;
+    margin-bottom: var(--space-lg);
   }
 
   .hero__logo-img {
-    width: 100%;
-    max-width: 520px;
+    max-width: 260px;
     height: auto;
-    filter: drop-shadow(0 0 30px rgba(33, 150, 243, 0.25));
-    animation: logo-glow 4s ease-in-out infinite;
-  }
-
-  @keyframes logo-glow {
-    0%, 100% {
-      filter: drop-shadow(0 0 20px rgba(33, 150, 243, 0.15));
-    }
-    50% {
-      filter: drop-shadow(0 0 45px rgba(33, 150, 243, 0.35));
-    }
+    display: block;
+    margin: 0 auto;
   }
 
   .hero__tagline {
-    font-family: var(--font-body);
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    font-weight: 500;
+    font-size: clamp(1.25rem, 3vw, 1.7rem);
+    font-weight: 700;
     color: var(--color-text);
     margin-bottom: var(--space-sm);
+    letter-spacing: -0.01em;
   }
 
   .hero__subtitle {
-    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
     color: var(--color-text-muted);
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 580px;
+    margin: 0 auto var(--space-lg);
+    line-height: 1.65;
+  }
+
+  .hero__subtitle a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hero__subtitle a:hover {
+    color: var(--color-cta);
+  }
+
+  .hero__badges {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: var(--color-accent);
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .hero__badge:hover {
+    background: var(--color-cta);
+  }
+
+  .hero__badge--neutral {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__badge--neutral:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 480px) {
+    .hero__cta {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 </style>

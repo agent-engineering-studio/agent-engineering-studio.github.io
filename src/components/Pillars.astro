@@ -1,43 +1,47 @@
 ---
 /*
- * Pillars.astro — Le 4 aree dello studio (cards)
- * Per modificare le card: aggiorna l'array `pillars` qui sotto.
+ * Pillars.astro — I 4 pilastri del laboratorio
+ * Aggiornato per direzione Wikimedia Italia / MCP open data italiani
  */
 
 const pillars = [
   {
-    icon: '\u{1F9EA}',
-    title: 'Proof-of-Concept',
-    description: 'Idee trasformate in prototipi funzionanti. Codice aperto, esperimenti riproducibili.',
+    icon: '🗺️',
+    title: "MCP server per l'Italia",
+    description:
+      'Server open-source che espongono OpenStreetMap, ISTAT, CKAN e i dataset PA come tool MCP — interrogabili in linguaggio naturale da qualsiasi agente AI compatibile.',
   },
   {
-    icon: '\u{1F52C}',
-    title: 'Sperimentazione',
-    description: 'Architetture, pattern e framework messi alla prova. Si pubblica quello che funziona — e anche quello che non funziona.',
+    icon: '🤝',
+    title: 'Community & collaborazioni',
+    description:
+      'Vogliamo crescere dentro la community Wikimedia Italia e OpenStreetMap Italia, trovare co-contributori e costruire ponti tra civic tech, PA e volontariato digitale.',
   },
   {
-    icon: '\u{1F393}',
-    title: 'Formazione & Divulgazione',
-    description: 'Libri, articoli e appunti tecnici. Per chi vuole capire cosa c\'è sotto il cofano degli agenti AI.',
+    icon: '📚',
+    title: 'Formazione in italiano',
+    description:
+      'Tutorial, guide e articoli sul protocollo MCP e gli agenti AI scritti in italiano — per rendere questi strumenti accessibili a sviluppatori, ricercatori e appassionati.',
   },
   {
-    icon: '\u{1F91D}',
-    title: 'Community',
-    description: 'Discussioni aperte, contributi benvenuti. Ogni progetto è pubblico e documentato.',
+    icon: '🏛️',
+    title: 'Civic tech',
+    description:
+      'Agenti AI per la trasparenza e il bene comune: appalti pubblici, accessibilità urbana, dati catastali, emergenze e patrimonio culturale aperto.',
   },
 ];
 ---
 
-<section class="pillars" aria-labelledby="pillars-heading">
+<section class="pillars" aria-label="Pilastri del laboratorio">
   <div class="container">
-    <h2 id="pillars-heading" class="sr-only">Le aree dello studio</h2>
+    <h2 class="pillars__heading">Cosa costruiamo</h2>
     <div class="pillars__grid">
-      {pillars.map((pillar, i) => (
-        <article class={`pillar-card animate-in animate-delay-${i + 3}`}>
-          <span class="pillar-card__icon" aria-hidden="true">{pillar.icon}</span>
-          <h3 class="pillar-card__title">{pillar.title}</h3>
-          <p class="pillar-card__desc">{pillar.description}</p>
-        </article>
+      {pillars.map((pillar) => (
+        <div class="pillar">
+          <div class="pillar__icon" aria-hidden="true">{pillar.icon}</div>
+          <h3 class="pillar__title">{pillar.title}</h3>
+          <p class="pillar__desc">{pillar.description}</p>
+        </div>
       ))}
     </div>
   </div>
@@ -45,55 +49,51 @@ const pillars = [
 
 <style>
   .pillars {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
+  }
+
+  .pillars__heading {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xl);
   }
 
   .pillars__grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: var(--space-lg);
   }
 
-  @media (min-width: 600px) {
-    .pillars__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .pillar-card {
-    background: var(--color-bg-card);
+  .pillar {
+    padding: var(--space-lg);
+    background: rgba(15, 34, 64, 0.4);
     border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-xl);
-    transition:
-      transform var(--transition-base),
-      border-color var(--transition-base),
-      box-shadow var(--transition-base);
+    border-radius: var(--border-radius-lg, 12px);
+    transition: border-color 0.2s, transform 0.2s;
   }
 
-  .pillar-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    border-color: rgba(33, 150, 243, 0.3);
-    box-shadow: 0 0 24px var(--color-accent-glow);
+  .pillar:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
   }
 
-  .pillar-card__icon {
-    display: block;
-    font-size: 2rem;
-    margin-bottom: var(--space-md);
-  }
-
-  .pillar-card__title {
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--color-text);
+  .pillar__icon {
+    font-size: 1.8rem;
     margin-bottom: var(--space-sm);
   }
 
-  .pillar-card__desc {
-    font-size: 0.95rem;
+  .pillar__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .pillar__desc {
+    font-size: 0.88rem;
     color: var(--color-text-muted);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 </style>
