@@ -4,7 +4,7 @@ description: "Un tutorial pratico per creare un agente AI che interroga dataset 
 pubDate: 2026-05-16
 author: "Giuseppe Zileni"
 tags: ["tutorial", "open-data", "agenti-ai", "python"]
-draft: false
+draft: true
 ---
 
 Quando ho iniziato a lavorare su Agent Engineering Studio, una delle prime domande era: **come si costruisce un agente AI utile senza un budget enterprise?**
