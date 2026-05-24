@@ -1,40 +1,39 @@
 ---
 /*
- * Pillars.astro — I 4 pilastri del laboratorio
- * Aggiornato per direzione Wikimedia Italia / MCP open data italiani
+ * Pillars.astro — I 4 ambiti del laboratorio
  */
 
 const pillars = [
   {
-    icon: '🗺️',
-    title: "MCP server per l'Italia",
+    icon: '📖',
+    title: 'Studio',
     description:
-      'Server open-source che espongono OpenStreetMap, ISTAT, CKAN e i dataset PA come tool MCP — interrogabili in linguaggio naturale da qualsiasi agente AI compatibile.',
+      'Approfondimenti su agenti AI, Knowledge Graph, retrieval ibrido e protocolli emergenti. Quello che imparo lo scrivo, quello che scrivo lo pubblico.',
   },
   {
-    icon: '🤝',
-    title: 'Community & collaborazioni',
+    icon: '🧪',
+    title: 'Sperimentazione',
     description:
-      'Vogliamo crescere dentro la community Wikimedia Italia e OpenStreetMap Italia, trovare co-contributori e costruire ponti tra civic tech, PA e volontariato digitale.',
+      'Prototipi open source per testare architetture, pattern e idee. Codice eseguibile, non solo teoria.',
   },
   {
     icon: '📚',
-    title: 'Formazione in italiano',
+    title: 'Divulgazione',
     description:
-      'Tutorial, guide e articoli sul protocollo MCP e gli agenti AI scritti in italiano — per rendere questi strumenti accessibili a sviluppatori, ricercatori e appassionati.',
+      'Libri tecnici in italiano, articoli e tutorial per rendere accessibili tecniche enterprise anche a chi studia da solo.',
   },
   {
-    icon: '🏛️',
-    title: 'Civic tech',
+    icon: '🌱',
+    title: 'Community',
     description:
-      'Agenti AI per la trasparenza e il bene comune: appalti pubblici, accessibilità urbana, dati catastali, emergenze e patrimonio culturale aperto.',
+      'Uno spazio aperto: chi vuole leggere, discutere o contribuire è benvenuto. Senza ruoli, senza adesioni.',
   },
 ];
 ---
 
-<section class="pillars" aria-label="Pilastri del laboratorio">
+<section class="pillars" aria-label="Ambiti del laboratorio">
   <div class="container">
-    <h2 class="pillars__heading">Cosa costruiamo</h2>
+    <h2 class="pillars__heading">Cosa faccio qui</h2>
     <div class="pillars__grid">
       {pillars.map((pillar) => (
         <div class="pillar">

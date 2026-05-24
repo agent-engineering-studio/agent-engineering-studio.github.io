@@ -1,43 +1,11 @@
 ---
 /*
  * ProjectsSection.astro — Grid dei progetti open source
- * Mostra tutti i 4 repo attivi + osm-italia-mcp coming soon
+ * Mostra solo il progetto companion del libro "AI che Ragiona".
+ * Altri repo restano privati in attesa di pubblicazione progressiva.
  */
 
 const projects = [
-  {
-    slug: 'mcp-ckan',
-    icon: '📦',
-    title: 'mcp-ckan',
-    status: 'Open Source',
-    statusClass: 'status--open',
-    description:
-      'MCP server per i portali open data basati su CKAN — dati.gov.it, portali regionali e comunali. Query in linguaggio naturale sui dataset della PA.',
-    stack: ['Python', 'FastMCP', 'CKAN API', 'Ollama'],
-    repoUrl: 'https://github.com/agent-engineering-studio/mcp-ckan',
-  },
-  {
-    slug: 'mcp-istat',
-    icon: '📊',
-    title: 'mcp-istat',
-    status: 'Open Source',
-    statusClass: 'status--open',
-    description:
-      'MCP server per i dati statistici ISTAT via SDMX API. Popolazione, economia, lavoro e territorio interrogabili come tool MCP.',
-    stack: ['Python', 'FastMCP', 'SDMX API', 'ISTAT'],
-    repoUrl: 'https://github.com/agent-engineering-studio/mcp-istat',
-  },
-  {
-    slug: 'mcp-osm',
-    icon: '🗺️',
-    title: 'mcp-osm',
-    status: 'Open Source',
-    statusClass: 'status--open',
-    description:
-      'MCP server per OpenStreetMap: Overpass API, Nominatim geocoding e OSRM routing. Interroga la mappa italiana in linguaggio naturale.',
-    stack: ['Python', 'FastMCP', 'Overpass API', 'Nominatim', 'OSRM'],
-    repoUrl: 'https://github.com/agent-engineering-studio/mcp-osm',
-  },
   {
     slug: 'knowledge-graph',
     icon: '🧠',
@@ -45,20 +13,9 @@ const projects = [
     status: 'In Development',
     statusClass: 'status--dev',
     description:
-      'Knowledge graph per connettere entità geografiche, statistiche e documentali. Backend multi-agente con LangGraph, Neo4j e FastMCP.',
+      'Progetto companion del libro "AI che Ragiona". Knowledge graph con pipeline di ingestion, retrieval ibrido (vector + graph), interfaccia web e orchestrazione multi-agente.',
     stack: ['Python', 'FastAPI', 'LangGraph', 'Neo4j', 'Redis', 'FastMCP', 'Next.js 15'],
     repoUrl: 'https://github.com/agent-engineering-studio/knowledge-graph',
-  },
-  {
-    slug: 'osm-italia-mcp',
-    icon: '🇮🇹',
-    title: 'osm-italia-mcp',
-    status: 'Coming Soon',
-    statusClass: 'status--soon',
-    description:
-      'Il primo MCP server .NET per i dati geospaziali italiani: OSM, ISTAT, Catasto e RNDT in un unico server C# con Microsoft Agent Framework 1.0.',
-    stack: ['.NET 9', 'C#', 'MAF 1.0', 'MCP SDK', 'Overpass', 'Nominatim', 'ISTAT', 'Catasto'],
-    repoUrl: 'https://github.com/agent-engineering-studio',
   },
 ];
 ---
@@ -67,7 +24,8 @@ const projects = [
   <div class="container">
     <h2 class="projects__heading">Progetti</h2>
     <p class="projects__intro">
-      Tutti i repository sono aperti e accettano contributi. Se usi questi strumenti o vuoi collaborare, apri una issue o una PR.
+      Progetto pubblico legato al libro <strong>"AI che Ragiona"</strong>. Altri repository
+      sono in revisione e verranno pubblicati progressivamente.
     </p>
 
     <div class="projects__grid">
