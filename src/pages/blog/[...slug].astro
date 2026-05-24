@@ -1,28 +1,28 @@
 ---
 /*
  * blog/[...slug].astro — Pagina singolo articolo
- * Astro legacy content collections (legacy.collections: true).
+ * Astro Content Layer API (Astro v6).
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const formatDate = (d: Date) =>
   d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 
-const canonical = `https://agentengineering.it/blog/${post.slug}`;
+const canonical = `https://agentengineering.it/blog/${post.id}`;
 ---
 
 <BaseLayout
