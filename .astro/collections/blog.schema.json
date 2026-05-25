@@ -27,6 +27,14 @@
       "default": false,
       "type": "boolean"
     },
+    "lang": {
+      "default": "it",
+      "type": "string",
+      "enum": [
+        "it",
+        "en"
+      ]
+    },
     "$schema": {
       "type": "string"
     }
