@@ -14,6 +14,10 @@ import Footer from '../../components/Footer.astro';
 const AMAZON_IT_URL = 'https://www.amazon.it/gp/product/B0GWRX64Z8/ref=ox_sc_act_title_1?smid=A1FPE5JXJST57&psc=1';
 const GITHUB_DISCUSSIONS_URL = 'https://github.com/orgs/agent-engineering-studio/discussions';
 
+// Il libro è in revisione editoriale: i link Amazon vengono disabilitati
+// finché la pubblicazione non è confermata.
+const COMING_SOON = true;
+
 const parts = [
   { number: 'I', title: 'Fondamenti dei Knowledge Graph', chapters: '1-4', desc: 'Teoria KG, modelli dati (RDF, Property Graph), query Cypher/SPARQL, ontologie OWL e ragionamento' },
   { number: 'II', title: 'Costruire con Python', chapters: '5-12', desc: 'Quick Start in 30 min, architettura, pipeline ingestion, Docker Compose, Pydantic, Vector Store' },
@@ -65,32 +69,47 @@ const formats = [
               di <strong>Giuseppe Zileni</strong>
             </p>
 
-            <!-- Amazon CTA -->
-            <div class="book-hero__actions">
-              <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon">
-                Acquista su Amazon
-              </a>
-            </div>
-            <div class="book-hero__badge-row">
-              <a
-                href={AMAZON_IT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Available at Amazon"
-              >
-                <img
-                  src="/badges/available_at_amazon_en_horizontal_drk.png"
-                  alt="Available at Amazon"
-                  class="amazon-badge-img"
-                  width="180"
-                  height="46"
-                  loading="eager"
-                />
-              </a>
-            </div>
-            <p class="trademark">
-              Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
-            </p>
+            {/* Amazon CTA — disabilitata finché il libro è in revisione */}
+            {COMING_SOON ? (
+              <div class="coming-soon-banner" role="status" aria-live="polite">
+                <span class="coming-soon-banner__icon" aria-hidden="true">⏳</span>
+                <div class="coming-soon-banner__body">
+                  <strong class="coming-soon-banner__title">Presto disponibile su Amazon</strong>
+                  <span class="coming-soon-banner__desc">
+                    Il libro è in revisione editoriale. I link di acquisto saranno
+                    attivati subito dopo la pubblicazione.
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div class="book-hero__actions">
+                  <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon">
+                    Acquista su Amazon
+                  </a>
+                </div>
+                <div class="book-hero__badge-row">
+                  <a
+                    href={AMAZON_IT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Available at Amazon"
+                  >
+                    <img
+                      src="/badges/available_at_amazon_en_horizontal_drk.png"
+                      alt="Available at Amazon"
+                      class="amazon-badge-img"
+                      width="180"
+                      height="46"
+                      loading="eager"
+                    />
+                  </a>
+                </div>
+                <p class="trademark">
+                  Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
+                </p>
+              </>
+            )}
           </div>
 
           <!-- Book cover — real image -->
@@ -207,29 +226,44 @@ const formats = [
           ))}
         </div>
 
-        <!-- Final Amazon CTA -->
+        {/* Final CTA — disabilitato finché il libro è in revisione */}
         <div class="formats__cta">
-          <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--lg">
-            Acquista su Amazon
-          </a>
-          <a
-            href={AMAZON_IT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Available at Amazon"
-          >
-            <img
-              src="/badges/available_at_amazon_en_horizontal_drk.png"
-              alt="Available at Amazon"
-              class="amazon-badge-img"
-              width="180"
-              height="46"
-              loading="lazy"
-            />
-          </a>
-          <p class="trademark">
-            Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
-          </p>
+          {COMING_SOON ? (
+            <div class="coming-soon-banner coming-soon-banner--lg" role="status" aria-live="polite">
+              <span class="coming-soon-banner__icon" aria-hidden="true">⏳</span>
+              <div class="coming-soon-banner__body">
+                <strong class="coming-soon-banner__title">Presto disponibile su Amazon</strong>
+                <span class="coming-soon-banner__desc">
+                  Il libro è in revisione editoriale. I link di acquisto saranno
+                  attivati subito dopo la pubblicazione.
+                </span>
+              </div>
+            </div>
+          ) : (
+            <>
+              <a href={AMAZON_IT_URL} target="_blank" rel="noopener noreferrer" class="btn-amazon btn-amazon--lg">
+                Acquista su Amazon
+              </a>
+              <a
+                href={AMAZON_IT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Available at Amazon"
+              >
+                <img
+                  src="/badges/available_at_amazon_en_horizontal_drk.png"
+                  alt="Available at Amazon"
+                  class="amazon-badge-img"
+                  width="180"
+                  height="46"
+                  loading="lazy"
+                />
+              </a>
+              <p class="trademark">
+                Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
+              </p>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -401,6 +435,51 @@ const formats = [
     font-size: 0.6rem;
     color: var(--color-text-muted);
     opacity: 0.4;
+  }
+
+  /* ── Coming soon banner ── */
+  .coming-soon-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background:
+      linear-gradient(135deg, rgba(255, 153, 0, 0.10), rgba(255, 153, 0, 0.04));
+    border: 1px solid rgba(255, 153, 0, 0.35);
+    border-radius: var(--border-radius-lg);
+    max-width: 520px;
+    margin-bottom: var(--space-md);
+  }
+
+  .coming-soon-banner--lg {
+    margin: 0 auto;
+  }
+
+  .coming-soon-banner__icon {
+    font-size: 1.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .coming-soon-banner__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: left;
+  }
+
+  .coming-soon-banner__title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ff9900;
+    letter-spacing: 0.02em;
+  }
+
+  .coming-soon-banner__desc {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
   }
 
   /* ── Cover 3D ── */
@@ -753,6 +832,7 @@ const formats = [
     }
     .book-hero__subtitle { margin-left: auto; margin-right: auto; }
     .book-hero__actions { justify-content: center; }
+    .coming-soon-banner { margin-left: auto; margin-right: auto; }
     .cover-3d { width: 200px; }
     .formats__grid { grid-template-columns: 1fr; }
 

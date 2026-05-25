@@ -17,6 +17,7 @@ const books = [
     tags: ['Python', 'Neo4j', 'Redis', 'Graph-RAG', 'MCP', 'Agent Framework'],
     cover: '/covers/ai-che-ragiona-it-thumb.jpg',
     amazonUrl: 'https://www.amazon.it/gp/product/B0GWRX64Z8/ref=ox_sc_act_title_1?smid=A1FPE5JXJST57&psc=1',
+    comingSoon: true,
   },
   // Aggiungi qui i prossimi libri:
   // {
@@ -72,15 +73,21 @@ const books = [
                 ))}
               </div>
 
-              {/* Amazon badge */}
+              {/* Amazon badge / Coming soon */}
               <div class="book-card__badge">
-                <img
-                  src="/badges/available_at_amazon_en_horizontal_drk.png"
-                  alt="Available at Amazon"
-                  width="140"
-                  height="36"
-                  loading="lazy"
-                />
+                {book.comingSoon ? (
+                  <span class="book-card__coming-soon">
+                    Presto disponibile su Amazon
+                  </span>
+                ) : (
+                  <img
+                    src="/badges/available_at_amazon_en_horizontal_drk.png"
+                    alt="Available at Amazon"
+                    width="140"
+                    height="36"
+                    loading="lazy"
+                  />
+                )}
               </div>
             </div>
           </a>
@@ -242,6 +249,21 @@ const books = [
   .book-card__badge img {
     height: 32px;
     width: auto;
+  }
+
+  .book-card__coming-soon {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35em 0.9em;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #ff9900;
+    background: rgba(255, 153, 0, 0.08);
+    border: 1px solid rgba(255, 153, 0, 0.35);
+    border-radius: 999px;
   }
 
   .catalog__trademark {
