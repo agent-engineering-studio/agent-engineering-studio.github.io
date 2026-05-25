@@ -8,6 +8,8 @@ draft: false
 lang: "it"
 ---
 
+![Papa Leone XIV osserva il volto di un'IA in trasparenza mentre un costruttore al tempo di Neemia mostra i piani del cantiere: due icone del costruire — Babele e Neemia — applicate alla progettazione dei sistemi di IA.](/covers/cantiere-neemia.png)
+
 Il 15 maggio scorso il Vaticano ha pubblicato la prima enciclica nella storia interamente dedicata all'intelligenza artificiale: **[*Magnifica Humanitas*](https://www.vatican.va/content/leo-xiv/it/encyclicals/documents/20260515-magnifica-humanitas.html)** di Papa Leone XIV. Quaranta paragrafi del terzo capitolo — dal §90 al §130 — parlano direttamente a chi costruisce sistemi di IA: di accountability, di concentrazione del potere computazionale, di trasparenza degli algoritmi, di residenza dei dati, di responsabilità di chi progetta (§111: «ogni scelta progettuale esprime una visione dell'umanità»).
 
 Letto con gli occhi di un ingegnere, è un testo che fa qualcosa di raro nella letteratura di AI ethics: distilla 135 anni di pensiero sociale strutturato in **sei principi compatti**, li applica a casi concreti dell'IA contemporanea, e si rivolge esplicitamente *anche* «agli uomini e alle donne di buona volontà» (§§16, 47, 91) — credenti o no. Ho voluto verificare se quel materiale potesse essere tradotto in **uno strumento di lavoro operativo** per le revisioni di progetti di IA. Il risultato si chiama **Cantiere Neemia**.

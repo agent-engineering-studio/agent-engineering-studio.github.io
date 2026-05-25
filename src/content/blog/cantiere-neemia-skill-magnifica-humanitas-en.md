@@ -8,6 +8,8 @@ draft: false
 lang: "en"
 ---
 
+![Pope Leo XIV looks at the translucent face of an AI while a builder at the time of Nehemiah shows him the construction plans: two icons of building — Babel and Nehemiah — applied to the design of AI systems.](/covers/cantiere-neemia.png)
+
 On 15 May, the Vatican published the first encyclical in history entirely dedicated to artificial intelligence: **[*Magnifica Humanitas*](https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html)** by Pope Leo XIV. Forty paragraphs of chapter three — §§90 to 130 — speak directly to those who build AI systems: about accountability, the concentration of computational power, algorithmic transparency, data residency, and the responsibility of designers (§111: *«every design choice expresses a vision of humanity»*).
 
 Read from an engineer's perspective, the text does something the AI ethics literature rarely does: it distills 135 years of structured social thought into **six compact principles**, applies them to concrete cases of contemporary AI, and explicitly addresses *also* «all men and women of good will» (§§16, 47, 91) — believers or not. I wanted to verify whether that material could be translated into **an operational working tool** for AI project reviews. The result is called **Cantiere Neemia**.

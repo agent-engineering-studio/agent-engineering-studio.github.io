@@ -194,6 +194,15 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
 
   .prose :global(p) { margin-bottom: var(--space-md); }
 
+  .prose :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: var(--space-lg) auto;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
   .prose :global(a) {
     color: var(--color-accent);
     text-decoration: underline;
