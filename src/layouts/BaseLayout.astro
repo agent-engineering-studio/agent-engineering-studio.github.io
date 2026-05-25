@@ -9,19 +9,21 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  lang?: 'it' | 'en';
 }
 
 const {
   title = 'Agent Engineering Studio — Laboratorio & community su agenti AI',
   description = 'Laboratorio aperto di sperimentazione, formazione e divulgazione su agenti AI: proof-of-concept, progetti open-source e materiale didattico.',
   canonical = 'https://agentengineering.it/',
+  lang = 'it',
 } = Astro.props;
 
 const ogImage = new URL('/logo-horizontal.png', canonical).href;
 ---
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />

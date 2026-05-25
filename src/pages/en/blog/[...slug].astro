@@ -1,17 +1,18 @@
 ---
 /*
- * blog/[...slug].astro — Pagina singolo articolo
- * Astro Content Layer API (Astro v6).
+ * en/blog/[...slug].astro — English single article page
+ * Filters posts with lang === 'en' and strips the "-en" suffix from the URL
+ * so /en/blog/<slug> mirrors /blog/<slug>.
  */
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Footer from '../../components/Footer.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Footer from '../../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'it');
+  const posts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en');
   return posts.map(post => ({
-    params: { slug: post.id },
+    params: { slug: post.id.replace(/-en$/, '') },
     props: { post },
   }));
 }
@@ -20,28 +21,30 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const formatDate = (d: Date) =>
-  d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-const canonical = `https://agentengineering.it/blog/${post.id}`;
+const cleanSlug = post.id.replace(/-en$/, '');
+const canonical = `https://agentengineering.it/en/blog/${cleanSlug}`;
 
-// Cerca eventuale versione inglese: stesso id + "-en"
-const enPosts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en');
-const enCounterpart = enPosts.find(p => p.id === `${post.id}-en`);
-const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
+// Cerca eventuale versione italiana con id pari allo slug "pulito"
+const itPosts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'it');
+const itCounterpart = itPosts.find(p => p.id === cleanSlug);
+const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
 ---
 
 <BaseLayout
   title={`${post.data.title} — Agent Engineering Studio`}
   description={post.data.description}
   canonical={canonical}
+  lang="en"
 >
   <header class="post-header">
     <div class="container">
       <div class="post-header__top">
-        <a href="/blog" class="back-link">&larr; Tutti gli articoli</a>
-        {enHref && (
-          <a href={enHref} class="lang-switch" hreflang="en" lang="en">
-            🇬🇧 Read in English
+        <a href="/en/blog" class="back-link">&larr; All articles</a>
+        {itHref && (
+          <a href={itHref} class="lang-switch" hreflang="it" lang="it">
+            🇮🇹 Leggi in italiano
           </a>
         )}
       </div>
@@ -67,10 +70,10 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
 
     <div class="post-footer">
       <div class="post-footer__support">
-        <p>Hai trovato utile questo articolo?</p>
-        <a href="/support" class="btn-support">&#10084;&#65039; Supporta il progetto</a>
+        <p>Did you find this article useful?</p>
+        <a href="/support" class="btn-support">&#10084;&#65039; Support the project</a>
       </div>
-      <a href="/blog" class="back-link">&larr; Torna al blog</a>
+      <a href="/en/blog" class="back-link">&larr; Back to blog</a>
     </div>
   </main>
 

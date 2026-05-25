@@ -1,51 +1,55 @@
 ---
 /*
- * blog/index.astro — Lista articoli del blog
- * Astro 5 Content Layer API. Aggiungere post in src/content/blog/
+ * en/blog/index.astro — English blog index
+ * Mirrors src/pages/blog/index.astro but filters posts with lang === 'en'.
  */
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Footer from '../../components/Footer.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Footer from '../../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'it'))
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en'))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const hasEnglish = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en')).length > 0;
+const hasItalian = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'it')).length > 0;
 
 const formatDate = (d: Date) =>
-  d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// URL pulito senza il suffisso "-en" (le pagine singole vivono in /en/blog/<id-senza-en>)
+const cleanSlug = (id: string) => id.replace(/-en$/, '');
 ---
 
 <BaseLayout
   title="Blog — Agent Engineering Studio"
-  description="Tutorial, riflessioni e aggiornamenti su agenti AI, open data e civic tech dal laboratorio Agent Engineering Studio."
-  canonical="https://agentengineering.it/blog"
+  description="Tutorials, lab notes and updates on AI agents, open data and civic tech from the Agent Engineering Studio."
+  canonical="https://agentengineering.it/en/blog"
+  lang="en"
 >
   <header class="blog-header">
     <div class="container">
       <div class="blog-header__top">
         <a href="/" class="back-link">&larr; Home</a>
-        {hasEnglish && (
-          <a href="/en/blog" class="lang-switch" hreflang="en" lang="en">
-            🇬🇧 English version
+        {hasItalian && (
+          <a href="/blog" class="lang-switch" hreflang="it" lang="it">
+            🇮🇹 Versione italiana
           </a>
         )}
       </div>
       <h1 class="blog-title">Blog</h1>
-      <p class="blog-subtitle">Tutorial, riflessioni e aggiornamenti dal laboratorio</p>
+      <p class="blog-subtitle">Tutorials, lab notes and updates from the studio</p>
     </div>
   </header>
 
   <main class="container">
     {allPosts.length === 0 && (
-      <p class="empty">Nessun articolo ancora. Torna presto!</p>
+      <p class="empty">No articles yet. Check back soon!</p>
     )}
 
     <ul class="post-list">
       {allPosts.map(post => (
         <li class="post-card">
-          <a href={`/blog/${post.id}`} class="post-card__link">
+          <a href={`/en/blog/${cleanSlug(post.id)}`} class="post-card__link">
             <div class="post-card__meta">
               <time datetime={post.data.pubDate.toISOString()}>
                 {formatDate(post.data.pubDate)}
@@ -56,7 +60,7 @@ const formatDate = (d: Date) =>
             </div>
             <h2 class="post-card__title">{post.data.title}</h2>
             <p class="post-card__desc">{post.data.description}</p>
-            <span class="post-card__cta">Leggi &rarr;</span>
+            <span class="post-card__cta">Read &rarr;</span>
           </a>
         </li>
       ))}
@@ -197,4 +201,3 @@ const formatDate = (d: Date) =>
     padding: var(--space-2xl) 0;
   }
 </style>
-

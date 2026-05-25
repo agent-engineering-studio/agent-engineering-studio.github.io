@@ -10,6 +10,7 @@ const blog = defineCollection({
     author: z.string().default('Giuseppe Zileni'),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    lang: z.enum(['it', 'en']).default('it'),
   }),
 });
 
