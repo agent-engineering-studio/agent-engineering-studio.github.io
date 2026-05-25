@@ -27,8 +27,15 @@ const formatDate = (d: Date) =>
       <div class="blog-header__top">
         <a href="/" class="back-link">&larr; Home</a>
         {hasEnglish && (
-          <a href="/en/blog" class="lang-switch" hreflang="en" lang="en">
-            🇬🇧 English version
+          <a
+            href="/en/blog"
+            class="lang-switch"
+            hreflang="en"
+            lang="en"
+            aria-label="English version"
+            title="English version"
+          >
+            <span aria-hidden="true">🇬🇧</span>
           </a>
         )}
       </div>

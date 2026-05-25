@@ -40,8 +40,15 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
       <div class="post-header__top">
         <a href="/blog" class="back-link">&larr; Tutti gli articoli</a>
         {enHref && (
-          <a href={enHref} class="lang-switch" hreflang="en" lang="en">
-            🇬🇧 Read in English
+          <a
+            href={enHref}
+            class="lang-switch"
+            hreflang="en"
+            lang="en"
+            aria-label="Read in English"
+            title="Read in English"
+          >
+            <span aria-hidden="true">🇬🇧</span>
           </a>
         )}
       </div>

@@ -43,8 +43,15 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
       <div class="post-header__top">
         <a href="/en/blog" class="back-link">&larr; All articles</a>
         {itHref && (
-          <a href={itHref} class="lang-switch" hreflang="it" lang="it">
-            🇮🇹 Leggi in italiano
+          <a
+            href={itHref}
+            class="lang-switch"
+            hreflang="it"
+            lang="it"
+            aria-label="Leggi in italiano"
+            title="Leggi in italiano"
+          >
+            <span aria-hidden="true">🇮🇹</span>
           </a>
         )}
       </div>

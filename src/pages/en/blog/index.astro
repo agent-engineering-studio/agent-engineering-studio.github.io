@@ -31,8 +31,15 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
       <div class="blog-header__top">
         <a href="/" class="back-link">&larr; Home</a>
         {hasItalian && (
-          <a href="/blog" class="lang-switch" hreflang="it" lang="it">
-            🇮🇹 Versione italiana
+          <a
+            href="/blog"
+            class="lang-switch"
+            hreflang="it"
+            lang="it"
+            aria-label="Versione italiana"
+            title="Versione italiana"
+          >
+            <span aria-hidden="true">🇮🇹</span>
           </a>
         )}
       </div>
