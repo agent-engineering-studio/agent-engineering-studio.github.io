@@ -2,6 +2,31 @@
 /*
  * Hero.astro — Sezione hero principale
  */
+interface Props {
+  lang?: 'it' | 'en';
+}
+const { lang = 'it' } = Astro.props;
+
+const t = {
+  it: {
+    tagline: 'Uno spazio di studio sugli agenti AI.',
+    subtitle:
+      "Appunti, esperimenti e codice open source per capire come si costruiscono agenti AI che ragionano davvero. Un laboratorio personale aperto a chi vuole imparare insieme.",
+    badges: ['Open Source', 'MIT License', 'Studio personale'],
+    bookCta: 'Scopri il libro',
+    blogCta: 'Vai al blog',
+    blogHref: '/blog',
+  },
+  en: {
+    tagline: 'A study space on AI agents.',
+    subtitle:
+      'Notes, experiments and open source code to understand how to build AI agents that actually reason. A personal laboratory open to anyone who wants to learn together.',
+    badges: ['Open Source', 'MIT License', 'Personal lab'],
+    bookCta: 'Discover the book',
+    blogCta: 'Go to the blog',
+    blogHref: '/en/blog',
+  },
+}[lang];
 ---
 
 <header class="hero">
@@ -9,21 +34,19 @@
 
     <!-- Tagline -->
     <p class="hero__tagline animate-in animate-delay-1">
-      Uno spazio di studio sugli agenti AI.
+      {t.tagline}
     </p>
 
     <!-- Sottotitolo -->
     <p class="hero__subtitle animate-in animate-delay-2">
-      Appunti, esperimenti e codice open source per capire come si costruiscono
-      agenti AI che ragionano davvero. Un laboratorio personale aperto a chi vuole
-      imparare insieme.
+      {t.subtitle}
     </p>
 
     <!-- Badge -->
     <div class="hero__badges animate-in animate-delay-3">
-      <span class="hero__badge hero__badge--neutral">Open Source</span>
-      <span class="hero__badge hero__badge--neutral">MIT License</span>
-      <span class="hero__badge hero__badge--neutral">Studio personale</span>
+      {t.badges.map((b) => (
+        <span class="hero__badge hero__badge--neutral">{b}</span>
+      ))}
     </div>
 
     <!-- CTA -->
@@ -36,17 +59,17 @@
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
         </svg>
-        Scopri il libro
+        {t.bookCta}
       </a>
 
-      <a href="/blog" class="hero__btn hero__btn--secondary">
+      <a href={t.blogHref} class="hero__btn hero__btn--secondary">
         <!-- Pencil icon -->
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 20h9"/>
           <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
         </svg>
-        Vai al blog
+        {t.blogCta}
       </a>
 
     </div>

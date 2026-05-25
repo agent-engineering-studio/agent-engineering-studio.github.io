@@ -1,0 +1,33 @@
+---
+/*
+ * en/index.astro — Landing page Agent Engineering Studio (EN)
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import Pillars from '../../components/Pillars.astro';
+import SocialLinks from '../../components/SocialLinks.astro';
+import BookSection from '../../components/BookSection.astro';
+import SupportSection from '../../components/SupportSection.astro';
+import ProjectsSection from '../../components/ProjectsSection.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  lang="en"
+  title="Agent Engineering Studio — A laboratory & community on AI agents"
+  description="An open lab for experimentation, training and dissemination on AI agents: proof-of-concept, open source projects and learning material."
+  canonical="https://agentengineering.it/en/"
+>
+  <Navbar lang="en" altLangHref="/" />
+  <main>
+    <Hero lang="en" />
+    <Pillars lang="en" />
+    <BookSection lang="en" />
+    <SupportSection lang="en" />
+    <ProjectsSection lang="en" />
+    <SocialLinks lang="en" />
+  </main>
+  <Footer lang="en" />
+</BaseLayout>

@@ -1,25 +1,58 @@
 ---
 /*
  * Navbar.astro — Barra di navigazione sticky in cima al sito
+ * Supporta lang: 'it' | 'en' per label e switcher di lingua.
  */
-const navLinks = [
-  { href: '/blog', label: 'Blog' },
-  { href: '/#progetti', label: 'Progetti' },
-  { href: 'https://github.com/agent-engineering-studio', label: 'GitHub', external: true },
-];
+import FlagIcon from './FlagIcon.astro';
+
+interface Props {
+  lang?: 'it' | 'en';
+  /** URL della controparte nell'altra lingua. Se assente, lo switcher non viene mostrato. */
+  altLangHref?: string;
+}
+
+const { lang = 'it', altLangHref } = Astro.props;
+
+const t = {
+  it: {
+    home: 'Agent Engineering Studio — torna alla home',
+    blog: 'Blog',
+    projects: 'Progetti',
+    github: 'GitHub',
+    githubAria: 'Agent Engineering Studio su GitHub (apre in nuova scheda)',
+    nav: 'Navigazione principale',
+    switchAria: 'Read in English',
+    switchTitle: 'Read in English',
+    switchCountry: 'gb' as const,
+  },
+  en: {
+    home: 'Agent Engineering Studio — back to home',
+    blog: 'Blog',
+    projects: 'Projects',
+    github: 'GitHub',
+    githubAria: 'Agent Engineering Studio on GitHub (opens in a new tab)',
+    nav: 'Main navigation',
+    switchAria: 'Leggi in italiano',
+    switchTitle: 'Leggi in italiano',
+    switchCountry: 'it' as const,
+  },
+}[lang];
+
+const blogHref = lang === 'en' ? '/en/blog' : '/blog';
+const projectsHref = lang === 'en' ? '/en/#projects' : '/#progetti';
 ---
 
-<nav class="navbar" role="navigation" aria-label="Navigazione principale">
+<nav class="navbar" role="navigation" aria-label={t.nav}>
   <div class="navbar__inner">
 
     <!-- Logo / home link -->
-    <a href="/" class="navbar__brand" aria-label="Agent Engineering Studio — torna alla home">
+    <a href={lang === 'en' ? '/en/' : '/'} class="navbar__brand" aria-label={t.home}>
       <img
         src="/logo-horizontal.png"
         alt="Agent Engineering Studio"
         class="navbar__logo"
-        width="160"
-        height="38"
+        width="235"
+        height="56"
       />
     </a>
 
@@ -27,19 +60,19 @@ const navLinks = [
     <ul class="navbar__links" role="list">
 
       <li>
-        <a href="/blog" class="navbar__link">
+        <a href={blogHref} class="navbar__link">
           <!-- Book icon -->
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
           </svg>
-          Blog
+          {t.blog}
         </a>
       </li>
 
       <li>
-        <a href="/#progetti" class="navbar__link">
+        <a href={projectsHref} class="navbar__link">
           <!-- Grid icon -->
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -48,7 +81,7 @@ const navLinks = [
             <rect x="3" y="14" width="7" height="7"/>
             <rect x="14" y="14" width="7" height="7"/>
           </svg>
-          Progetti
+          {t.projects}
         </a>
       </li>
 
@@ -58,15 +91,30 @@ const navLinks = [
           target="_blank"
           rel="noopener noreferrer"
           class="navbar__link navbar__link--github"
-          aria-label="Agent Engineering Studio su GitHub (apre in nuova scheda)"
+          aria-label={t.githubAria}
         >
           <!-- GitHub icon -->
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
           </svg>
-          GitHub
+          {t.github}
         </a>
       </li>
+
+      {altLangHref && (
+        <li>
+          <a
+            href={altLangHref}
+            class="navbar__lang-switch"
+            hreflang={lang === 'it' ? 'en' : 'it'}
+            lang={lang === 'it' ? 'en' : 'it'}
+            aria-label={t.switchAria}
+            title={t.switchTitle}
+          >
+            <FlagIcon country={t.switchCountry} />
+          </a>
+        </li>
+      )}
 
     </ul>
   </div>
@@ -87,7 +135,7 @@ const navLinks = [
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 var(--space-lg);
-    height: 56px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -102,7 +150,7 @@ const navLinks = [
   }
 
   .navbar__logo {
-    height: 28px;
+    height: 56px;
     width: auto;
     display: block;
   }
@@ -147,6 +195,32 @@ const navLinks = [
   .navbar__link--github:hover {
     background: rgba(255, 255, 255, 0.11);
     border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar__lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    padding: 0.35em 0.7em;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.18s, border-color 0.18s;
+  }
+  .navbar__lang-switch:hover {
+    color: var(--color-accent);
+    border-color: rgba(33, 150, 243, 0.4);
+  }
+
+  @media (max-width: 600px) {
+    .navbar__inner {
+      height: 64px;
+    }
+    .navbar__logo {
+      height: 40px;
+    }
   }
 
   @media (max-width: 420px) {

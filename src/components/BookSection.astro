@@ -2,40 +2,68 @@
 /*
  * BookSection.astro — Catalogo libri multi-book
  * Griglia di card con link alle pagine dedicate di ciascun libro.
- * Pensato per crescere: aggiungere un elemento a `books` per ogni nuovo titolo.
+ * Pensato per crescere: aggiungere un elemento a `books.it/en` per ogni nuovo titolo.
  */
+interface Props {
+  lang?: 'it' | 'en';
+}
+const { lang = 'it' } = Astro.props;
 
-const books = [
-  {
-    slug: 'knowledge-graph',
-    title: 'AI che Ragiona',
-    date: 'Aprile 2026',
-    pages: '500+ pagine full color',
-    formats: 'Paperback · Hardcover · Kindle',
-    description:
-      'Le chatbot rispondono. I sistemi che ragionano decidono. Oltre 500 pagine di codice Python eseguibile per costruire Knowledge Graph enterprise, pipeline Graph-RAG ibride, server MCP e crew di agenti orchestrati con Microsoft Agent Framework. Dalla teoria al deployment, senza scorciatoie.',
-    tags: ['Python', 'Neo4j', 'Redis', 'Graph-RAG', 'MCP', 'Agent Framework'],
-    cover: '/covers/ai-che-ragiona-it-thumb.jpg',
-    amazonUrl: 'https://www.amazon.it/gp/product/B0GWRX64Z8/ref=ox_sc_act_title_1?smid=A1FPE5JXJST57&psc=1',
-    comingSoon: true,
+const dataByLang = {
+  it: {
+    heading: 'Pubblicazioni',
+    subtitle: 'Libri tecnici per chi vuole imparare facendo',
+    comingSoonLabel: 'Presto disponibile su Amazon',
+    trademark:
+      "Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.",
+    coverAltPrefix: 'Copertina: ',
+    books: [
+      {
+        slug: 'knowledge-graph',
+        title: 'AI che Ragiona',
+        date: 'Aprile 2026',
+        pages: '500+ pagine full color',
+        formats: 'Paperback · Hardcover · Kindle',
+        description:
+          'Le chatbot rispondono. I sistemi che ragionano decidono. Oltre 500 pagine di codice Python eseguibile per costruire Knowledge Graph enterprise, pipeline Graph-RAG ibride, server MCP e crew di agenti orchestrati con Microsoft Agent Framework. Dalla teoria al deployment, senza scorciatoie.',
+        tags: ['Python', 'Neo4j', 'Redis', 'Graph-RAG', 'MCP', 'Agent Framework'],
+        cover: '/covers/ai-che-ragiona-it-thumb.jpg',
+        comingSoon: true,
+      },
+    ],
   },
-  // Aggiungi qui i prossimi libri:
-  // {
-  //   slug: 'next-book-slug',
-  //   title: 'Titolo del prossimo libro',
-  //   ...,
-  //   cover: '/covers/next-book-thumb.jpg',
-  // },
-];
+  en: {
+    heading: 'Publications',
+    subtitle: 'Technical books for those who learn by doing',
+    comingSoonLabel: 'Coming soon on Amazon',
+    trademark:
+      "Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.",
+    coverAltPrefix: 'Cover: ',
+    books: [
+      {
+        slug: 'knowledge-graph',
+        title: 'AI that Reasons',
+        date: 'April 2026',
+        pages: '500+ full-color pages',
+        formats: 'Paperback · Hardcover · Kindle',
+        description:
+          'Chatbots reply. Systems that reason decide. Over 500 pages of runnable Python code to build enterprise Knowledge Graphs, hybrid Graph-RAG pipelines, MCP servers and agent crews orchestrated with Microsoft Agent Framework. From theory to deployment, no shortcuts.',
+        tags: ['Python', 'Neo4j', 'Redis', 'Graph-RAG', 'MCP', 'Agent Framework'],
+        cover: '/covers/ai-che-ragiona-en-thumb.jpg',
+        comingSoon: true,
+      },
+    ],
+  },
+}[lang];
+
+const books = dataByLang.books;
 ---
 
 <section class="catalog" id="books" aria-labelledby="catalog-heading">
   <div class="container">
     <div class="catalog__header animate-in">
-      <h2 id="catalog-heading" class="catalog__title">Pubblicazioni</h2>
-      <p class="catalog__subtitle">
-        Libri tecnici per chi vuole imparare facendo
-      </p>
+      <h2 id="catalog-heading" class="catalog__title">{dataByLang.heading}</h2>
+      <p class="catalog__subtitle">{dataByLang.subtitle}</p>
     </div>
 
     <div class="catalog__grid">
@@ -46,7 +74,7 @@ const books = [
             <div class="book-card__cover">
               <img
                 src={book.cover}
-                alt={`Copertina: ${book.title}`}
+                alt={`${dataByLang.coverAltPrefix}${book.title}`}
                 class="book-card__cover-img"
                 width="400"
                 height="640"
@@ -77,7 +105,7 @@ const books = [
               <div class="book-card__badge">
                 {book.comingSoon ? (
                   <span class="book-card__coming-soon">
-                    Presto disponibile su Amazon
+                    {dataByLang.comingSoonLabel}
                   </span>
                 ) : (
                   <img
@@ -95,9 +123,7 @@ const books = [
       ))}
     </div>
 
-    <p class="catalog__trademark">
-      Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
-    </p>
+    <p class="catalog__trademark">{dataByLang.trademark}</p>
   </div>
 </section>
 

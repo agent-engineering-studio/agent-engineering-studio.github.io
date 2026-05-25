@@ -2,40 +2,78 @@
 /*
  * Pillars.astro — I 4 ambiti del laboratorio
  */
+interface Props {
+  lang?: 'it' | 'en';
+}
+const { lang = 'it' } = Astro.props;
 
-const pillars = [
-  {
-    icon: '📖',
-    title: 'Studio',
-    description:
-      'Approfondimenti su agenti AI, Knowledge Graph, retrieval ibrido e protocolli emergenti. Quello che imparo lo scrivo, quello che scrivo lo pubblico.',
+const copy = {
+  it: {
+    heading: 'Cosa faccio qui',
+    pillars: [
+      {
+        icon: '📖',
+        title: 'Studio',
+        description:
+          'Approfondimenti su agenti AI, Knowledge Graph, retrieval ibrido e protocolli emergenti. Quello che imparo lo scrivo, quello che scrivo lo pubblico.',
+      },
+      {
+        icon: '🧪',
+        title: 'Sperimentazione',
+        description:
+          'Prototipi open source per testare architetture, pattern e idee. Codice eseguibile, non solo teoria.',
+      },
+      {
+        icon: '📚',
+        title: 'Divulgazione',
+        description:
+          'Libri tecnici in italiano, articoli e tutorial per rendere accessibili tecniche enterprise anche a chi studia da solo.',
+      },
+      {
+        icon: '🌱',
+        title: 'Community',
+        description:
+          'Uno spazio aperto: chi vuole leggere, discutere o contribuire è benvenuto. Senza ruoli, senza adesioni.',
+      },
+    ],
   },
-  {
-    icon: '🧪',
-    title: 'Sperimentazione',
-    description:
-      'Prototipi open source per testare architetture, pattern e idee. Codice eseguibile, non solo teoria.',
+  en: {
+    heading: 'What I do here',
+    pillars: [
+      {
+        icon: '📖',
+        title: 'Study',
+        description:
+          'Deep dives on AI agents, Knowledge Graphs, hybrid retrieval and emerging protocols. What I learn I write down, what I write down I publish.',
+      },
+      {
+        icon: '🧪',
+        title: 'Experimentation',
+        description:
+          'Open source prototypes to test architectures, patterns and ideas. Runnable code, not just theory.',
+      },
+      {
+        icon: '📚',
+        title: 'Dissemination',
+        description:
+          'Technical books, articles and tutorials that make enterprise-grade techniques accessible to self-taught learners.',
+      },
+      {
+        icon: '🌱',
+        title: 'Community',
+        description:
+          'An open space: anyone who wants to read, discuss or contribute is welcome. No roles, no memberships.',
+      },
+    ],
   },
-  {
-    icon: '📚',
-    title: 'Divulgazione',
-    description:
-      'Libri tecnici in italiano, articoli e tutorial per rendere accessibili tecniche enterprise anche a chi studia da solo.',
-  },
-  {
-    icon: '🌱',
-    title: 'Community',
-    description:
-      'Uno spazio aperto: chi vuole leggere, discutere o contribuire è benvenuto. Senza ruoli, senza adesioni.',
-  },
-];
+}[lang];
 ---
 
-<section class="pillars" aria-label="Ambiti del laboratorio">
+<section class="pillars" aria-label={lang === 'en' ? 'Areas of the lab' : 'Ambiti del laboratorio'}>
   <div class="container">
-    <h2 class="pillars__heading">Cosa faccio qui</h2>
+    <h2 class="pillars__heading">{copy.heading}</h2>
     <div class="pillars__grid">
-      {pillars.map((pillar) => (
+      {copy.pillars.map((pillar) => (
         <div class="pillar">
           <div class="pillar__icon" aria-hidden="true">{pillar.icon}</div>
           <h3 class="pillar__title">{pillar.title}</h3>

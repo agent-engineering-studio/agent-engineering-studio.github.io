@@ -1,8 +1,31 @@
 ---
 /*
  * Footer.astro — Footer minimal
- * Per modificare i link o il testo: aggiorna l'HTML qui sotto.
+ * Per modificare i link o il testo: aggiorna i blocchi qui sotto.
  */
+interface Props {
+  lang?: 'it' | 'en';
+}
+const { lang = 'it' } = Astro.props;
+
+const t = {
+  it: {
+    blog: 'Blog',
+    github: 'GitHub',
+    privacy: 'Privacy Policy',
+    builtWith: 'Built with',
+    hostedOn: 'Hosted on',
+    blogHref: '/blog',
+  },
+  en: {
+    blog: 'Blog',
+    github: 'GitHub',
+    privacy: 'Privacy Policy',
+    builtWith: 'Built with',
+    hostedOn: 'Hosted on',
+    blogHref: '/en/blog',
+  },
+}[lang];
 ---
 
 <footer class="footer">
@@ -12,15 +35,15 @@
     </div>
     <p class="footer__copy">&copy; 2025&ndash;2026 Agent Engineering Studio</p>
     <p class="footer__meta">
-      Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
-      &middot; Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+      {t.builtWith} <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
+      &middot; {t.hostedOn} <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
     </p>
     <p class="footer__links">
-      <a href="/blog" class="footer__link">Blog</a>
+      <a href={t.blogHref} class="footer__link">{t.blog}</a>
       <span class="footer__sep" aria-hidden="true">&middot;</span>
-      <a href="https://github.com/agent-engineering-studio" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a>
+      <a href="https://github.com/agent-engineering-studio" target="_blank" rel="noopener noreferrer" class="footer__link">{t.github}</a>
       <span class="footer__sep" aria-hidden="true">&middot;</span>
-      <a href="#" class="footer__link">Privacy Policy</a>
+      <a href="#" class="footer__link">{t.privacy}</a>
     </p>
   </div>
 </footer>
