@@ -6,6 +6,7 @@
 
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Footer from '../../../components/Footer.astro';
+import FlagIcon from '../../../components/FlagIcon.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en'))
@@ -39,7 +40,7 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
             aria-label="Versione italiana"
             title="Versione italiana"
           >
-            <span aria-hidden="true">🇮🇹</span>
+            <FlagIcon country="it" />
           </a>
         )}
       </div>
