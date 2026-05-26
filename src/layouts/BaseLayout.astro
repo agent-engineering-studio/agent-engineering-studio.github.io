@@ -63,7 +63,13 @@ const ogImage = new URL('/logo-horizontal.png', canonical).href;
     @import '../styles/global.css';
   </style>
 
-  <!-- TODO: analytics -->
+  <!-- Plausible Analytics (self-hosted) -->
+  <script
+    is:inline
+    defer
+    data-domain="agentengineering.it"
+    src="https://analytics.agentengineering.it/js/script.js"
+  ></script>
 </head>
 <body>
   <slot />
