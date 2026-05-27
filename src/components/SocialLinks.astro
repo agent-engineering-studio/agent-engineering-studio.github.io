@@ -12,15 +12,15 @@ const { lang = 'it' } = Astro.props;
 const t = {
   it: {
     sectionAria: 'Social links',
-    blog: 'Blog',
+    medium: 'Medium',
     newsletter: 'Iscriviti alla Newsletter',
-    newsletterAria: 'Iscriviti alla Newsletter LinkedIn',
+    newsletterAria: 'Iscriviti alla Newsletter Substack',
   },
   en: {
     sectionAria: 'Social links',
-    blog: 'Blog',
+    medium: 'Medium',
     newsletter: 'Subscribe to the Newsletter',
-    newsletterAria: 'Subscribe to the LinkedIn Newsletter',
+    newsletterAria: 'Subscribe to the Substack Newsletter',
   },
 }[lang];
 ---
@@ -88,21 +88,21 @@ const t = {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
           </svg>
-          <span>{t.blog}</span>
+          <span>{t.medium}</span>
         </a>
       </li>
 
-      <!-- LinkedIn Newsletter -->
+      <!-- Substack Newsletter -->
       <li>
         <a
-          href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7445502996655800320"
+          href="https://gzileni.substack.com"
           target="_blank"
           rel="noopener noreferrer"
           class="social-links__link social-links__link--newsletter"
           aria-label={t.newsletterAria}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+            <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
           </svg>
           <span>{t.newsletter}</span>
         </a>
@@ -150,19 +150,19 @@ const t = {
     height: 20px;
   }
 
-  /* Newsletter button — LinkedIn blue style */
+  /* Newsletter button — Substack orange style */
   .social-links__link--newsletter {
     color: #ffffff;
-    background-color: #0A66C2;
-    border-color: #0A66C2;
+    background-color: #FF6719;
+    border-color: #FF6719;
     border-radius: 16px;
     font-weight: 600;
   }
 
   .social-links__link--newsletter:hover {
     color: #ffffff;
-    background-color: #004182;
-    border-color: #004182;
+    background-color: #E54E00;
+    border-color: #E54E00;
   }
 
   @media (max-width: 500px) {

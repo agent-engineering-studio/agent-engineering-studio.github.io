@@ -10,6 +10,7 @@
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
+import SubstackEmbed from '../../components/SubstackEmbed.astro';
 
 const AMAZON_IT_URL = 'https://www.amazon.it/gp/product/B0GWRX64Z8/ref=ox_sc_act_title_1?smid=A1FPE5JXJST57&psc=1';
 const GITHUB_DISCUSSIONS_URL = 'https://github.com/orgs/agent-engineering-studio/discussions';
@@ -41,6 +42,38 @@ const formats = [
   { icon: '📖', title: 'Paperback', details: ['7" × 10" — Full color', 'Carta bianca premium, copertina lucida'] },
   { icon: '📕', title: 'Hardcover', details: ['7" × 10" — Full color', 'Copertina rigida, dorso stampato'] },
   { icon: '📱', title: 'eBook Kindle', details: ['EPUB 3.0 — Reflowable', 'TOC navigabile, 35 figure'] },
+];
+
+const audiences = [
+  {
+    title: 'Developer & Engineer',
+    desc: 'Per chi scrive codice e progetta architetture.',
+    items: [
+      'Developer Python',
+      'AI/ML engineer',
+      'Software architect',
+      'Data engineer e platform engineer',
+    ],
+  },
+  {
+    title: 'Decision maker',
+    desc: 'Per chi decide cosa portare in produzione e con quale budget.',
+    items: [
+      'CTO e Head of Engineering',
+      'Product Manager e AI Product Lead',
+      'Consulenti AI e founder',
+      'Innovation manager enterprise',
+    ],
+  },
+];
+
+const bonuses = [
+  { icon: '📦', label: 'Repository GitHub con i 5 moduli del progetto' },
+  { icon: '📓', label: 'Jupyter Notebook per ogni capitolo' },
+  { icon: '🐳', label: 'Docker Compose pronto all\'uso' },
+  { icon: '📚', label: 'Glossario, Bibliografia, Cheat Sheet, Troubleshooting' },
+  { icon: '📝', label: 'Template pronti: ADR, SOW, business case, RFP' },
+  { icon: '🇪🇺', label: 'Sezione compliance: GDPR, EU AI Act, ISO/IEC 42001' },
 ];
 ---
 
@@ -267,6 +300,72 @@ const formats = [
         </div>
       </div>
     </section>
+
+    <!-- Audience: per chi è il libro -->
+    <section class="audience">
+      <div class="container">
+        <h2 class="section-title">Per chi è</h2>
+        <div class="audience__grid">
+          {audiences.map((aud) => (
+            <div class="audience-card">
+              <h3 class="audience-card__title">{aud.title}</h3>
+              <p class="audience-card__desc">{aud.desc}</p>
+              <ul class="audience-card__list">
+                {aud.items.map((it) => (
+                  <li>{it}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Bonus inclusi -->
+    <section class="bonuses">
+      <div class="container">
+        <h2 class="section-title">Bonus inclusi</h2>
+        <p class="bonuses__intro">
+          Il libro non finisce all'ultima pagina. Ogni copia include risorse pratiche
+          per accelerare il lavoro su progetti reali.
+        </p>
+        <div class="bonuses__grid">
+          {bonuses.map((b) => (
+            <div class="bonus-item">
+              <span class="bonus-item__icon" aria-hidden="true">{b.icon}</span>
+              <span class="bonus-item__label">{b.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Autore -->
+    <section class="author">
+      <div class="container">
+        <h2 class="section-title">L'autore</h2>
+        <div class="author__card">
+          <div class="author__avatar" aria-hidden="true">GZ</div>
+          <div class="author__body">
+            <h3 class="author__name">Giuseppe Zileni</h3>
+            <p class="author__bio">
+              Sviluppatore software da oltre vent'anni. In <strong>Hevolus</strong> guida
+              la AI Engineering Unit. Il suo lavoro ha portato XR Copilot powered by
+              Microsoft AI Foundry a integrare Knowledge Graph, GenAI ed Extended Reality
+              in soluzioni enterprise.
+            </p>
+            <p class="author__quote">
+              <em>"Wikipedia spiega cos'è un Knowledge Graph. YouTube mostra come fare una demo.
+              Questo libro risponde alla domanda diversa, e molto più difficile: come si costruisce
+              un sistema che funziona davvero in produzione e che qualcuno è disposto a pagare per usarlo."</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Substack -->
+    <SubstackEmbed lang="it" variant="book" />
 
     <!-- Community / Discussions -->
     <section class="community">
@@ -733,6 +832,181 @@ const formats = [
     gap: var(--space-md);
   }
 
+  /* ── Audience ── */
+  .audience {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .audience__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .audience-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-lg);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .audience-card:hover {
+    border-color: rgba(33, 150, 243, 0.3);
+    box-shadow: 0 0 16px var(--color-accent-glow);
+  }
+
+  .audience-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .audience-card__desc {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+  }
+
+  .audience-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .audience-card__list li {
+    padding: 0.35rem 0;
+    color: var(--color-text);
+    font-size: 0.88rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .audience-card__list li::before {
+    content: '→';
+    color: var(--color-accent);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  /* ── Bonuses ── */
+  .bonuses {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .bonuses__intro {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto var(--space-xl);
+    line-height: 1.6;
+  }
+
+  .bonuses__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .bonus-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    padding: var(--space-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: border-color var(--transition-base);
+  }
+
+  .bonus-item:hover {
+    border-color: rgba(33, 150, 243, 0.3);
+  }
+
+  .bonus-item__icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .bonus-item__label {
+    font-size: 0.88rem;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  /* ── Author ── */
+  .author {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .author__card {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+  }
+
+  .author__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-accent), #9c5bff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-bg);
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .author__name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .author__bio {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .author__bio strong {
+    color: var(--color-text);
+  }
+
+  .author__quote {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--color-accent);
+    font-style: italic;
+  }
+
   /* ── Community / Discussions ── */
   .community {
     padding: var(--space-2xl) 0 var(--space-3xl);
@@ -842,5 +1116,19 @@ const formats = [
       padding: var(--space-lg);
     }
     .community__arrow { display: none; }
+
+    .audience__grid { grid-template-columns: 1fr; }
+    .author__card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .author__avatar { margin: 0 auto; }
+    .author__quote {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 2px solid var(--color-accent);
+      padding-top: var(--space-md);
+    }
   }
 </style>

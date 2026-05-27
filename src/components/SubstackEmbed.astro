@@ -1,0 +1,190 @@
+---
+/*
+ * SubstackEmbed.astro — Newsletter Substack di Giuseppe Zileni
+ * URL: https://gzileni.substack.com
+ *
+ * L'iframe ha sfondo bianco fisso (non restilizzabile via CSS perché vive su substack.com).
+ * Per integrarsi al tema dark, la card che lo contiene è bianca così l'iframe si fonde.
+ *
+ * Props:
+ *  - lang: 'it' | 'en'
+ *  - variant: 'book' | 'home' — copy differenziato per contesto
+ */
+interface Props {
+  lang?: 'it' | 'en';
+  variant?: 'book' | 'home';
+}
+
+const { lang = 'it', variant = 'home' } = Astro.props;
+
+const t = {
+  it: {
+    book: {
+      title: 'Non perdere la data di uscita',
+      subtitle: 'Iscriviti alla newsletter — solo aggiornamenti importanti sul libro. Niente spam, niente filler.',
+      benefits: [
+        'La data esatta di uscita con qualche giorno di anticipo',
+        'Un capitolo gratuito in anteprima',
+        'Lo sconto early-bird sul lancio',
+      ],
+      note: 'Powered by Substack · Puoi disiscriverti con un click in ogni momento.',
+    },
+    home: {
+      title: 'Resta aggiornato',
+      subtitle: 'Articoli, anteprime dei libri e progetti open source — direttamente nella tua casella di posta.',
+      benefits: [
+        'Approfondimenti su Knowledge Graph, Graph-RAG, MCP e agenti AI',
+        'Anteprime dei capitoli dei libri in uscita',
+        'Niente spam: solo contenuti che vale la pena leggere',
+      ],
+      note: 'Powered by Substack · Disiscrizione con un click.',
+    },
+  },
+  en: {
+    book: {
+      title: 'Don\'t miss the release date',
+      subtitle: 'Subscribe to the newsletter — only important book updates. No spam, no filler.',
+      benefits: [
+        'The exact release date with a few days\' notice',
+        'A free chapter preview',
+        'The early-bird launch discount',
+      ],
+      note: 'Powered by Substack · Unsubscribe with one click anytime.',
+    },
+    home: {
+      title: 'Stay updated',
+      subtitle: 'Articles, book previews, and open source projects — straight to your inbox.',
+      benefits: [
+        'Deep dives on Knowledge Graphs, Graph-RAG, MCP and AI agents',
+        'Chapter previews of upcoming books',
+        'No spam: only content worth reading',
+      ],
+      note: 'Powered by Substack · One-click unsubscribe.',
+    },
+  },
+}[lang][variant];
+---
+
+<section class="substack-section" aria-labelledby="substack-heading">
+  <div class="container">
+    <div class="substack-card">
+      <h2 id="substack-heading" class="substack-card__title">{t.title}</h2>
+      <p class="substack-card__subtitle">{t.subtitle}</p>
+
+      <ul class="substack-card__benefits">
+        {t.benefits.map((b) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+
+      <div class="substack-card__embed-wrap">
+        <iframe
+          src="https://gzileni.substack.com/embed"
+          width="480"
+          height="320"
+          style="border: 1px solid #EEE; background: white"
+          frameborder="0"
+          scrolling="no"
+          title="Substack subscription form"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <p class="substack-card__note">{t.note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .substack-section {
+    padding: var(--space-3xl) 0;
+    border-top: 1px solid var(--color-border);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(33, 150, 243, 0.06), transparent 70%);
+  }
+
+  .substack-card {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl);
+    background: #ffffff;
+    color: #1a2030;
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(33, 150, 243, 0.25);
+  }
+
+  .substack-card__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 800;
+    color: #0a0e1a;
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.01em;
+  }
+
+  .substack-card__subtitle {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.55;
+    margin-bottom: var(--space-lg);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .substack-card__benefits {
+    list-style: none;
+    margin: 0 auto var(--space-lg);
+    padding: 0;
+    text-align: left;
+    display: inline-block;
+  }
+
+  .substack-card__benefits li {
+    padding: 0.4rem 0;
+    color: #1a2030;
+    font-size: 0.92rem;
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    font-weight: 500;
+  }
+
+  .substack-card__benefits li::before {
+    content: '✓';
+    color: #10b981;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+    line-height: 1.5;
+  }
+
+  .substack-card__embed-wrap {
+    display: flex;
+    justify-content: center;
+    margin: var(--space-md) 0 var(--space-sm);
+  }
+
+  .substack-card__embed-wrap iframe {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .substack-card__note {
+    font-size: 0.78rem;
+    color: #6b7280;
+    margin-top: var(--space-sm);
+  }
+
+  @media (max-width: 600px) {
+    .substack-card {
+      padding: var(--space-xl) var(--space-md);
+    }
+    .substack-card__embed-wrap iframe {
+      width: 100%;
+    }
+  }
+</style>

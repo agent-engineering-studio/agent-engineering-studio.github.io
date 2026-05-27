@@ -10,20 +10,20 @@ const { lang = 'it' } = Astro.props;
 
 const t = {
   it: {
-    blog: 'Blog',
+    blog: 'Newsletter',
     github: 'GitHub',
     privacy: 'Privacy Policy',
     builtWith: 'Built with',
     hostedOn: 'Hosted on',
-    blogHref: '/blog',
+    blogHref: 'https://gzileni.substack.com',
   },
   en: {
-    blog: 'Blog',
+    blog: 'Newsletter',
     github: 'GitHub',
     privacy: 'Privacy Policy',
     builtWith: 'Built with',
     hostedOn: 'Hosted on',
-    blogHref: '/en/blog',
+    blogHref: 'https://gzileni.substack.com',
   },
 }[lang];
 ---
@@ -39,7 +39,7 @@ const t = {
       &middot; {t.hostedOn} <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
     </p>
     <p class="footer__links">
-      <a href={t.blogHref} class="footer__link">{t.blog}</a>
+      <a href={t.blogHref} target="_blank" rel="noopener noreferrer" class="footer__link">{t.blog}</a>
       <span class="footer__sep" aria-hidden="true">&middot;</span>
       <a href="https://github.com/agent-engineering-studio" target="_blank" rel="noopener noreferrer" class="footer__link">{t.github}</a>
       <span class="footer__sep" aria-hidden="true">&middot;</span>

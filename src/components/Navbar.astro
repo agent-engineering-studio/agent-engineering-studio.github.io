@@ -16,10 +16,11 @@ const { lang = 'it', altLangHref } = Astro.props;
 const t = {
   it: {
     home: 'Agent Engineering Studio — torna alla home',
-    blog: 'Blog',
+    blog: 'Newsletter',
     projects: 'Progetti',
     github: 'GitHub',
     githubAria: 'Agent Engineering Studio su GitHub (apre in nuova scheda)',
+    blogAria: 'Newsletter Substack (apre in nuova scheda)',
     nav: 'Navigazione principale',
     switchAria: 'Read in English',
     switchTitle: 'Read in English',
@@ -27,10 +28,11 @@ const t = {
   },
   en: {
     home: 'Agent Engineering Studio — back to home',
-    blog: 'Blog',
+    blog: 'Newsletter',
     projects: 'Projects',
     github: 'GitHub',
     githubAria: 'Agent Engineering Studio on GitHub (opens in a new tab)',
+    blogAria: 'Substack Newsletter (opens in a new tab)',
     nav: 'Main navigation',
     switchAria: 'Leggi in italiano',
     switchTitle: 'Leggi in italiano',
@@ -38,7 +40,7 @@ const t = {
   },
 }[lang];
 
-const blogHref = lang === 'en' ? '/en/blog' : '/blog';
+const blogHref = 'https://gzileni.substack.com';
 const projectsHref = lang === 'en' ? '/en/#projects' : '/#progetti';
 ---
 
@@ -60,12 +62,18 @@ const projectsHref = lang === 'en' ? '/en/#projects' : '/#progetti';
     <ul class="navbar__links" role="list">
 
       <li>
-        <a href={blogHref} class="navbar__link">
-          <!-- Book icon -->
+        <a
+          href={blogHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="navbar__link"
+          aria-label={t.blogAria}
+        >
+          <!-- Newsletter / mail icon -->
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
           </svg>
           {t.blog}
         </a>
