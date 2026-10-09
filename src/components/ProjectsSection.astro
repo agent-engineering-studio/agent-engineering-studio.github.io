@@ -1,8 +1,7 @@
 ---
 /*
  * ProjectsSection.astro — Grid dei progetti open source
- * Mostra solo il progetto companion del libro "AI che Ragiona".
- * Altri repo restano privati in attesa di pubblicazione progressiva.
+ * Un progetto con `hidden: true` resta qui ma non si mostra.
  */
 interface Props {
   lang?: 'it' | 'en';
@@ -15,7 +14,7 @@ const t = {
     sectionAria: 'Progetti open source',
     heading: 'Progetti',
     intro:
-      'Progetti open source dello studio: <strong>opendata-ai</strong> (open data civici), <strong>mcp-geo-server</strong> (GeoServer in linguaggio naturale) e <strong>knowledge-graph</strong> (companion del libro <strong>"AI che Ragiona"</strong>). Altri repository verranno pubblicati progressivamente.',
+      'Progetti open source dello studio: <strong>Limen</strong> (pericolo di frane, allagamenti e incendi in Italia), <strong>mcp-geo-server</strong> (GeoServer in linguaggio naturale) e <strong>knowledge-graph</strong> (companion del libro <strong>"AI che Ragiona"</strong>). Altri repository verranno pubblicati progressivamente.',
     repoLink: 'Vai al repo',
     siteLink: 'Apri il progetto',
     orgLink: 'Org GitHub',
@@ -23,7 +22,19 @@ const t = {
     statusDev: 'In Development',
     projects: [
       {
+        slug: 'limen',
+        icon: '⛰️',
+        title: 'limen',
+        statusClass: 'status--dev',
+        description:
+          'Mappa AI aperta del pericolo di frane, allagamenti e incendi in tutta Italia: oltre 300.000 celle da 1 km², ogni ora e con la previsione a 72 ore. Solo dati aperti (ISPRA, CNR-IRPI, Copernicus, INGV, EFFIS, NASA FIRMS); i numeri li calcola un motore deterministico, i racconti per regione sono scritti con Claude. Affianca, non sostituisce, l\'allertamento della Protezione Civile.',
+        stack: ['Python', 'FastAPI', 'PostGIS', 'MapLibre', 'React', 'Claude', 'Docker'],
+        liveUrl: 'https://office-gdc.w3pro.it/limen',
+        repoUrl: 'https://github.com/agent-engineering-studio/limen',
+      },
+      {
         slug: 'opendata-ai',
+        hidden: true,
         icon: '🛰️',
         title: 'opendata-ai',
         statusClass: 'status--dev',
@@ -62,7 +73,7 @@ const t = {
     sectionAria: 'Open source projects',
     heading: 'Projects',
     intro:
-      'Open-source projects from the studio: <strong>opendata-ai</strong> (civic open data), <strong>mcp-geo-server</strong> (GeoServer in natural language) and <strong>knowledge-graph</strong> (companion to the book <strong>"AI that Reasons"</strong>). More repositories will be published progressively.',
+      'Open-source projects from the studio: <strong>Limen</strong> (landslide, flood and wildfire hazard across Italy), <strong>mcp-geo-server</strong> (GeoServer in natural language) and <strong>knowledge-graph</strong> (companion to the book <strong>"AI that Reasons"</strong>). More repositories will be published progressively.',
     repoLink: 'View repo',
     siteLink: 'Open the project',
     orgLink: 'GitHub Org',
@@ -70,7 +81,19 @@ const t = {
     statusDev: 'In Development',
     projects: [
       {
+        slug: 'limen',
+        icon: '⛰️',
+        title: 'limen',
+        statusClass: 'status--dev',
+        description:
+          'Open AI map of landslide, flood and wildfire hazard across Italy: over 300,000 one-km² cells, every hour and with a 72-hour forecast. Open data only (ISPRA, CNR-IRPI, Copernicus, INGV, EFFIS, NASA FIRMS); a deterministic engine computes the numbers, and the per-region narratives are written with Claude. It complements, and does not replace, official civil-protection warnings.',
+        stack: ['Python', 'FastAPI', 'PostGIS', 'MapLibre', 'React', 'Claude', 'Docker'],
+        liveUrl: 'https://office-gdc.w3pro.it/limen',
+        repoUrl: 'https://github.com/agent-engineering-studio/limen',
+      },
+      {
         slug: 'opendata-ai',
+        hidden: true,
         icon: '🛰️',
         title: 'opendata-ai',
         statusClass: 'status--dev',
@@ -113,7 +136,7 @@ const t = {
     <p class="projects__intro" set:html={t.intro}></p>
 
     <div class="projects__grid">
-      {t.projects.map((p) => (
+      {t.projects.filter((p) => !('hidden' in p && p.hidden)).map((p) => (
         <article class={`project-card ${p.statusClass === 'status--soon' ? 'project-card--soon' : ''}`}>
           <div class="project-card__header">
             <span class="project-card__icon" aria-hidden="true">{p.icon}</span>
