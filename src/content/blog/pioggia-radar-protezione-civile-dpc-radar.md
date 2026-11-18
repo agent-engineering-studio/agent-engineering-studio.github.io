@@ -5,6 +5,10 @@ pubDate: 2026-11-18
 author: "Giuseppe Zileni"
 tags: ["open-data", "dpc-radar", "protezione-civile", "meteo", "python"]
 series: "opendata"
+project:
+  name: "dpc-radar"
+  repo: "https://github.com/agent-engineering-studio/dpc-radar"
+  docs: "https://agentengineering.it/dpc-radar/"
 draft: false
 ---
 
@@ -65,7 +69,7 @@ Usare questi dati in un programma ha insegnato qualche lezione. Le più importan
 
 ## Che cosa ci costruisci
 
-Per usare questi dati bastava, finora, una settimana di lavoro: capire le chiamate non documentate del visualizzatore web, gestire due sistemi di coordinate diversi, interpretare i valori «nessun dato». **dpc-radar** è una libreria Python aperta, con licenza Apache-2.0, che fa questo lavoro per te.
+Per usare questi dati bastava, finora, una settimana di lavoro: capire le chiamate non documentate del visualizzatore web, gestire due sistemi di coordinate diversi, interpretare i valori «nessun dato». **[dpc-radar](https://agentengineering.it/dpc-radar/)** è una libreria Python aperta, con licenza Apache-2.0, che fa questo lavoro per te. Il suo sito raccoglie la guida, i notebook e il riferimento completo.
 
 ```bash
 pip install dpc-radar
@@ -123,7 +127,7 @@ Il codice è aperto, i dati sono aperti, i limiti sono scritti. Il resto lo cost
 
 ---
 
-**Per approfondire:** il [repository dpc-radar](https://github.com/agent-engineering-studio/dpc-radar), la [documentazione](https://agentengineering.it/dpc-radar/), i [cinque notebook](https://github.com/agent-engineering-studio/dpc-radar/tree/main/notebooks) e la pagina sul [riuso nella Pubblica Amministrazione](https://github.com/agent-engineering-studio/dpc-radar/blob/main/docs/riuso.md).
+**Per approfondire:** il [sito di dpc-radar](https://agentengineering.it/dpc-radar/), il [codice su GitHub](https://github.com/agent-engineering-studio/dpc-radar), i [cinque notebook](https://github.com/agent-engineering-studio/dpc-radar/tree/main/notebooks) e la pagina sul [riuso nella Pubblica Amministrazione](https://github.com/agent-engineering-studio/dpc-radar/blob/main/docs/riuso.md).
 
 **Partecipa:** hai trovato una trappola nei dati, o hai costruito qualcosa con dpc-radar? Raccontalo nelle [discussioni su GitHub](https://github.com/orgs/agent-engineering-studio/discussions).
 

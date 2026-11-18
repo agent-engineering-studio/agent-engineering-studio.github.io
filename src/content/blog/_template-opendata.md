@@ -8,6 +8,10 @@ pubDate: 2026-01-01
 author: "Giuseppe Zileni"
 tags: ["open-data", "<repository>", "<ente o tema>"]
 series: "opendata"
+project:
+  name: "<repository>"
+  repo: "https://github.com/agent-engineering-studio/<repository>"
+  docs: "https://agentengineering.it/<repository>/"
 draft: true
 ---
 

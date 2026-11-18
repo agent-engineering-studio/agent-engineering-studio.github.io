@@ -13,6 +13,12 @@ const blog = defineCollection({
     lang: z.enum(['it', 'en']).default('it'),
     /** Rubrica a cui appartiene l'articolo (es. 'opendata'). Facoltativo. */
     series: z.string().optional(),
+    /** Progetto open source raccontato dall'articolo: repository e sito GitHub Pages. */
+    project: z.object({
+      name: z.string(),
+      repo: z.string().url(),
+      docs: z.string().url().optional(),
+    }).optional(),
   }),
 });
 

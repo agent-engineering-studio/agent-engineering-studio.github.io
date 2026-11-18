@@ -65,6 +65,16 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
       <div class="tags">
         {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
       </div>
+      {post.data.project && (
+        <div class="project-box">
+          <span class="project-box__label">Il progetto</span>
+          <span class="project-box__name">{post.data.project.name}</span>
+          {post.data.project.docs && (
+            <a href={post.data.project.docs} class="project-box__link project-box__link--main">Sito e documentazione &rarr;</a>
+          )}
+          <a href={post.data.project.repo} target="_blank" rel="noopener noreferrer" class="project-box__link">Codice su GitHub</a>
+        </div>
+      )}
     </div>
   </header>
 
@@ -78,7 +88,9 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
         <p>Hai trovato utile questo articolo?</p>
         <a href="/support" class="btn-support">&#10084;&#65039; Supporta il progetto</a>
       </div>
-      <a href="/blog" class="back-link">&larr; Torna al blog</a>
+      {post.data.series === 'opendata'
+        ? <a href="/opendata" class="back-link">&larr; Tutte le puntate Open Data</a>
+        : <a href="/blog" class="back-link">&larr; Torna al blog</a>}
     </div>
   </main>
 
@@ -281,4 +293,36 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
     transition: background var(--transition-fast);
   }
   .btn-support:hover { background: var(--color-cta-hover); }
+
+  .project-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border: 1px solid rgba(33,150,243,0.3);
+    border-radius: 10px;
+    background: rgba(33,150,243,0.06);
+    font-size: 0.9rem;
+  }
+  .project-box__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+  }
+  .project-box__name {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-right: auto;
+  }
+  .project-box__link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .project-box__link:hover { color: var(--color-accent); }
+  .project-box__link--main { color: var(--color-accent); font-weight: 600; }
 </style>

@@ -44,6 +44,8 @@ Formato: ~800–1000 parole, tono diretto e personale.
 Pagina: [agentengineering.it/opendata](https://agentengineering.it/opendata).  
 Una puntata per ogni repository dell'organizzazione che usa dati pubblici. Gli articoli stanno in `src/content/blog/` con `series: "opendata"` nel frontmatter e compaiono sia nel blog sia nella pagina della rubrica. Modello: `src/content/blog/_template-opendata.md`.
 
+Ogni puntata indica nel frontmatter il progetto (`project: name, repo, docs`): la pagina della rubrica e l'articolo mostrano il link al sito GitHub Pages del repository (es. [agentengineering.it/dpc-radar](https://agentengineering.it/dpc-radar/)) e al codice. Ogni repository raccontato deve quindi avere il suo sito pubblicato su GitHub Pages.
+
 Ogni puntata risponde alle stesse cinque domande: il dato in breve, che cosa misura davvero, dove può ingannare, che cosa ci costruisci, i limiti detti chiaramente.
 
 **Linguaggio**, lo stesso del README di dpc-radar: frasi brevi, parole di tutti i giorni, una parola tecnica per volta e spiegata la prima volta, ogni affermazione con un caso e un numero presi dal repository, i limiti scritti accanto ai risultati. Niente tabelle: i confronti si scrivono in prosa.
