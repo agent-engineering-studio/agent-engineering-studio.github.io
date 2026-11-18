@@ -29,7 +29,7 @@ Non serve un account né una chiave. La licenza è CC BY-SA 4.0: chi usa i dati 
 
 C'è un limite da conoscere subito: il Dipartimento conserva le mappe per **circa cinque mesi**. Quello che non salvi in tempo, sparisce.
 
-![La pioggia delle 24 ore del 10 ottobre 2026 su tutta l'Italia, con lo zoom sull'area di Reggio Calabria](/opendata/dpc-radar/rain-24h.png)
+![La pioggia delle 24 ore del 10 ottobre 2026 su tutta l'Italia, con lo zoom sull'area di Reggio Calabria](https://raw.githubusercontent.com/agent-engineering-studio/dpc-radar/main/docs/images/rain-24h.png)
 
 *La pioggia del 10 ottobre 2026, dal prodotto «Merging» CUM24. Dati: Dipartimento della Protezione Civile, CC BY-SA 4.0.*
 
@@ -41,7 +41,7 @@ Qui c'è il primo punto debole. L'eco dipende moltissimo dalla grandezza delle g
 
 C'è un secondo punto debole. Il fascio del radar parte quasi orizzontale, ma la Terra è curva e gli scappa sotto. A 100 chilometri dal radar il fascio è già a un chilometro e mezzo di altezza; a 200 chilometri è a quattro. Il radar guarda in alto, e quello che vede lassù non è sempre quello che arriva a terra. Le montagne gli fanno ombra, la neve che si scioglie sembra un acquazzone, e a volte la pioggia si forma proprio nell'ultimo chilometro, sotto il fascio.
 
-![Il fascio del radar sale con la distanza: una montagna ne nasconde metà e la pioggia bassa cade sotto il fascio, dove solo il pluviometro la raccoglie](/opendata/dpc-radar/how-radar-sees.png)
+![Il fascio del radar sale con la distanza: una montagna ne nasconde metà e la pioggia bassa cade sotto il fascio, dove solo il pluviometro la raccoglie](https://raw.githubusercontent.com/agent-engineering-studio/dpc-radar/main/docs/images/how-radar-sees.png)
 
 *Perché il radar non vede sempre quello che cade. Immagine dal repository dpc-radar.*
 
@@ -51,7 +51,7 @@ Il «Merging» unisce i due: il radar dice **dove** è piovuto, i pluviometri di
 
 A Melito si vede bene. I pluviometri hanno misurato 192 millimetri, il radar da solo ne aveva visti 115, cioè il 60%.
 
-![Due mappe dell'area di Reggio Calabria il 10 ottobre 2026: la pioggia vista dal solo radar e quella del Merging](/opendata/dpc-radar/radar-vs-merging.png)
+![Due mappe dell'area di Reggio Calabria il 10 ottobre 2026: la pioggia vista dal solo radar e quella del Merging](https://raw.githubusercontent.com/agent-engineering-studio/dpc-radar/main/docs/images/radar-vs-merging.png)
 
 *A sinistra il solo radar, a destra il «Merging». Dati: Dipartimento della Protezione Civile, CC BY-SA 4.0.*
 
@@ -105,7 +105,7 @@ E poi ci sono tre usi che vanno oltre lo script.
 
 **Una mappa per il sito del Comune.** Il progetto include una pagina pronta, in italiano e in inglese, costruita con il kit grafico della Pubblica Amministrazione. Si apre sulle coordinate dell'ente e, punto per punto, mostra la pioggia, quanto è rara, l'allerta ufficiale e quanto ci si può fidare del radar.
 
-![La pagina della pioggia aperta sul Comune di Gioia del Colle](/opendata/dpc-radar/demo-comune.png)
+![La pagina della pioggia aperta sul Comune di Gioia del Colle](https://raw.githubusercontent.com/agent-engineering-studio/dpc-radar/main/docs/images/demo-comune.png)
 
 **Un assistente AI che non inventa i numeri.** dpc-radar include un server MCP: un modo standard per dare a un assistente come Claude degli strumenti per leggere i dati. Alla domanda «quanto ha piovuto a Messina nelle ultime tre ore?» l'assistente risponde con il numero calcolato sulla mappa di quel momento, e dice da quale mappa viene. E quando la libreria scrive il resoconto di un evento, ogni numero del testo viene confrontato con i dati prima di essere salvato: un numero che non c'è, viene rifiutato.
 
