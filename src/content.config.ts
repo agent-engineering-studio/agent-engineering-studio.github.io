@@ -11,6 +11,8 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     lang: z.enum(['it', 'en']).default('it'),
+    /** Rubrica a cui appartiene l'articolo (es. 'opendata'). Facoltativo. */
+    series: z.string().optional(),
   }),
 });
 

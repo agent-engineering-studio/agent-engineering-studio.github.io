@@ -35,6 +35,9 @@
         "en"
       ]
     },
+    "series": {
+      "type": "string"
+    },
     "$schema": {
       "type": "string"
     }

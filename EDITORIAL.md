@@ -39,6 +39,23 @@ Formato: ~800–1000 parole, tono diretto e personale.
 
 ---
 
+## Rubrica Open Data
+
+Pagina: [agentengineering.it/opendata](https://agentengineering.it/opendata).  
+Una puntata per ogni repository dell'organizzazione che usa dati pubblici. Gli articoli stanno in `src/content/blog/` con `series: "opendata"` nel frontmatter e compaiono sia nel blog sia nella pagina della rubrica. Modello: `src/content/blog/_template-opendata.md`.
+
+Ogni puntata risponde alle stesse cinque domande: il dato in breve, che cosa misura davvero, dove può ingannare, che cosa ci costruisci, i limiti detti chiaramente.
+
+**Linguaggio**, lo stesso del README di dpc-radar: frasi brevi, parole di tutti i giorni, una parola tecnica per volta e spiegata la prima volta, ogni affermazione con un caso e un numero presi dal repository, i limiti scritti accanto ai risultati. Niente tabelle: i confronti si scrivono in prosa.
+
+**Distribuzione:** articolo sul sito, poi articolo LinkedIn nella newsletter con il link all'articolo nel primo commento.
+
+Ordine previsto: dpc-radar, mcp-ckan (dati.puglia.it), mcp-istat, mcp-osm, Limen.
+
+Label: `tipo: open-data`.
+
+---
+
 ## Flusso di lavoro editoriale
 
 ```
@@ -95,4 +112,5 @@ Qualita` > frequenza. Non forzare contenuti vuoti per "mantenere la cadenza".
 
 | Data | Titolo | Pilastro |
 |------|--------|----------|
+| 2026-11-18 | La pioggia d'Italia, ogni cinque minuti (dpc-radar) | Open Data |
 | 2026-05-16 | Agenti AI e Open Data: come costruire il primo prototipo | Tutorial |
