@@ -19,7 +19,6 @@ const t = {
     siteLink: 'Apri il progetto',
     orgLink: 'Org GitHub',
     repoAria: (title: string) => `Vai al repository ${title} su GitHub`,
-    statusDev: 'In Development',
     projects: [
       {
         slug: 'dpc-radar',
@@ -91,7 +90,6 @@ const t = {
     siteLink: 'Open the project',
     orgLink: 'GitHub Org',
     repoAria: (title: string) => `Go to the ${title} repository on GitHub`,
-    statusDev: 'In Development',
     projects: [
       {
         slug: 'dpc-radar',
@@ -166,7 +164,6 @@ const t = {
         <article class={`project-card ${p.statusClass === 'status--soon' ? 'project-card--soon' : ''}`}>
           <div class="project-card__header">
             <span class="project-card__icon" aria-hidden="true">{p.icon}</span>
-            <span class={`project-card__status ${p.statusClass}`}>{t.statusDev}</span>
           </div>
 
           <h3 class="project-card__title">{p.title}</h3>
@@ -261,32 +258,6 @@ const t = {
     font-size: 1.5rem;
   }
 
-  .project-card__status {
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
-
-  .status--open {
-    background: rgba(52, 211, 153, 0.15);
-    color: #34d399;
-    border: 1px solid rgba(52, 211, 153, 0.3);
-  }
-
-  .status--dev {
-    background: rgba(251, 191, 36, 0.15);
-    color: #fbbf24;
-    border: 1px solid rgba(251, 191, 36, 0.3);
-  }
-
-  .status--soon {
-    background: rgba(148, 163, 184, 0.1);
-    color: var(--color-text-muted);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-  }
 
   .project-card__title {
     font-size: 1rem;
