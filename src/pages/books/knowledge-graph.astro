@@ -8,6 +8,7 @@
  * Cover: Neo4j-style Knowledge Graph diagram (v7)
  */
 
+import Navbar from '../../components/Navbar.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
 
@@ -78,11 +79,11 @@ const bonuses = [
   title="AI che Ragiona — Agent Engineering Studio"
   description="Oltre 400 pagine di codice Python eseguibile per costruire Knowledge Graph enterprise, pipeline Graph-RAG ibride, server MCP e crew di agenti orchestrati con Microsoft Agent Framework. Dalla teoria al deployment, senza scorciatoie."
 >
+  <Navbar lang="it" active="libri" />
   <main>
     <!-- Hero -->
     <section class="book-hero">
       <div class="container">
-        <a href="/" class="back-link">&larr; Agent Engineering Studio</a>
 
         <div class="book-hero__layout">
           <div class="book-hero__info">

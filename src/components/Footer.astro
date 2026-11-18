@@ -12,6 +12,8 @@ const { lang = 'it' } = Astro.props;
 const t = {
   it: {
     blog: 'Newsletter',
+    blogPage: 'Blog',
+    opendata: 'Open Data',
     github: 'GitHub',
     privacy: 'Privacy Policy',
     builtWith: 'Built with',
@@ -20,6 +22,8 @@ const t = {
   },
   en: {
     blog: 'Newsletter',
+    blogPage: 'Blog',
+    opendata: 'Open Data',
     github: 'GitHub',
     privacy: 'Privacy Policy',
     builtWith: 'Built with',
@@ -40,6 +44,14 @@ const t = {
       &middot; {t.hostedOn} <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
     </p>
     <p class="footer__links">
+      <a href={lang === 'en' ? '/en/blog' : '/blog'} class="footer__link">{t.blogPage}</a>
+      <span class="footer__sep" aria-hidden="true">&middot;</span>
+      {lang === 'it' && (
+        <>
+          <a href="/opendata" class="footer__link">{t.opendata}</a>
+          <span class="footer__sep" aria-hidden="true">&middot;</span>
+        </>
+      )}
       <a href={t.blogHref} target="_blank" rel="noopener noreferrer" class="footer__link">{t.blog}</a>
       <span class="footer__sep" aria-hidden="true">&middot;</span>
       <a href="https://github.com/agent-engineering-studio" target="_blank" rel="noopener noreferrer" class="footer__link">{t.github}</a>

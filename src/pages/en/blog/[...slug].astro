@@ -6,9 +6,9 @@ import { BMC_URL } from '../../../links';
  * so /en/blog/<slug> mirrors /blog/<slug>.
  */
 
+import Navbar from '../../../components/Navbar.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Footer from '../../../components/Footer.astro';
-import FlagIcon from '../../../components/FlagIcon.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -40,22 +40,11 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
   canonical={canonical}
   lang="en"
 >
+  <Navbar lang="en" active="blog" altLangHref={itHref ?? undefined} />
   <header class="post-header">
     <div class="container">
       <div class="post-header__top">
         <a href="/en/blog" class="back-link">&larr; All articles</a>
-        {itHref && (
-          <a
-            href={itHref}
-            class="lang-switch"
-            hreflang="it"
-            lang="it"
-            aria-label="Leggi in italiano"
-            title="Leggi in italiano"
-          >
-            <FlagIcon country="it" />
-          </a>
-        )}
       </div>
       <div class="post-meta">
         <time datetime={post.data.pubDate.toISOString()}>
@@ -86,7 +75,7 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
     </div>
   </main>
 
-  <Footer />
+  <Footer lang="en" />
 </BaseLayout>
 
 <style>

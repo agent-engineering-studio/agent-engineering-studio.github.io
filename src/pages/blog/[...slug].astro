@@ -5,9 +5,9 @@ import { BMC_URL } from '../../links';
  * Astro Content Layer API (Astro v6).
  */
 
+import Navbar from '../../components/Navbar.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
-import FlagIcon from '../../components/FlagIcon.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -37,22 +37,13 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
   description={post.data.description}
   canonical={canonical}
 >
+  <Navbar lang="it" active={post.data.series === 'opendata' ? 'opendata' : 'blog'} altLangHref={enHref ?? undefined} />
   <header class="post-header">
     <div class="container">
       <div class="post-header__top">
-        <a href="/blog" class="back-link">&larr; Tutti gli articoli</a>
-        {enHref && (
-          <a
-            href={enHref}
-            class="lang-switch"
-            hreflang="en"
-            lang="en"
-            aria-label="Read in English"
-            title="Read in English"
-          >
-            <FlagIcon country="gb" />
-          </a>
-        )}
+        {post.data.series === 'opendata'
+          ? <a href="/opendata" class="back-link">&larr; Rubrica Open Data</a>
+          : <a href="/blog" class="back-link">&larr; Tutti gli articoli</a>}
       </div>
       <div class="post-meta">
         <time datetime={post.data.pubDate.toISOString()}>

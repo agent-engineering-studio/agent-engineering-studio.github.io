@@ -5,6 +5,7 @@ import { NEWSLETTER_SUBSCRIBE_URL } from '../links';
  * Elenca gli articoli della collezione blog con series: 'opendata'.
  */
 
+import Navbar from '../components/Navbar.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
@@ -25,11 +26,9 @@ const NEWSLETTER = NEWSLETTER_SUBSCRIBE_URL;
   description="Una rubrica sull'uso consapevole dei dati pubblici italiani: che cosa misurano davvero, dove possono ingannare, che cosa ci si costruisce. Con codice aperto."
   canonical="https://agentengineering.it/opendata"
 >
+  <Navbar lang="it" active="opendata" />
   <header class="blog-header">
     <div class="container">
-      <div class="blog-header__top">
-        <a href="/" class="back-link">&larr; Home</a>
-      </div>
       <h1 class="blog-title">Open Data</h1>
       <p class="blog-subtitle">Dati pubblici, usati con consapevolezza</p>
     </div>
@@ -94,6 +93,7 @@ const NEWSLETTER = NEWSLETTER_SUBSCRIBE_URL;
         Conosci un dataset pubblico che merita una puntata? Hai trovato una trappola nei dati
         che usi? Hai un progetto open source costruito su dati aperti? Raccontacelo nelle
         <a href={DISCUSSIONS} target="_blank" rel="noopener noreferrer">discussioni su GitHub</a>.
+        Gli altri articoli del laboratorio sono nel <a href="/blog">blog</a>.
         Le puntate escono anche nella
         <a href={NEWSLETTER} target="_blank" rel="noopener noreferrer">newsletter LinkedIn</a>.
       </p>

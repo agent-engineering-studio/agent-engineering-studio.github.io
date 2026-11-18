@@ -4,9 +4,9 @@
  * Mirrors src/pages/blog/index.astro but filters posts with lang === 'en'.
  */
 
+import Navbar from '../../../components/Navbar.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Footer from '../../../components/Footer.astro';
-import FlagIcon from '../../../components/FlagIcon.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en'))
@@ -27,23 +27,9 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
   canonical="https://agentengineering.it/en/blog"
   lang="en"
 >
+  <Navbar lang="en" active="blog" altLangHref={hasItalian ? "/blog" : undefined} />
   <header class="blog-header">
     <div class="container">
-      <div class="blog-header__top">
-        <a href="/" class="back-link">&larr; Home</a>
-        {hasItalian && (
-          <a
-            href="/blog"
-            class="lang-switch"
-            hreflang="it"
-            lang="it"
-            aria-label="Versione italiana"
-            title="Versione italiana"
-          >
-            <FlagIcon country="it" />
-          </a>
-        )}
-      </div>
       <h1 class="blog-title">Blog</h1>
       <p class="blog-subtitle">Tutorials, lab notes and updates from the studio</p>
     </div>
@@ -75,7 +61,7 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
     </ul>
   </main>
 
-  <Footer />
+  <Footer lang="en" />
 </BaseLayout>
 
 <style>
