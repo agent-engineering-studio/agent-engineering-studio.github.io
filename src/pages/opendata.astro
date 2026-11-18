@@ -1,4 +1,5 @@
 ---
+import { NEWSLETTER_SUBSCRIBE_URL } from '../links';
 /*
  * opendata.astro — Rubrica "Open Data": uso consapevole dei dati pubblici.
  * Elenca gli articoli della collezione blog con series: 'opendata'.
@@ -16,7 +17,7 @@ const formatDate = (d: Date) =>
   d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 
 const DISCUSSIONS = 'https://github.com/orgs/agent-engineering-studio/discussions';
-const NEWSLETTER = 'https://www.linkedin.com/newsletters/agent-engineering-studio-7445502996655800320/';
+const NEWSLETTER = NEWSLETTER_SUBSCRIBE_URL;
 ---
 
 <BaseLayout

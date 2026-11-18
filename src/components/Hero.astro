@@ -1,4 +1,5 @@
 ---
+import { NEWSLETTER_SUBSCRIBE_URL } from '../links';
 /*
  * Hero.astro — Sezione hero principale
  */
@@ -15,7 +16,7 @@ const t = {
     badges: ['Open Source', 'MIT License', 'Studio personale'],
     bookCta: 'Scopri il libro',
     blogCta: 'Iscriviti alla newsletter',
-    blogHref: 'https://www.linkedin.com/newsletters/agent-engineering-studio-7445502996655800320/',
+    blogHref: NEWSLETTER_SUBSCRIBE_URL,
   },
   en: {
     tagline: 'A study space on AI agents.',
@@ -24,7 +25,7 @@ const t = {
     badges: ['Open Source', 'MIT License', 'Personal lab'],
     bookCta: 'Discover the book',
     blogCta: 'Subscribe to the newsletter',
-    blogHref: 'https://www.linkedin.com/newsletters/agent-engineering-studio-7445502996655800320/',
+    blogHref: NEWSLETTER_SUBSCRIBE_URL,
   },
 }[lang];
 ---

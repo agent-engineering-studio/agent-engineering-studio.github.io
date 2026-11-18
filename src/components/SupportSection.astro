@@ -1,4 +1,5 @@
 ---
+import { NEWSLETTER_SUBSCRIBE_URL } from '../links';
 /*
  * SupportSection.astro — "Resta in contatto"
  * Sezione contatti minimale: GitHub, newsletter LinkedIn, email dedicata.
@@ -59,7 +60,7 @@ const t = {
         </a>
 
         <a
-          href="https://www.linkedin.com/newsletters/agent-engineering-studio-7445502996655800320/"
+          href={NEWSLETTER_SUBSCRIBE_URL}
           target="_blank"
           rel="noopener noreferrer"
           class="contact-section__btn contact-section__btn--secondary"
