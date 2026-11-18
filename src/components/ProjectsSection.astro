@@ -14,7 +14,7 @@ const t = {
     sectionAria: 'Progetti open source',
     heading: 'Progetti',
     intro:
-      'Progetti open source dello studio: <strong>Limen</strong> (pericolo di frane, allagamenti e incendi in Italia), <strong>mcp-geo-server</strong> (GeoServer in linguaggio naturale) e <strong>knowledge-graph</strong> (companion del libro <strong>"AI che Ragiona"</strong>). Altri repository verranno pubblicati progressivamente.',
+      'Progetti open source dello studio: <strong>dpc-radar</strong> (la pioggia d\'Italia dai radar della Protezione Civile) e <strong>knowledge-graph</strong> (companion del libro <strong>"AI che Ragiona"</strong>). Gli altri arriveranno, uno alla volta, insieme alle prossime puntate della rubrica <a href="/opendata">Open Data</a>.',
     repoLink: 'Vai al repo',
     siteLink: 'Apri il progetto',
     orgLink: 'Org GitHub',
@@ -22,7 +22,19 @@ const t = {
     statusDev: 'In Development',
     projects: [
       {
+        slug: 'dpc-radar',
+        icon: '🌧️',
+        title: 'dpc-radar',
+        statusClass: 'status--dev',
+        description:
+          'La pioggia su tutta l\'Italia dai radar della Protezione Civile, in poche righe di Python: l\'ultima mappa, la pioggia in un punto, quanto è rara lì, le prossime due ore e l\'allerta ufficiale. Dice quando il dato non c\'è, invece di scrivere zero, e scarta le mappe difettose. Con un server MCP per gli assistenti AI e una mappa pronta per il sito di un Comune. Dati aperti del DPC, CC BY-SA 4.0.',
+        stack: ['Python', 'httpx', 'NumPy', 'rasterio', 'MCP', 'Next.js', 'Leaflet', 'Docker'],
+        liveUrl: 'https://agentengineering.it/dpc-radar/',
+        repoUrl: 'https://github.com/agent-engineering-studio/dpc-radar',
+      },
+      {
         slug: 'limen',
+        hidden: true,
         icon: '⛰️',
         title: 'limen',
         statusClass: 'status--dev',
@@ -57,6 +69,7 @@ const t = {
       },
       {
         slug: 'mcp-geo-server',
+        hidden: true,
         icon: '🗺️',
         title: 'mcp-geo-server',
         statusClass: 'status--dev',
@@ -73,7 +86,7 @@ const t = {
     sectionAria: 'Open source projects',
     heading: 'Projects',
     intro:
-      'Open-source projects from the studio: <strong>Limen</strong> (landslide, flood and wildfire hazard across Italy), <strong>mcp-geo-server</strong> (GeoServer in natural language) and <strong>knowledge-graph</strong> (companion to the book <strong>"AI that Reasons"</strong>). More repositories will be published progressively.',
+      'Open-source projects from the studio: <strong>dpc-radar</strong> (rain over Italy from the Civil Protection radar) and <strong>knowledge-graph</strong> (companion to the book <strong>"AI that Reasons"</strong>). More repositories will be published progressively.',
     repoLink: 'View repo',
     siteLink: 'Open the project',
     orgLink: 'GitHub Org',
@@ -81,7 +94,19 @@ const t = {
     statusDev: 'In Development',
     projects: [
       {
+        slug: 'dpc-radar',
+        icon: '🌧️',
+        title: 'dpc-radar',
+        statusClass: 'status--dev',
+        description:
+          'Rain over all of Italy from the Civil Protection radar, in a few lines of Python: the latest map, the rain at a place, how rare it is there, the next two hours and the official alert. It says when there is no data instead of writing zero, and rejects faulty maps. With an MCP server for AI assistants and a ready-made map for a municipality\'s website. Open DPC data, CC BY-SA 4.0.',
+        stack: ['Python', 'httpx', 'NumPy', 'rasterio', 'MCP', 'Next.js', 'Leaflet', 'Docker'],
+        liveUrl: 'https://agentengineering.it/dpc-radar/',
+        repoUrl: 'https://github.com/agent-engineering-studio/dpc-radar',
+      },
+      {
         slug: 'limen',
+        hidden: true,
         icon: '⛰️',
         title: 'limen',
         statusClass: 'status--dev',
@@ -116,6 +141,7 @@ const t = {
       },
       {
         slug: 'mcp-geo-server',
+        hidden: true,
         icon: '🗺️',
         title: 'mcp-geo-server',
         statusClass: 'status--dev',
