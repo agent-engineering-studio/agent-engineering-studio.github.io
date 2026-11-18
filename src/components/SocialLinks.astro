@@ -14,13 +14,13 @@ const t = {
     sectionAria: 'Social links',
     medium: 'Medium',
     newsletter: 'Iscriviti alla Newsletter',
-    newsletterAria: 'Iscriviti alla Newsletter Substack',
+    newsletterAria: 'Iscriviti alla newsletter su LinkedIn',
   },
   en: {
     sectionAria: 'Social links',
     medium: 'Medium',
     newsletter: 'Subscribe to the Newsletter',
-    newsletterAria: 'Subscribe to the Substack Newsletter',
+    newsletterAria: 'Subscribe to the newsletter on LinkedIn',
   },
 }[lang];
 ---
@@ -92,17 +92,18 @@ const t = {
         </a>
       </li>
 
-      <!-- Substack Newsletter -->
+      <!-- Newsletter LinkedIn -->
       <li>
         <a
-          href="https://agentengineeringstudio.substack.com"
+          href="https://www.linkedin.com/newsletters/agent-engineering-studio-7445502996655800320/"
           target="_blank"
           rel="noopener noreferrer"
           class="social-links__link social-links__link--newsletter"
           aria-label={t.newsletterAria}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2"/>
           </svg>
           <span>{t.newsletter}</span>
         </a>
@@ -150,19 +151,19 @@ const t = {
     height: 20px;
   }
 
-  /* Newsletter button — Substack orange style */
+  /* Newsletter button — LinkedIn blue */
   .social-links__link--newsletter {
     color: #ffffff;
-    background-color: #FF6719;
-    border-color: #FF6719;
+    background-color: #0A66C2;
+    border-color: #0A66C2;
     border-radius: 16px;
     font-weight: 600;
   }
 
   .social-links__link--newsletter:hover {
     color: #ffffff;
-    background-color: #E54E00;
-    border-color: #E54E00;
+    background-color: #004182;
+    border-color: #004182;
   }
 
   @media (max-width: 500px) {
