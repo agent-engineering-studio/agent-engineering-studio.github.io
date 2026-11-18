@@ -1,0 +1,99 @@
+---
+/*
+ * SponsorSection.astro — Sostieni il laboratorio con Buy Me a Coffee.
+ * Il pulsante è l'SVG ufficiale del brand kit Buy Me a Coffee.
+ */
+import { BMC_URL } from '../links';
+
+interface Props {
+  lang?: 'it' | 'en';
+}
+const { lang = 'it' } = Astro.props;
+
+const t = {
+  it: {
+    id: 'sostieni',
+    aria: 'Sostieni il laboratorio',
+    title: 'Sostieni il laboratorio',
+    desc:
+      'Il codice, gli articoli e i dati del laboratorio sono gratuiti e restano gratuiti. Se ti sono stati utili, puoi offrire un caffè: aiuta a tenere vivi i progetti e a pubblicarne di nuovi.',
+    alt: 'Offrimi un caffè su Buy Me a Coffee',
+    aria_link: 'Sostieni il laboratorio su Buy Me a Coffee (apre in nuova scheda)',
+  },
+  en: {
+    id: 'support',
+    aria: 'Support the lab',
+    title: 'Support the lab',
+    desc:
+      'The code, articles and data of the lab are free and will stay free. If they were useful to you, you can buy me a coffee: it helps keep the projects alive and publish new ones.',
+    alt: 'Buy me a coffee',
+    aria_link: 'Support the lab on Buy Me a Coffee (opens in a new tab)',
+  },
+}[lang];
+---
+
+<section id={t.id} class="sponsor" aria-label={t.aria}>
+  <div class="container">
+    <div class="sponsor__card">
+      <h2 class="sponsor__title">{t.title}</h2>
+      <p class="sponsor__desc">{t.desc}</p>
+      <a
+        href={BMC_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="sponsor__button"
+        aria-label={t.aria_link}
+      >
+        <img src="/sponsor/bmc-button.svg" alt={t.alt} width="218" height="61" loading="lazy" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sponsor {
+    padding: var(--space-xl) 0;
+    text-align: center;
+  }
+
+  .sponsor__card {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-2xl);
+    background: rgba(15, 34, 64, 0.5);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .sponsor__title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .sponsor__desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0 auto var(--space-lg);
+    max-width: 460px;
+  }
+
+  .sponsor__button {
+    display: inline-block;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .sponsor__button:hover,
+  .sponsor__button:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 221, 0, 0.25);
+  }
+  .sponsor__button img {
+    display: block;
+    width: 218px;
+    height: auto;
+  }
+</style>

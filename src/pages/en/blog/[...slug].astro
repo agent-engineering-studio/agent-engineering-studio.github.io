@@ -1,4 +1,5 @@
 ---
+import { BMC_URL } from '../../../links';
 /*
  * en/blog/[...slug].astro — English single article page
  * Filters posts with lang === 'en' and strips the "-en" suffix from the URL
@@ -79,7 +80,7 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
     <div class="post-footer">
       <div class="post-footer__support">
         <p>Did you find this article useful?</p>
-        <a href="/support" class="btn-support">&#10084;&#65039; Support the project</a>
+        <a href={BMC_URL} target="_blank" rel="noopener noreferrer" class="btn-support">&#9749; Buy me a coffee</a>
       </div>
       <a href="/en/blog" class="back-link">&larr; Back to blog</a>
     </div>

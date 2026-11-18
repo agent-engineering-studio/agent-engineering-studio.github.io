@@ -1,4 +1,5 @@
 ---
+import { BMC_URL } from '../../links';
 /*
  * blog/[...slug].astro — Pagina singolo articolo
  * Astro Content Layer API (Astro v6).
@@ -86,7 +87,7 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
     <div class="post-footer">
       <div class="post-footer__support">
         <p>Hai trovato utile questo articolo?</p>
-        <a href="/support" class="btn-support">&#10084;&#65039; Supporta il progetto</a>
+        <a href={BMC_URL} target="_blank" rel="noopener noreferrer" class="btn-support">&#9749; Offrimi un caffè</a>
       </div>
       {post.data.series === 'opendata'
         ? <a href="/opendata" class="back-link">&larr; Tutte le puntate Open Data</a>
