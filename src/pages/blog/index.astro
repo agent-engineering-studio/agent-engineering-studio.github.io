@@ -12,8 +12,6 @@ import { getCollection } from 'astro:content';
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'it'))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const hasEnglish = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en')).length > 0;
-
 const formatDate = (d: Date) =>
   d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
@@ -22,8 +20,9 @@ const formatDate = (d: Date) =>
   title="Blog — Agent Engineering Studio"
   description="Tutorial, riflessioni e aggiornamenti su agenti AI, open data e civic tech dal laboratorio Agent Engineering Studio."
   canonical="https://agentengineering.it/blog"
+  altLangHref="/en/blog"
 >
-  <Navbar lang="it" active="blog" altLangHref={hasEnglish ? "/en/blog" : undefined} />
+  <Navbar lang="it" active="blog" altLangHref="/en/blog" />
   <header class="blog-header">
     <div class="container">
       <h1 class="blog-title">Blog</h1>

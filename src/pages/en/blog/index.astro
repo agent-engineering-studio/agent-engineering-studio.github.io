@@ -12,8 +12,6 @@ import { getCollection } from 'astro:content';
 const allPosts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en'))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const hasItalian = (await getCollection('blog', ({ data }) => !data.draft && data.lang === 'it')).length > 0;
-
 const formatDate = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -26,8 +24,9 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
   description="Tutorials, lab notes and updates on AI agents, open data and civic tech from the Agent Engineering Studio."
   canonical="https://agentengineering.it/en/blog"
   lang="en"
+  altLangHref="/blog"
 >
-  <Navbar lang="en" active="blog" altLangHref={hasItalian ? "/blog" : undefined} />
+  <Navbar lang="en" active="blog" altLangHref="/blog" />
   <header class="blog-header">
     <div class="container">
       <h1 class="blog-title">Blog</h1>
@@ -36,6 +35,13 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
   </header>
 
   <main class="container">
+    <a href="/en/opendata" class="series-banner">
+      <span class="series-banner__label">Series</span>
+      <span class="series-banner__title">Open Data</span>
+      <span class="series-banner__desc">Italian public data, used wisely: what it measures, where it misleads, what you can build with it.</span>
+      <span class="series-banner__cta">All episodes &rarr;</span>
+    </a>
+
     {allPosts.length === 0 && (
       <p class="empty">No articles yet. Check back soon!</p>
     )}
@@ -45,6 +51,7 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
         <li class="post-card">
           <a href={`/en/blog/${cleanSlug(post.id)}`} class="post-card__link">
             <div class="post-card__meta">
+              {post.data.series === 'opendata' && <span class="series-badge">Open Data</span>}
               <time datetime={post.data.pubDate.toISOString()}>
                 {formatDate(post.data.pubDate)}
               </time>
@@ -193,5 +200,50 @@ const cleanSlug = (id: string) => id.replace(/-en$/, '');
     text-align: center;
     color: var(--color-text-muted);
     padding: var(--space-2xl) 0;
+  }
+
+  .series-banner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-lg) var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    border: 1px solid rgba(33,150,243,0.3);
+    border-radius: 12px;
+    background: rgba(33,150,243,0.06);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition-base);
+  }
+  .series-banner:hover { border-color: var(--color-accent); }
+  .series-banner__label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+  }
+  .series-banner__title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--color-text);
+  }
+  .series-banner__cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  .series-banner__desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .series-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #0a0e17;
+    background: var(--color-accent);
+    border-radius: 4px;
+    padding: 2px 6px;
   }
 </style>

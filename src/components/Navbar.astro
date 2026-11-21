@@ -1,7 +1,7 @@
 ---
 /*
  * Navbar.astro — Barra di navigazione, la stessa su tutte le pagine.
- * Voci: Blog, Open Data (solo IT), Progetti, Libri, Newsletter, GitHub, lingua.
+ * Voci: Blog, Open Data, Progetti, Libri, Newsletter, GitHub, lingua.
  * `active` evidenzia la sezione corrente.
  */
 import FlagIcon from './FlagIcon.astro';
@@ -45,6 +45,7 @@ const t = {
     switchCountry: 'it' as const,
     links: [
       { id: 'blog', label: 'Blog', href: '/en/blog' },
+      { id: 'opendata', label: 'Open Data', href: '/en/opendata' },
       { id: 'progetti', label: 'Projects', href: '/en/#projects' },
       { id: 'libri', label: 'Books', href: '/en/#books' },
     ],

@@ -36,6 +36,7 @@ const enHref = enCounterpart ? `/en/blog/${post.id}` : null;
   title={`${post.data.title} — Agent Engineering Studio`}
   description={post.data.description}
   canonical={canonical}
+  altLangHref={enHref ?? undefined}
 >
   <Navbar lang="it" active={post.data.series === 'opendata' ? 'opendata' : 'blog'} altLangHref={enHref ?? undefined} />
   <header class="post-header">

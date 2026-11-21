@@ -1,0 +1,333 @@
+---
+/*
+ * OpenDataPage.astro — Rubrica "Open Data": uso consapevole dei dati pubblici.
+ * Elenca gli articoli della collezione blog con series: 'opendata' nella lingua scelta.
+ * Usata da src/pages/opendata.astro (IT) e src/pages/en/opendata.astro (EN).
+ */
+import { NEWSLETTER_SUBSCRIBE_URL } from '../links';
+import Navbar from './Navbar.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from './Footer.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang?: 'it' | 'en';
+}
+const { lang = 'it' } = Astro.props;
+
+const posts = (await getCollection('blog', ({ data }) =>
+  !data.draft && data.lang === lang && data.series === 'opendata'))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString(lang === 'en' ? 'en-US' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// Le versioni inglesi hanno id "<slug>-en" ma vivono in /en/blog/<slug>
+const postHref = (id: string) => lang === 'en' ? `/en/blog/${id.replace(/-en$/, '')}` : `/blog/${id}`;
+
+const DISCUSSIONS = 'https://github.com/orgs/agent-engineering-studio/discussions';
+const NEWSLETTER = NEWSLETTER_SUBSCRIBE_URL;
+
+const t = {
+  it: {
+    metaDesc: "Una rubrica sull'uso consapevole dei dati pubblici italiani: che cosa misurano davvero, dove possono ingannare, che cosa ci si costruisce. Con codice aperto.",
+    canonical: 'https://agentengineering.it/opendata',
+    altLangHref: '/en/opendata',
+    subtitle: 'Dati pubblici, usati con consapevolezza',
+    intro: [
+      "L'Italia pubblica ogni giorno dati preziosi, gratis: la pioggia misurata dai radar, le statistiche dell'ISTAT, le mappe, i dataset di Regioni e Comuni. Sono stati pagati da tutti, e più persone sanno leggerli, più valgono.",
+      "Ogni puntata di questa rubrica prende un dato pubblico e un progetto open source che lo usa, e risponde sempre alle stesse cinque domande, con parole semplici:",
+    ],
+    steps: [
+      ['Il dato in breve.', 'Chi lo pubblica, ogni quanto, per quanto tempo resta disponibile, con quale licenza.'],
+      ['Che cosa misura davvero.', 'Come nasce il numero, spiegato senza dare nulla per scontato.'],
+      ['Dove può ingannare.', 'Le trappole che abbiamo già incontrato, perché tu non debba scoprirle da solo.'],
+      ['Che cosa ci costruisci.', "Poche righe di codice, un notebook da aprire nel browser, un'idea da riusare."],
+      ['I limiti, detti chiaramente.', 'Che cosa il dato non può dirti, e quale fonte ufficiale non sostituisce.'],
+    ],
+    empty: 'La prima puntata è in arrivo.',
+    projectSite: 'Sito del progetto',
+    projectCode: 'Codice su GitHub',
+    readMore: "Leggi l'articolo",
+    ctaTitle: 'Partecipa',
+    cta: `Conosci un dataset pubblico che merita una puntata? Hai trovato una trappola nei dati che usi? Hai un progetto open source costruito su dati aperti? Raccontacelo nelle <a href="${DISCUSSIONS}" target="_blank" rel="noopener noreferrer">discussioni su GitHub</a>. Gli altri articoli del laboratorio sono nel <a href="/blog">blog</a>. Le puntate escono anche nella <a href="${NEWSLETTER}" target="_blank" rel="noopener noreferrer">newsletter LinkedIn</a>.`,
+  },
+  en: {
+    metaDesc: 'A series on using Italian public data wisely: what it really measures, where it can mislead, and what you can build with it. With open source code.',
+    canonical: 'https://agentengineering.it/en/opendata',
+    altLangHref: '/opendata',
+    subtitle: 'Public data, used wisely',
+    intro: [
+      'Every day Italy publishes valuable data for free: rainfall measured by weather radars, ISTAT statistics, maps, datasets from regions and municipalities. Everyone paid for it, and the more people can read it, the more it is worth.',
+      'Each episode of this series takes one public dataset and an open source project that uses it, and always answers the same five questions, in plain words:',
+    ],
+    steps: [
+      ['The data in brief.', 'Who publishes it, how often, how long it stays available, under which license.'],
+      ['What it really measures.', 'How the number comes about, explained without taking anything for granted.'],
+      ['Where it can mislead.', "The traps we've already run into, so you don't have to find them on your own."],
+      ['What you can build.', 'A few lines of code, a notebook you can open in the browser, an idea to reuse.'],
+      ['The limits, stated clearly.', 'What the data cannot tell you, and which official source it does not replace.'],
+    ],
+    empty: 'English episodes are on their way. Meanwhile, the Italian ones are on the <a href="/opendata" hreflang="it">Italian page</a>.',
+    projectSite: 'Project site',
+    projectCode: 'Code on GitHub',
+    readMore: 'Read the article',
+    ctaTitle: 'Get involved',
+    cta: `Know a public dataset that deserves an episode? Found a trap in the data you use? Built an open source project on open data? Tell us in the <a href="${DISCUSSIONS}" target="_blank" rel="noopener noreferrer">GitHub discussions</a>. The lab's other articles are on the <a href="/en/blog">blog</a>. Episodes also go out in the <a href="${NEWSLETTER}" target="_blank" rel="noopener noreferrer">LinkedIn newsletter</a>.`,
+  },
+}[lang];
+---
+
+<BaseLayout
+  lang={lang}
+  title="Open Data — Agent Engineering Studio"
+  description={t.metaDesc}
+  canonical={t.canonical}
+  altLangHref={t.altLangHref}
+>
+  <Navbar lang={lang} active="opendata" altLangHref={t.altLangHref} />
+  <header class="blog-header">
+    <div class="container">
+      <h1 class="blog-title">Open Data</h1>
+      <p class="blog-subtitle">{t.subtitle}</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      {t.intro.map((p) => <p>{p}</p>)}
+      <ol class="steps">
+        {t.steps.map(([title, desc]) => (
+          <li><strong>{title}</strong> {desc}</li>
+        ))}
+      </ol>
+    </section>
+
+    {posts.length === 0 && (
+      <p class="empty" set:html={t.empty} />
+    )}
+
+    <ul class="post-list">
+      {posts.map(post => (
+        <li class="post-card">
+          {post.data.project && (
+            <div class="project-links">
+              <span class="project-name">{post.data.project.name}</span>
+              {post.data.project.docs && (
+                <a href={post.data.project.docs} class="project-link project-link--main">{t.projectSite} &rarr;</a>
+              )}
+              <a href={post.data.project.repo} target="_blank" rel="noopener noreferrer" class="project-link">{t.projectCode}</a>
+            </div>
+          )}
+          <a href={postHref(post.id)} class="post-card__link">
+            <div class="post-card__meta">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {formatDate(post.data.pubDate)}
+              </time>
+              {post.data.tags.slice(0, 3).map(tag => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+            <h2 class="post-card__title">{post.data.title}</h2>
+            <p class="post-card__desc">{post.data.description}</p>
+            <span class="post-card__cta">{t.readMore} &rarr;</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <section class="cta">
+      <h2>{t.ctaTitle}</h2>
+      <p set:html={t.cta} />
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  .blog-header {
+    padding: var(--space-2xl) 0 var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .blog-header__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .back-link {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    display: inline-block;
+    transition: color var(--transition-fast);
+  }
+  .back-link:hover { color: var(--color-accent); }
+
+  .lang-switch {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 0.35em 0.8em;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+  .lang-switch:hover {
+    color: var(--color-accent);
+    border-color: rgba(33, 150, 243, 0.4);
+  }
+
+  .blog-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .blog-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .post-card {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color var(--transition-base), transform var(--transition-base);
+  }
+  .post-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .post-card__link {
+    display: block;
+    padding: var(--space-xl);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-sm);
+  }
+
+  .post-card__meta time {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+    background: rgba(33,150,243,0.1);
+    border: 1px solid rgba(33,150,243,0.2);
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+
+  .post-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+  }
+
+  .post-card__desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .post-card__cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .empty :global(a) { color: var(--color-accent); }
+
+  .empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: var(--space-2xl) 0;
+  }
+
+  .intro {
+    max-width: 72ch;
+    margin: 0 0 var(--space-2xl);
+    color: var(--color-text);
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+  .intro p { margin-bottom: var(--space-md); }
+  .steps { padding-left: var(--space-xl); margin: 0; }
+  .steps li { margin-bottom: var(--space-xs); color: var(--color-text-muted); }
+  .steps strong { color: var(--color-text); font-weight: 600; }
+
+  .cta {
+    max-width: 72ch;
+    margin: 0 0 var(--space-2xl);
+    padding: var(--space-xl);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    line-height: 1.7;
+  }
+  .cta h2 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+  }
+  .cta p { color: var(--color-text-muted); margin: 0; }
+  .cta :global(a) { color: var(--color-accent); text-underline-offset: 3px; }
+
+  .project-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    padding: var(--space-md) var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(33,150,243,0.05);
+    font-size: 0.85rem;
+  }
+  .project-name {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-right: auto;
+  }
+  .project-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .project-link:hover { color: var(--color-accent); }
+  .project-link--main { color: var(--color-accent); font-weight: 600; }
+</style>

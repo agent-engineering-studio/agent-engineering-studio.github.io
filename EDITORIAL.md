@@ -58,6 +58,12 @@ Label: `tipo: open-data`.
 
 ---
 
+## Versione inglese
+
+Il sito è bilingue: italiano alla radice, inglese sotto `/en/` (home, blog, rubrica Open Data, pagina del libro). Ogni articolo può avere la sua traduzione: stesso nome file con il suffisso `-en` (es. `pioggia-radar-protezione-civile-dpc-radar-en.md`) e `lang: "en"` nel frontmatter, con gli stessi `series` e `project`. L'articolo inglese esce a `/en/blog/<slug-senza-en>`; il selettore di lingua e i tag `hreflang` collegano le due versioni da soli.
+
+---
+
 ## Flusso di lavoro editoriale
 
 ```

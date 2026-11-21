@@ -39,12 +39,15 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
   description={post.data.description}
   canonical={canonical}
   lang="en"
+  altLangHref={itHref ?? undefined}
 >
-  <Navbar lang="en" active="blog" altLangHref={itHref ?? undefined} />
+  <Navbar lang="en" active={post.data.series === 'opendata' ? 'opendata' : 'blog'} altLangHref={itHref ?? undefined} />
   <header class="post-header">
     <div class="container">
       <div class="post-header__top">
-        <a href="/en/blog" class="back-link">&larr; All articles</a>
+        {post.data.series === 'opendata'
+          ? <a href="/en/opendata" class="back-link">&larr; Open Data series</a>
+          : <a href="/en/blog" class="back-link">&larr; All articles</a>}
       </div>
       <div class="post-meta">
         <time datetime={post.data.pubDate.toISOString()}>
@@ -58,6 +61,16 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
       <div class="tags">
         {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
       </div>
+      {post.data.project && (
+        <div class="project-box">
+          <span class="project-box__label">The project</span>
+          <span class="project-box__name">{post.data.project.name}</span>
+          {post.data.project.docs && (
+            <a href={post.data.project.docs} class="project-box__link project-box__link--main">Site and documentation &rarr;</a>
+          )}
+          <a href={post.data.project.repo} target="_blank" rel="noopener noreferrer" class="project-box__link">Code on GitHub</a>
+        </div>
+      )}
     </div>
   </header>
 
@@ -71,7 +84,9 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
         <p>Did you find this article useful?</p>
         <a href={BMC_URL} target="_blank" rel="noopener noreferrer" class="btn-support">&#9749; Buy me a coffee</a>
       </div>
-      <a href="/en/blog" class="back-link">&larr; Back to blog</a>
+      {post.data.series === 'opendata'
+        ? <a href="/en/opendata" class="back-link">&larr; All Open Data episodes</a>
+        : <a href="/en/blog" class="back-link">&larr; Back to blog</a>}
     </div>
   </main>
 
@@ -274,4 +289,36 @@ const itHref = itCounterpart ? `/blog/${cleanSlug}` : null;
     transition: background var(--transition-fast);
   }
   .btn-support:hover { background: var(--color-cta-hover); }
+
+  .project-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border: 1px solid rgba(33,150,243,0.3);
+    border-radius: 10px;
+    background: rgba(33,150,243,0.06);
+    font-size: 0.9rem;
+  }
+  .project-box__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+  }
+  .project-box__name {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-right: auto;
+  }
+  .project-box__link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .project-box__link:hover { color: var(--color-accent); }
+  .project-box__link--main { color: var(--color-accent); font-weight: 600; }
 </style>

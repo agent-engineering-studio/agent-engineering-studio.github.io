@@ -46,12 +46,8 @@ const t = {
     <p class="footer__links">
       <a href={lang === 'en' ? '/en/blog' : '/blog'} class="footer__link">{t.blogPage}</a>
       <span class="footer__sep" aria-hidden="true">&middot;</span>
-      {lang === 'it' && (
-        <>
-          <a href="/opendata" class="footer__link">{t.opendata}</a>
-          <span class="footer__sep" aria-hidden="true">&middot;</span>
-        </>
-      )}
+      <a href={lang === 'en' ? '/en/opendata' : '/opendata'} class="footer__link">{t.opendata}</a>
+      <span class="footer__sep" aria-hidden="true">&middot;</span>
       <a href={t.blogHref} target="_blank" rel="noopener noreferrer" class="footer__link">{t.blog}</a>
       <span class="footer__sep" aria-hidden="true">&middot;</span>
       <a href="https://github.com/agent-engineering-studio" target="_blank" rel="noopener noreferrer" class="footer__link">{t.github}</a>

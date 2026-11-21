@@ -69,7 +69,7 @@ const books = dataByLang.books;
     <div class="catalog__grid">
       {books.map((book) => (
         <article class="book-card animate-in">
-          <a href={`/books/${book.slug}`} class="book-card__link">
+          <a href={`${lang === 'en' ? '/en' : ''}/books/${book.slug}`} class="book-card__link">
             {/* Cover con immagine reale */}
             <div class="book-card__cover">
               <img

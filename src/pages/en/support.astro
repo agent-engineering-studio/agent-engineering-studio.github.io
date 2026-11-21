@@ -1,0 +1,21 @@
+---
+/*
+ * en/support.astro — Redirect to the "Support the lab" section of the EN home.
+ * Mirrors src/pages/support.astro.
+ */
+const target = '/en/#support';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Agent Engineering Studio</title>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href="https://agentengineering.it/en/" />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <p>Redirecting. If your browser doesn't redirect automatically, <a href={target}>go to the home page</a>.</p>
+  </body>
+</html>

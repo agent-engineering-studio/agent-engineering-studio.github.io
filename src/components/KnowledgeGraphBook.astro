@@ -1,0 +1,1147 @@
+---
+/*
+ * KnowledgeGraphBook.astro — Pagina dedicata al libro
+ * "AI che Ragiona" / "AI that Reasons", in italiano e in inglese.
+ * Usata da src/pages/books/knowledge-graph.astro (IT) e
+ * src/pages/en/books/knowledge-graph.astro (EN).
+ *
+ * Formati: Paperback, Hardcover, eBook Kindle
+ */
+
+import Navbar from './Navbar.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from './Footer.astro';
+import { AMAZON_BOOK_URL } from '../links';
+
+interface Props {
+  lang?: 'it' | 'en';
+}
+const { lang = 'it' } = Astro.props;
+
+const GITHUB_DISCUSSIONS_URL = 'https://github.com/orgs/agent-engineering-studio/discussions';
+
+const COMING_SOON = false;
+
+const stack = ['Python 3.11+', 'Neo4j', 'Redis Stack', 'Ollama (qwen2.5:14b + nomic-embed-text)', 'FastMCP', 'Microsoft Agent Framework', 'FastAPI', 'Next.js', 'Docker Compose'];
+
+const content = {
+  it: {
+    metaTitle: 'AI che Ragiona — Agent Engineering Studio',
+    metaDesc: 'Oltre 400 pagine di codice Python eseguibile per costruire Knowledge Graph enterprise, pipeline Graph-RAG ibride, server MCP e crew di agenti orchestrati con Microsoft Agent Framework. Dalla teoria al deployment, senza scorciatoie.',
+    canonical: 'https://agentengineering.it/books/knowledge-graph',
+    altLangHref: '/en/books/knowledge-graph',
+    amazonUrl: AMAZON_BOOK_URL.it,
+    cover: '/covers/ai-che-ragiona-it-ebook-cover.jpg',
+    badge: 'Edizione 2026',
+    title: 'AI che Ragiona',
+    titleAccent: 'Da sviluppatore a Solution Architect',
+    subtitle: 'Knowledge Graph, Graph-RAG e Agenti Multi-Modello in Produzione con Python, Neo4j, MCP e Microsoft Agent Framework.',
+    by: 'di',
+    coverAlt: 'Copertina: AI che Ragiona',
+    soonTitle: 'Presto disponibile su Amazon',
+    soonDesc: 'Il libro è in revisione editoriale. I link di acquisto saranno attivati subito dopo la pubblicazione.',
+    aboutTitle: 'Di cosa parla il libro',
+    aboutLead: 'Le chatbot rispondono. I sistemi che ragionano decidono.',
+    aboutBody: [
+      "La maggior parte dei libri sull'AI si ferma al notebook Jupyter. <strong>Questo no.</strong> Ogni riga di codice è stata scritta, eseguita e messa in produzione — puoi farlo anche tu, sulla tua macchina, stasera. Fai <code>git clone</code> del repository e nel giro di un caffè avrai il tuo primo Knowledge Graph in esecuzione.",
+      "<strong>AI che Ragiona</strong> colma il divario fra teoria accademica e sistema enterprise che paga le bollette. Oltre <strong>400 pagine</strong> di codice Python eseguibile, architetture di produzione e uno <strong>studio di caso end-to-end da 18 mesi</strong>.",
+      "Dai <strong>Knowledge Graph</strong> — la stessa tecnologia dietro al grafo Google da 1,6 trilioni di triple — alle due evoluzioni che nel 2025-2026 ridefiniscono come l'AI viene progettata e venduta: il <strong>Model Context Protocol</strong> di Anthropic e l'<strong>orchestrazione multi-agente</strong> con Microsoft Agent Framework. Tutto eseguibile con un singolo <code>docker compose up</code>.",
+      "Pensato per <strong>developer Python, AI/ML engineer e architect</strong> che cercano codice completo e pattern di produzione, ma anche per <strong>chi affianca team e progetti AI</strong> e cerca casi d'uso concreti per settore.",
+    ],
+    tocTitle: 'Struttura del libro',
+    partLabel: 'Parte',
+    chapLabel: 'Cap.',
+    parts: [
+      { number: 'I', title: 'Fondamenti dei Knowledge Graph', chapters: '1-4', desc: 'Teoria KG, modelli dati (RDF, Property Graph), query Cypher/SPARQL, ontologie OWL e ragionamento' },
+      { number: 'II', title: 'Costruire con Python', chapters: '5-12', desc: 'Quick Start in 30 min, architettura, pipeline ingestion, Docker Compose, Pydantic, Vector Store' },
+      { number: 'III-V', title: 'RAG, KGC e Pipeline', chapters: '13-20', desc: 'Graph-RAG vs RAG classico, ricerca ibrida, KG Completion, pipeline da testo, metriche qualità' },
+      { number: 'VI', title: 'Model Context Protocol', chapters: '21-24', desc: 'Architettura MCP, server per KG, tool custom, sicurezza enterprise, debug' },
+      { number: 'VII+', title: 'Agent AI e Business', chapters: '25-32', desc: '7 agenti orchestrati con MAF, confronto framework, pricing, ROI, deployment cloud enterprise' },
+    ],
+    stackTitle: 'Stack Tecnologico',
+    highlights: [
+      { icon: '📖', label: '400+ pagine full color' },
+      { icon: '💻', label: 'Codice Python eseguibile' },
+      { icon: '🏗️', label: 'Architetture enterprise reali' },
+      { icon: '🤖', label: '7 agenti orchestrati con MAF' },
+      { icon: '🔗', label: 'MCP + Knowledge Graph' },
+      { icon: '📊', label: 'Caso reale end-to-end di 18 mesi' },
+    ],
+    formatsTitle: 'Formati disponibili',
+    formats: [
+      { icon: '📖', title: 'Paperback', details: ['7" × 10" — Full color', 'Carta bianca premium, copertina lucida'] },
+      { icon: '📕', title: 'Hardcover', details: ['7" × 10" — Full color', 'Copertina rigida, dorso stampato'] },
+      { icon: '📱', title: 'eBook Kindle', details: ['EPUB 3.0 — Reflowable', 'TOC navigabile, 35 figure'] },
+    ],
+    audienceTitle: 'Per chi è',
+    audiences: [
+      {
+        title: 'Developer & Engineer',
+        desc: 'Per chi scrive codice e progetta architetture.',
+        items: ['Developer Python', 'AI/ML engineer', 'Software architect', 'Data engineer e platform engineer'],
+      },
+      {
+        title: 'Decision maker',
+        desc: 'Per chi decide cosa portare in produzione e con quale budget.',
+        items: ['CTO e Head of Engineering', 'Product Manager e AI Product Lead', 'Consulenti AI e founder', 'Innovation manager enterprise'],
+      },
+    ],
+    bonusTitle: 'Bonus inclusi',
+    bonusIntro: "Il libro non finisce all'ultima pagina. Ogni copia include risorse pratiche per accelerare il lavoro su progetti reali.",
+    bonuses: [
+      { icon: '📦', label: 'Repository GitHub con i 5 moduli del progetto' },
+      { icon: '📓', label: 'Jupyter Notebook per ogni capitolo' },
+      { icon: '🐳', label: "Docker Compose pronto all'uso" },
+      { icon: '📚', label: 'Glossario, Bibliografia, Cheat Sheet, Troubleshooting' },
+      { icon: '📝', label: 'Template pronti: ADR, SOW, business case, RFP' },
+      { icon: '🇪🇺', label: 'Sezione compliance: GDPR, EU AI Act, ISO/IEC 42001' },
+    ],
+    authorTitle: "L'autore",
+    authorBio: "Sviluppatore software da oltre vent'anni. In <strong>Hevolus</strong> guida la AI Engineering Unit. Il suo lavoro ha portato XR Copilot powered by Microsoft AI Foundry a integrare Knowledge Graph, GenAI ed Extended Reality in soluzioni enterprise.",
+    authorQuote: "\"Wikipedia spiega cos'è un Knowledge Graph. YouTube mostra come fare una demo. Questo libro risponde alla domanda diversa, e molto più difficile: come si costruisce un sistema che funziona davvero in produzione e che qualcuno è disposto a pagare per usarlo.\"",
+    communityTitle: 'Unisciti alla discussione',
+    communityDesc: "Domande sul codice, idee, segnalazioni, casi d'uso reali: la conversazione continua sulle GitHub Discussions di Agent Engineering Studio.",
+  },
+  en: {
+    metaTitle: 'AI that Reasons — Agent Engineering Studio',
+    metaDesc: 'Over 400 pages of runnable Python code to build enterprise Knowledge Graphs, hybrid Graph-RAG pipelines, MCP servers and agent crews orchestrated with Microsoft Agent Framework. From theory to deployment, no shortcuts.',
+    canonical: 'https://agentengineering.it/en/books/knowledge-graph',
+    altLangHref: '/books/knowledge-graph',
+    amazonUrl: AMAZON_BOOK_URL.en,
+    cover: '/covers/ai-che-ragiona-en-ebook-cover.jpg',
+    badge: '2026 Edition',
+    title: 'AI that Reasons',
+    titleAccent: 'From Developer to Solution Architect',
+    subtitle: 'Knowledge Graphs, Graph-RAG and Multi-Model Agents in Production with Python, Neo4j, MCP and Microsoft Agent Framework.',
+    by: 'by',
+    coverAlt: 'Cover: AI that Reasons',
+    soonTitle: 'Coming soon on Amazon',
+    soonDesc: 'The book is in editorial review. Purchase links will go live right after publication.',
+    aboutTitle: 'What the book is about',
+    aboutLead: 'Chatbots reply. Systems that reason decide.',
+    aboutBody: [
+      "Most AI books stop at the Jupyter notebook. <strong>This one doesn't.</strong> Every line of code has been written, run and shipped to production — and you can do the same, on your own machine, tonight. Run <code>git clone</code> on the repository and within a coffee break your first Knowledge Graph will be up and running.",
+      "<strong>AI that Reasons</strong> bridges the gap between academic theory and the enterprise system that pays the bills. Over <strong>400 pages</strong> of runnable Python code, production architectures and an <strong>18-month end-to-end case study</strong>.",
+      "From <strong>Knowledge Graphs</strong> — the same technology behind Google's 1.6-trillion-triple graph — to the two shifts redefining how AI is designed and sold in 2025-2026: Anthropic's <strong>Model Context Protocol</strong> and <strong>multi-agent orchestration</strong> with Microsoft Agent Framework. All of it runs with a single <code>docker compose up</code>.",
+      "Written for <strong>Python developers, AI/ML engineers and architects</strong> looking for complete code and production patterns, and also for <strong>people working alongside AI teams and projects</strong> who want concrete, industry-specific use cases.",
+    ],
+    tocTitle: 'Book structure',
+    partLabel: 'Part',
+    chapLabel: 'Ch.',
+    parts: [
+      { number: 'I', title: 'Knowledge Graph Foundations', chapters: '1-4', desc: 'KG theory, data models (RDF, Property Graph), Cypher/SPARQL queries, OWL ontologies and reasoning' },
+      { number: 'II', title: 'Building with Python', chapters: '5-12', desc: '30-minute Quick Start, architecture, ingestion pipelines, Docker Compose, Pydantic, Vector Store' },
+      { number: 'III-V', title: 'RAG, KGC and Pipelines', chapters: '13-20', desc: 'Graph-RAG vs classic RAG, hybrid search, KG Completion, text-to-graph pipelines, quality metrics' },
+      { number: 'VI', title: 'Model Context Protocol', chapters: '21-24', desc: 'MCP architecture, KG servers, custom tools, enterprise security, debugging' },
+      { number: 'VII+', title: 'AI Agents and Business', chapters: '25-32', desc: '7 agents orchestrated with MAF, framework comparison, pricing, ROI, enterprise cloud deployment' },
+    ],
+    stackTitle: 'Tech Stack',
+    highlights: [
+      { icon: '📖', label: '400+ full-color pages' },
+      { icon: '💻', label: 'Runnable Python code' },
+      { icon: '🏗️', label: 'Real enterprise architectures' },
+      { icon: '🤖', label: '7 agents orchestrated with MAF' },
+      { icon: '🔗', label: 'MCP + Knowledge Graph' },
+      { icon: '📊', label: '18-month end-to-end real case' },
+    ],
+    formatsTitle: 'Available formats',
+    formats: [
+      { icon: '📖', title: 'Paperback', details: ['7" × 10" — Full color', 'Premium white paper, glossy cover'] },
+      { icon: '📕', title: 'Hardcover', details: ['7" × 10" — Full color', 'Hard cover, printed spine'] },
+      { icon: '📱', title: 'Kindle eBook', details: ['EPUB 3.0 — Reflowable', 'Navigable TOC, 35 figures'] },
+    ],
+    audienceTitle: "Who it's for",
+    audiences: [
+      {
+        title: 'Developers & Engineers',
+        desc: 'For those who write code and design architectures.',
+        items: ['Python developers', 'AI/ML engineers', 'Software architects', 'Data and platform engineers'],
+      },
+      {
+        title: 'Decision makers',
+        desc: 'For those who decide what goes to production, and on what budget.',
+        items: ['CTOs and Heads of Engineering', 'Product Managers and AI Product Leads', 'AI consultants and founders', 'Enterprise innovation managers'],
+      },
+    ],
+    bonusTitle: 'Included bonuses',
+    bonusIntro: "The book doesn't end on the last page. Every copy includes hands-on resources to speed up work on real projects.",
+    bonuses: [
+      { icon: '📦', label: 'GitHub repository with the 5 project modules' },
+      { icon: '📓', label: 'A Jupyter Notebook for every chapter' },
+      { icon: '🐳', label: 'Ready-to-use Docker Compose' },
+      { icon: '📚', label: 'Glossary, Bibliography, Cheat Sheet, Troubleshooting' },
+      { icon: '📝', label: 'Ready-made templates: ADR, SOW, business case, RFP' },
+      { icon: '🇪🇺', label: 'Compliance section: GDPR, EU AI Act, ISO/IEC 42001' },
+    ],
+    authorTitle: 'The author',
+    authorBio: 'Software developer for over twenty years. At <strong>Hevolus</strong> he leads the AI Engineering Unit. His work brought XR Copilot powered by Microsoft AI Foundry to integrate Knowledge Graphs, GenAI and Extended Reality into enterprise solutions.',
+    authorQuote: '"Wikipedia explains what a Knowledge Graph is. YouTube shows you how to build a demo. This book answers a different, much harder question: how do you build a system that actually works in production, and that someone is willing to pay to use."',
+    communityTitle: 'Join the discussion',
+    communityDesc: 'Questions about the code, ideas, bug reports, real use cases: the conversation continues on the Agent Engineering Studio GitHub Discussions.',
+  },
+}[lang];
+
+const t = content;
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.metaTitle}
+  description={t.metaDesc}
+  canonical={t.canonical}
+  altLangHref={t.altLangHref}
+>
+  <Navbar lang={lang} active="libri" altLangHref={t.altLangHref} />
+  <main>
+    <!-- Hero -->
+    <section class="book-hero">
+      <div class="container">
+
+        <div class="book-hero__layout">
+          <div class="book-hero__info">
+            <span class="badge-new">{t.badge}</span>
+            <h1 class="book-hero__title">
+              {t.title}<br/>
+              <span class="accent">{t.titleAccent}</span>
+            </h1>
+            <p class="book-hero__subtitle">{t.subtitle}</p>
+            <p class="book-hero__author">
+              {t.by} <strong>Giuseppe Zileni</strong>
+            </p>
+
+            {/* Amazon CTA — disabilitata finché il libro è in revisione */}
+            {COMING_SOON ? (
+              <div class="coming-soon-banner" role="status" aria-live="polite">
+                <span class="coming-soon-banner__icon" aria-hidden="true">⏳</span>
+                <div class="coming-soon-banner__body">
+                  <strong class="coming-soon-banner__title">{t.soonTitle}</strong>
+                  <span class="coming-soon-banner__desc">{t.soonDesc}</span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div class="book-hero__badge-row">
+                  <a
+                    href={t.amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Available at Amazon"
+                  >
+                    <img
+                      src="/badges/available_at_amazon_en_vertical_wht.png"
+                      alt="Available at Amazon"
+                      class="amazon-badge-img"
+                      width="220"
+                      height="106"
+                      loading="eager"
+                    />
+                  </a>
+                </div>
+                <p class="trademark">
+                  Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
+                </p>
+              </>
+            )}
+          </div>
+
+          <!-- Book cover — real image -->
+          <div class="book-hero__cover">
+            <div class="cover-3d">
+              <img
+                src={t.cover}
+                alt={t.coverAlt}
+                class="cover-3d__img"
+                width="320"
+                height="512"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="highlights">
+      <div class="container">
+        <div class="highlights__grid">
+          {t.highlights.map((h) => (
+            <div class="highlight-item">
+              <span class="highlight-item__icon" aria-hidden="true">{h.icon}</span>
+              <span class="highlight-item__label">{h.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section class="description">
+      <div class="container">
+        <h2 class="section-title">{t.aboutTitle}</h2>
+        <div class="description__content">
+          <p class="lead">
+            <em>{t.aboutLead}</em>
+          </p>
+          {t.aboutBody.map((p) => <p set:html={p} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Table of contents -->
+    <section class="toc">
+      <div class="container">
+        <h2 class="section-title">{t.tocTitle}</h2>
+        <div class="toc__grid">
+          {t.parts.map((part) => (
+            <div class="toc-card">
+              <div class="toc-card__header">
+                <span class="toc-card__number">{t.partLabel} {part.number}</span>
+                <span class="toc-card__chapters">{t.chapLabel} {part.chapters}</span>
+              </div>
+              <h3 class="toc-card__title">{part.title}</h3>
+              <p class="toc-card__desc">{part.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section class="tech-stack">
+      <div class="container">
+        <h2 class="section-title">{t.stackTitle}</h2>
+        <div class="stack-tags">
+          {stack.map((tech) => (
+            <span class="stack-tag">{tech}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Formats -->
+    <section class="formats">
+      <div class="container">
+        <h2 class="section-title">{t.formatsTitle}</h2>
+        <div class="formats__grid">
+          {t.formats.map((fmt) => (
+            <div class="format-card">
+              <span class="format-card__icon" aria-hidden="true">{fmt.icon}</span>
+              <h3 class="format-card__title">{fmt.title}</h3>
+              {fmt.details.map((d) => (
+                <p class="format-card__detail">{d}</p>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Final CTA — disabilitato finché il libro è in revisione */}
+        <div class="formats__cta">
+          {COMING_SOON ? (
+            <div class="coming-soon-banner coming-soon-banner--lg" role="status" aria-live="polite">
+              <span class="coming-soon-banner__icon" aria-hidden="true">⏳</span>
+              <div class="coming-soon-banner__body">
+                <strong class="coming-soon-banner__title">{t.soonTitle}</strong>
+                <span class="coming-soon-banner__desc">{t.soonDesc}</span>
+              </div>
+            </div>
+          ) : (
+            <>
+              <a
+                href={t.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Available at Amazon"
+              >
+                <img
+                  src="/badges/available_at_amazon_en_vertical_wht.png"
+                  alt="Available at Amazon"
+                  class="amazon-badge-img amazon-badge-img--lg"
+                  width="260"
+                  height="125"
+                  loading="lazy"
+                />
+              </a>
+              <p class="trademark">
+                Amazon's trademark is used under license from Amazon.com, Inc. or its affiliates.
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- Audience -->
+    <section class="audience">
+      <div class="container">
+        <h2 class="section-title">{t.audienceTitle}</h2>
+        <div class="audience__grid">
+          {t.audiences.map((aud) => (
+            <div class="audience-card">
+              <h3 class="audience-card__title">{aud.title}</h3>
+              <p class="audience-card__desc">{aud.desc}</p>
+              <ul class="audience-card__list">
+                {aud.items.map((it) => (
+                  <li>{it}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Bonus -->
+    <section class="bonuses">
+      <div class="container">
+        <h2 class="section-title">{t.bonusTitle}</h2>
+        <p class="bonuses__intro">{t.bonusIntro}</p>
+        <div class="bonuses__grid">
+          {t.bonuses.map((b) => (
+            <div class="bonus-item">
+              <span class="bonus-item__icon" aria-hidden="true">{b.icon}</span>
+              <span class="bonus-item__label">{b.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Autore -->
+    <section class="author">
+      <div class="container">
+        <h2 class="section-title">{t.authorTitle}</h2>
+        <div class="author__card">
+          <div class="author__avatar" aria-hidden="true">GZ</div>
+          <div class="author__body">
+            <h3 class="author__name">Giuseppe Zileni</h3>
+            <p class="author__bio" set:html={t.authorBio} />
+            <p class="author__quote">
+              <em>{t.authorQuote}</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community / Discussions -->
+    <section class="community">
+      <div class="container">
+        <a
+          href={GITHUB_DISCUSSIONS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="community__card"
+        >
+          <div class="community__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+          </div>
+          <div class="community__body">
+            <span class="community__eyebrow">Community</span>
+            <h3 class="community__title">{t.communityTitle}</h3>
+            <p class="community__desc">{t.communityDesc}</p>
+          </div>
+          <div class="community__arrow" aria-hidden="true">→</div>
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  /* ── Back link ── */
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+    transition: color var(--transition-fast);
+  }
+  .back-link:hover { color: var(--color-accent); }
+
+  /* ── Hero ── */
+  .book-hero {
+    padding: var(--space-3xl) 0 var(--space-2xl);
+  }
+
+  .book-hero__layout {
+    display: flex;
+    gap: var(--space-3xl);
+    align-items: flex-start;
+  }
+
+  .book-hero__info {
+    flex: 1;
+  }
+
+  .badge-new {
+    display: inline-block;
+    padding: 0.2em 0.8em;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border-radius: 999px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .book-hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .accent { color: var(--color-accent); }
+
+  .book-hero__subtitle {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 560px;
+    margin-bottom: var(--space-md);
+  }
+
+  .book-hero__author {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .book-hero__author strong {
+    color: var(--color-text);
+  }
+
+  /* ── Amazon CTA ── */
+  .book-hero__badge-row {
+    margin-bottom: var(--space-sm);
+  }
+
+  .amazon-badge-img {
+    height: auto;
+    width: 220px;
+    max-width: 100%;
+    display: block;
+    transition: transform var(--transition-fast), filter var(--transition-fast);
+  }
+
+  .amazon-badge-img:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 6px 20px rgba(255, 153, 0, 0.35));
+  }
+
+  .amazon-badge-img--lg {
+    width: 260px;
+  }
+
+  .trademark {
+    font-size: 0.6rem;
+    color: var(--color-text-muted);
+    opacity: 0.4;
+  }
+
+  /* ── Coming soon banner ── */
+  .coming-soon-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background:
+      linear-gradient(135deg, rgba(255, 153, 0, 0.10), rgba(255, 153, 0, 0.04));
+    border: 1px solid rgba(255, 153, 0, 0.35);
+    border-radius: var(--border-radius-lg);
+    max-width: 520px;
+    margin-bottom: var(--space-md);
+  }
+
+  .coming-soon-banner--lg {
+    margin: 0 auto;
+  }
+
+  .coming-soon-banner__icon {
+    font-size: 1.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .coming-soon-banner__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: left;
+  }
+
+  .coming-soon-banner__title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ff9900;
+    letter-spacing: 0.02em;
+  }
+
+  .coming-soon-banner__desc {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Cover 3D ── */
+  .book-hero__cover {
+    flex-shrink: 0;
+  }
+
+  .cover-3d {
+    width: 260px;
+    perspective: 900px;
+  }
+
+  .cover-3d__img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow:
+      -4px 0 0 rgba(33, 150, 243, 0.15),
+      -6px 1px 0 rgba(33, 150, 243, 0.08),
+      0 8px 40px rgba(0, 0, 0, 0.5),
+      0 0 60px rgba(33, 150, 243, 0.08);
+    transform: rotateY(-6deg);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .cover-3d:hover .cover-3d__img {
+    transform: rotateY(-2deg) translateY(-4px);
+    box-shadow:
+      -3px 0 0 rgba(33, 150, 243, 0.2),
+      -5px 1px 0 rgba(33, 150, 243, 0.12),
+      0 12px 48px rgba(0, 0, 0, 0.6),
+      0 0 80px rgba(33, 150, 243, 0.12);
+  }
+
+  /* ── Highlights ── */
+  .highlights {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .highlights__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .highlight-item__icon { font-size: 1.1rem; }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  /* ── Description ── */
+  .description {
+    padding: var(--space-3xl) 0;
+  }
+
+  .description__content {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .description__content p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    text-align: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .description__content p.lead {
+    font-size: 1.15rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
+  }
+
+  .description__content p.lead em {
+    background: linear-gradient(90deg, var(--color-accent), #9c5bff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+
+  .description__content strong {
+    color: var(--color-text);
+  }
+
+  .description__content em {
+    color: var(--color-text);
+    font-style: italic;
+  }
+
+  .description__content code {
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 0.85em;
+    padding: 0.1em 0.4em;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-accent);
+  }
+
+  /* ── TOC ── */
+  .toc {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .toc__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .toc-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-lg);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .toc-card:hover {
+    border-color: rgba(33,150,243,0.3);
+    box-shadow: 0 0 16px var(--color-accent-glow);
+  }
+
+  .toc-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-xs);
+  }
+
+  .toc-card__number {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .toc-card__chapters {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .toc-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .toc-card__desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Stack ── */
+  .tech-stack {
+    padding: var(--space-2xl) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  .stack-tag {
+    padding: 0.3em 0.9em;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    transition: border-color var(--transition-base);
+  }
+
+  .stack-tag:hover {
+    border-color: rgba(33,150,243,0.3);
+    color: var(--color-accent);
+  }
+
+  /* ── Formats ── */
+  .formats {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .formats__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    max-width: 720px;
+    margin: 0 auto var(--space-2xl);
+  }
+
+  .format-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  .format-card__icon { font-size: 2rem; display: block; margin-bottom: var(--space-sm); }
+  .format-card__title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: var(--space-xs); }
+  .format-card__detail { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5; }
+
+  .formats__cta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  /* ── Audience ── */
+  .audience {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .audience__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .audience-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-lg);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .audience-card:hover {
+    border-color: rgba(33, 150, 243, 0.3);
+    box-shadow: 0 0 16px var(--color-accent-glow);
+  }
+
+  .audience-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .audience-card__desc {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+  }
+
+  .audience-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .audience-card__list li {
+    padding: 0.35rem 0;
+    color: var(--color-text);
+    font-size: 0.88rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .audience-card__list li::before {
+    content: '→';
+    color: var(--color-accent);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  /* ── Bonuses ── */
+  .bonuses {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .bonuses__intro {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto var(--space-xl);
+    line-height: 1.6;
+  }
+
+  .bonuses__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .bonus-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    padding: var(--space-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: border-color var(--transition-base);
+  }
+
+  .bonus-item:hover {
+    border-color: rgba(33, 150, 243, 0.3);
+  }
+
+  .bonus-item__icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .bonus-item__label {
+    font-size: 0.88rem;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  /* ── Author ── */
+  .author {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .author__card {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+  }
+
+  .author__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-accent), #9c5bff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-bg);
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .author__name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .author__bio {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .author__bio strong {
+    color: var(--color-text);
+  }
+
+  .author__quote {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--color-accent);
+    font-style: italic;
+  }
+
+  /* ── Community / Discussions ── */
+  .community {
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .community__card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-xl);
+    background:
+      radial-gradient(circle at top left, rgba(33, 150, 243, 0.12), transparent 60%),
+      radial-gradient(circle at bottom right, rgba(156, 91, 255, 0.12), transparent 60%),
+      var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  .community__card:hover {
+    border-color: rgba(33, 150, 243, 0.4);
+    box-shadow: 0 0 28px var(--color-accent-glow);
+    transform: translateY(-2px);
+  }
+
+  .community__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    color: var(--color-text);
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.18), rgba(156, 91, 255, 0.18));
+    border: 1px solid rgba(33, 150, 243, 0.35);
+    transition: transform var(--transition-base);
+  }
+
+  .community__card:hover .community__icon {
+    transform: rotate(-6deg) scale(1.05);
+  }
+
+  .community__body {
+    flex: 1;
+  }
+
+  .community__eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .community__title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .community__desc {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  .community__arrow {
+    flex-shrink: 0;
+    font-size: 1.4rem;
+    color: var(--color-accent);
+    transition: transform var(--transition-base);
+  }
+
+  .community__card:hover .community__arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .book-hero__layout {
+      flex-direction: column-reverse;
+      align-items: center;
+      text-align: center;
+    }
+    .book-hero__subtitle { margin-left: auto; margin-right: auto; }
+    .book-hero__badge-row { display: flex; justify-content: center; }
+    .coming-soon-banner { margin-left: auto; margin-right: auto; }
+    .cover-3d { width: 200px; }
+    .formats__grid { grid-template-columns: 1fr; }
+
+    .community__card {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .community__arrow { display: none; }
+
+    .audience__grid { grid-template-columns: 1fr; }
+    .author__card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .author__avatar { margin: 0 auto; }
+    .author__quote {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 2px solid var(--color-accent);
+      padding-top: var(--space-md);
+    }
+  }
+</style>
