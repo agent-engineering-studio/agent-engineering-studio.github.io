@@ -88,11 +88,23 @@ Risponde: la velocità della cella è +145,2 mm/anno; la mediana entro 5 chilome
 
 Sopra questo ci sono quattro usi.
 
-**Una pagina per il sito del Comune.** Il progetto include una pagina stretta, in italiano e in inglese, con il kit grafico della Pubblica Amministrazione. Si installa con Docker, si imposta con il nome e le coordinate del Comune e si può incorporare nel sito dell'ente. Mostra la mappa della velocità verticale e, per il punto cliccato, quanto si muove, in che direzione, quanto fidarsi e fino a quando. Dove manca il dato, dice quanto è misurato intorno. Non è un sistema di allerta, e lo scrive.
+**Una pagina per il sito del Comune.** Il progetto include una pagina pronta, in italiano e in inglese, con il kit grafico della Pubblica Amministrazione. Si installa con Docker e si imposta con il nome e le coordinate del Comune. Al primo avvio scarica i dati dell'area e i confini dell'ISTAT, e intanto mostra una barra di avanzamento; le volte dopo si apre subito. Accanto alla mappa dice a che cosa serve: che cosa dicono i dati aperti del territorio, quanto fidarsi, e dove mancano.
 
-![La pagina per il Comune di Pozzuoli: la mappa della velocità verticale e la scheda del Rione Terra](https://raw.githubusercontent.com/agent-engineering-studio/egms-client/main/docs/images/ui-pozzuoli.jpg)
+Si clicca un punto e sulla mappa si apre una scheda. Vicino al Rione Terra dice «sale di 153,6 mm/anno», con una freccia. Un grafico lo mette accanto alla mediana dei 5 chilometri intorno, che è +28,7: quel punto sale più di cinque volte più in fretta dei dintorni. Una barra dice quanto fidarsi, un'altra il periodo misurato. Sotto ci sono le altre fonti del posto: la pioggia del radar della Protezione Civile, la soglia di pioggia per le frane, un pluviometro con la sua linea.
 
-*La pagina aperta sul Comune di Pozzuoli. Dati: EGMS, Copernicus Land Monitoring Service, © Unione europea.*
+![La pagina per il Comune di Pozzuoli: la scheda di un punto vicino al Rione Terra, che sale di 153,6 mm/anno, e i quadrati numerati dove il suolo si muove di più](https://raw.githubusercontent.com/agent-engineering-studio/egms-client/main/docs/images/ui-territorio.jpg)
+
+*La pagina aperta sul Comune di Pozzuoli. Dati: EGMS, Copernicus Land Monitoring Service, © Unione europea; confini dei Comuni: ISTAT, CC BY 4.0.*
+
+La pagina numera anche gli otto chilometri quadrati dove il suolo si muove di più. A Pozzuoli il primo sale di 153 millimetri all'anno, in mediana. Sono le zone da seguire con più attenzione. Non è un'allerta, e la pagina lo scrive.
+
+Poi mostra dove i dati mancano. Un chilometro quadrato dove il satellite misura meno di un quarto delle celle è un **buco di dati**, in arancione. Non è un posto pericoloso. È il posto dove il Comune può pubblicare un dato aperto in più: una livellazione, una stazione GNSS, un sensore, un rilievo. Il mare non conta, perché l'EGMS lì non misura mai: lo tolgono i confini dei Comuni dell'ISTAT. A Pozzuoli i buchi sono 3 chilometri quadrati su 47. Uno è al bordo del cratere degli Astroni, dove il satellite misura l'1% delle celle.
+
+![Un buco di dati al bordo del cratere degli Astroni: la scheda dice che in quel chilometro quadrato il satellite misura l'1% delle celle, e come aggiungere una fonte](https://raw.githubusercontent.com/agent-engineering-studio/egms-client/main/docs/images/ui-buco-di-dati.jpg)
+
+*Un buco di dati nel Comune di Pozzuoli. Dati: EGMS, Copernicus Land Monitoring Service, © Unione europea; confini dei Comuni: ISTAT, CC BY 4.0.*
+
+C'è anche [un video di trenta secondi](https://agentengineering.it/egms-client/images/ui-territorio.mp4) della pagina.
 
 **Statistiche per un modello.** Un modello di rischio non lavora su celle da 100 metri, ma su quadrati più grandi. La libreria fa le statistiche per quadrato con tre regole: dove manca il dato resta vuoto, i segni si tengono, ogni numero usa le stesse celle. Un test verifica che le mediane siano quelle di Limen, sulle stesse celle.
 
@@ -126,4 +138,4 @@ La rubrica continua con gli incendi e le alluvioni.
 
 **Partecipa:** conosci un luogo dove il terreno si muove, o uno fermo che l'EGMS vede muoversi? Raccontalo nelle [discussioni su GitHub](https://github.com/orgs/agent-engineering-studio/discussions).
 
-*Dati: European Ground Motion Service (EGMS), Copernicus Land Monitoring Service, © Unione europea; contiene informazioni modificate del Copernicus Land Monitoring Service. Misure GNSS del Rione Terra: INGV, Osservatorio Vesuviano. Questo articolo e la libreria non sono affiliati alla Commissione europea, all'Agenzia europea dell'ambiente o all'INGV.*
+*Dati: European Ground Motion Service (EGMS), Copernicus Land Monitoring Service, © Unione europea; contiene informazioni modificate del Copernicus Land Monitoring Service. Misure GNSS del Rione Terra: INGV, Osservatorio Vesuviano. Confini dei Comuni: ISTAT, CC BY 4.0. Questo articolo e la libreria non sono affiliati alla Commissione europea, all'Agenzia europea dell'ambiente o all'INGV.*

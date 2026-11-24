@@ -89,11 +89,23 @@ It answers: the velocity of the cell is +145.2 mm/year; the median within 5 kilo
 
 On top of this there are four uses.
 
-**A page for the site of a municipality.** The project includes a narrow page, in Italian and English, with the design kit of the Italian public administration. It installs with Docker, is set up with the name and coordinates of the municipality, and can be embedded in its site. It shows the map of vertical velocity and, for the point clicked, how much it moves, which way, how far to trust it and until when. Where the data is missing, it says how much is measured around. It is not an alert system, and it says so.
+**A page for the site of a municipality.** The project includes a ready page, in Italian and English, with the design kit of the Italian public administration. It installs with Docker and is set up with the name and coordinates of the municipality. At the first start it downloads the data of the area and the ISTAT boundaries, and shows a progress bar meanwhile; afterwards it opens at once. Next to the map it says what it is for: what the open data of the area say, how far to trust them, and where they are missing.
 
-![The page for the Comune di Pozzuoli: the map of vertical velocity and the card of Rione Terra](https://raw.githubusercontent.com/agent-engineering-studio/egms-client/main/docs/images/ui-pozzuoli.jpg)
+Click a point and a card opens on the map. Near Rione Terra it says "rises by 153.6 mm/year", with an arrow. A chart puts it next to the median of the 5 kilometres around, which is +28.7: that point rises more than five times faster than its surroundings. A bar says how far to trust it, another the period measured. Below are the other sources of the place: the radar rain of the Protezione Civile, the rain threshold for landslides, a rain gauge with its line.
 
-*The page open on the Comune di Pozzuoli. Data: EGMS, Copernicus Land Monitoring Service, © European Union.*
+![The page for the Comune di Pozzuoli: the card of a point near Rione Terra, rising by 153.6 mm/year, and the numbered squares where the ground moves most](https://raw.githubusercontent.com/agent-engineering-studio/egms-client/main/docs/images/ui-territorio.jpg)
+
+*The page open on the Comune di Pozzuoli. Data: EGMS, Copernicus Land Monitoring Service, © European Union; boundaries of the municipalities: ISTAT, CC BY 4.0.*
+
+The page also numbers the eight square kilometres where the ground moves most. At Pozzuoli the first rises by 153 millimetres a year, as a median. They are the zones to follow most closely. It is not an alert, and the page says so.
+
+Then it shows where data are missing. A square kilometre where the satellite measures less than a quarter of the cells is a **data gap**, in amber. It is not a dangerous place. It is where the municipality can publish one more open dataset: a levelling, a GNSS station, a sensor, a survey. The sea does not count, because EGMS never measures there: the ISTAT boundaries of the municipalities take it out. At Pozzuoli the gaps are 3 square kilometres out of 47. One is on the edge of the Astroni crater, where the satellite measures 1% of the cells.
+
+![A data gap on the edge of the Astroni crater: the card says the satellite measures 1% of the cells of that square kilometre, and how to add a source](https://raw.githubusercontent.com/agent-engineering-studio/egms-client/main/docs/images/ui-buco-di-dati.jpg)
+
+*A data gap in the Comune di Pozzuoli. Data: EGMS, Copernicus Land Monitoring Service, © European Union; boundaries of the municipalities: ISTAT, CC BY 4.0.*
+
+There is also [a thirty-second video](https://agentengineering.it/egms-client/images/ui-territorio.mp4) of the page.
 
 **Statistics for a model.** A risk model does not work on 100-metre cells but on larger squares. The library computes statistics per square with three rules: where the data is missing it stays empty, signs are kept, every number uses the same cells. A test checks that the medians are Limen's, on the same cells.
 
@@ -127,4 +139,4 @@ The series goes on with wildfires and floods.
 
 **Join in:** do you know a place where the ground moves, or a still one that EGMS sees moving? Tell us in the [GitHub discussions](https://github.com/orgs/agent-engineering-studio/discussions).
 
-*Data: European Ground Motion Service (EGMS), Copernicus Land Monitoring Service, © European Union; contains modified Copernicus Land Monitoring Service information. GNSS measurements at Rione Terra: INGV, Osservatorio Vesuviano. This article and the library are not affiliated with the European Commission, the European Environment Agency or INGV.*
+*Data: European Ground Motion Service (EGMS), Copernicus Land Monitoring Service, © European Union; contains modified Copernicus Land Monitoring Service information. GNSS measurements at Rione Terra: INGV, Osservatorio Vesuviano. Boundaries of the municipalities: ISTAT, CC BY 4.0. This article and the library are not affiliated with the European Commission, the European Environment Agency or INGV.*
