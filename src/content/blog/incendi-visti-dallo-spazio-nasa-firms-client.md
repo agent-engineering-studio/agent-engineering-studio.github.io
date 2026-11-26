@@ -87,7 +87,11 @@ Il progetto include una pagina pronta, in italiano e in inglese, con il kit graf
 
 In alto, sempre visibile, c'è scritto che non è un'allerta. Sotto, che un satellite non vede tutti i fuochi.
 
-<!-- Schermata della pagina: da aggiungere (docs/images/ui-*.jpg in firms-client). -->
+Aperta su Palermo, nella stagione 2023 la pagina conta 46 incendi distinti in 20 giorni. Il più grande è quello del 25 e 26 luglio, arrivato alle case: 84 rilevazioni, su bosco e macchia. Un punto cliccato in quella zona ha affidabilità 1: una rilevazione lì è con ogni probabilità un incendio di vegetazione.
+
+![La pagina impostata su Palermo, stagione 2023: i punti dell'incendio del 25-26 luglio sopra Tommaso Natale, una barra per anno, e l'affidabilità del punto cliccato](https://raw.githubusercontent.com/agent-engineering-studio/firms-client/main/docs/images/ui-comune.jpg)
+
+*La pagina aperta sul Comune di Palermo. Dati: NASA FIRMS; copertura del suolo: ESA WorldCover 2021, CC BY 4.0; mappa: © OpenStreetMap contributors.*
 
 **Statistiche per un modello.** Per ogni cella di una griglia qualunque, anche quella da un chilometro di Limen, la libreria conta i giorni di fuoco, la quota di coltivo sotto di essi e quanto fidarsi del posto. Dove non è mai bruciato la quota resta vuota, non zero: lì non c'è terra *sotto un fuoco* da descrivere.
 

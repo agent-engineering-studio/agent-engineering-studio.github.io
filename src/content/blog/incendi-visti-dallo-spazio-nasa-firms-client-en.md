@@ -88,7 +88,11 @@ The project includes a ready page, in Italian and in English, with the design ki
 
 At the top, always visible, it says it is not an alert. Below, that a satellite does not see every fire.
 
-<!-- Screenshot of the page: to add (docs/images/ui-*.jpg in firms-client). -->
+Set on Palermo, for the 2023 season the page counts 46 separate fires on 20 days. The largest is that of 25 and 26 July, which reached the houses: 84 detections, on woods and scrub. A point clicked in that area has trust 1: a detection there is most likely a vegetation fire.
+
+![The page set on Palermo, 2023 season: the points of the 25-26 July fire above Tommaso Natale, a bar per year, and the trust of the clicked point](https://raw.githubusercontent.com/agent-engineering-studio/firms-client/main/docs/images/ui-comune-en.jpg)
+
+*The page open on the Comune di Palermo. Data: NASA FIRMS; land cover: ESA WorldCover 2021, CC BY 4.0; map: © OpenStreetMap contributors.*
 
 **Statistics for a model.** For each cell of any grid, including Limen's one-kilometre grid, the library counts the fire-days, the share of cropland under them and how far to trust the place. Where nothing ever burnt the share stays empty, not zero: there is no land *under a fire* to describe there.
 
