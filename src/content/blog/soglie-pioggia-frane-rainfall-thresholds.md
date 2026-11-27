@@ -9,7 +9,7 @@ project:
   name: "rainfall-thresholds"
   repo: "https://github.com/agent-engineering-studio/rainfall-thresholds"
   docs: "https://agentengineering.it/rainfall-thresholds/"
-draft: false
+draft: true
 ---
 
 Tra il pomeriggio del 9 e la notte del 10 ottobre 2026, a Melito di Porto Salvo, in Calabria, il radar della Protezione Civile ha misurato 166 millimetri di pioggia in 35 ore. Nella zona di Reggio sono scese frane.

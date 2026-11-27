@@ -9,7 +9,7 @@ project:
   name: "egms-client"
   repo: "https://github.com/agent-engineering-studio/egms-client"
   docs: "https://agentengineering.it/egms-client/"
-draft: false
+draft: true
 ---
 
 A Pozzuoli, al Rione Terra, il suolo sale di **145 millimetri all'anno**. Non è una stima: lo misurano i satelliti europei Sentinel-1, dallo spazio, ogni pochi giorni. Tra il 2020 e la metà del 2025 la stazione dell'INGV al Rione Terra è salita di circa 80 centimetri, e dopo il 2022 ha preso a salire più in fretta.
