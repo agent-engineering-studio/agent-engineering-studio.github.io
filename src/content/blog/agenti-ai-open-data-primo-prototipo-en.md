@@ -4,7 +4,7 @@ description: "A hands-on tutorial to build an AI agent that queries Italian publ
 pubDate: 2026-05-16
 author: "Giuseppe Zileni"
 tags: ["tutorial", "open-data", "ai-agents", "python"]
-draft: true
+draft: false
 lang: "en"
 ---
 
