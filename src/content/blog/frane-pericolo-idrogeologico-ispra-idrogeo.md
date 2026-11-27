@@ -18,6 +18,8 @@ Su quel Comune l'inventario nazionale delle frane ne aveva già censite 213. La 
 
 Questa differenza, tra dove e quando, è il filo di questa seconda puntata. Il dato è dell'ISPRA, è pubblico e gratuito, e racconta il dissesto idrogeologico italiano meglio di quasi ogni altra fonte. Bisogna solo sapere che cosa dice, e che cosa no.
 
+È anche un modo diverso di guardare il territorio. La [prima puntata](/blog/pioggia-radar-protezione-civile-dpc-radar/), sui radar della Protezione Civile, raccontava un monitoraggio in tempo reale: la pioggia misurata ogni cinque minuti, mentre cade, che dice che cosa sta succedendo adesso. L'inventario delle frane e le mappe di pericolo sono l'opposto: cambiano in anni, non in minuti, e dicono dove il suolo è già fragile. Il radar risponde al quando, l'ISPRA al dove. Nessuno dei due, da solo, basta a prevedere una frana.
+
 ## Il dato in breve
 
 L'ISPRA, l'istituto nazionale per l'ambiente, pubblica sulla piattaforma **IdroGEO** tre cose diverse.
@@ -103,7 +105,7 @@ C'è anche un limite da dire: il controllo verifica che un numero esista nei dat
 
 ## I limiti, detti chiaramente
 
-**Non è un sistema di allerta.** La libreria non legge la pioggia. L'allerta ufficiale è il bollettino di criticità del Dipartimento della Protezione Civile e della Regione. La classe di predisposizione dice quanta parte del territorio è in pericolo, non se una frana sta per arrivare.
+**Non è un sistema di allerta.** La libreria non legge la pioggia: quella la misura [dpc-radar](https://agentengineering.it/dpc-radar/), dalla prima puntata. L'allerta ufficiale è il bollettino di criticità del Dipartimento della Protezione Civile e della Regione. La classe di predisposizione dice quanta parte del territorio è in pericolo, non se una frana sta per arrivare.
 
 **Una mappa di pericolo non è una perizia.** Non dice se una casa è sicura: per un edificio servono studi specifici e le carte ufficiali dell'Autorità di bacino.
 

@@ -9,7 +9,7 @@ project:
   name: "rainfall-thresholds"
   repo: "https://github.com/agent-engineering-studio/rainfall-thresholds"
   docs: "https://agentengineering.it/rainfall-thresholds/"
-draft: false
+draft: true
 lang: "en"
 ---
 

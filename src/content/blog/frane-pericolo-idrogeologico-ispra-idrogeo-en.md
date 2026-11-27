@@ -19,6 +19,8 @@ The national landslide inventory had already mapped 213 landslides in that town.
 
 That difference, between where and when, runs through this second episode. The data comes from ISPRA, it is public and free, and it tells the story of Italy's landslides and floods better than almost any other source. You only need to know what it says, and what it does not.
 
+It is also a different way of watching the land. The [first episode](/en/blog/pioggia-radar-protezione-civile-dpc-radar/), on the Civil Protection radars, told the story of real-time monitoring: rain measured every five minutes, as it falls, saying what is happening now. The landslide inventory and the hazard maps are the opposite: they change over years, not minutes, and say where the ground is already fragile. The radar answers when, ISPRA answers where. Neither, alone, is enough to forecast a landslide.
+
 ## The data in brief
 
 ISPRA, Italy's national environmental agency, publishes three different things on its **IdroGEO** platform.
@@ -104,7 +106,7 @@ There is also a limit worth saying: the check makes sure a number exists in the 
 
 ## The limits, said plainly
 
-**It is not an alert system.** The library reads no rain. The official alert is the bulletin of the Civil Protection Department and of the region. The predisposition class says how much of the land is in hazard, not whether a landslide is coming.
+**It is not an alert system.** The library reads no rain: that is measured by [dpc-radar](https://agentengineering.it/dpc-radar/), from the first episode. The official alert is the bulletin of the Civil Protection Department and of the region. The predisposition class says how much of the land is in hazard, not whether a landslide is coming.
 
 **A hazard map is not a survey of your house.** It does not say whether a building is safe: that takes specific studies and the official maps of the basin authority.
 

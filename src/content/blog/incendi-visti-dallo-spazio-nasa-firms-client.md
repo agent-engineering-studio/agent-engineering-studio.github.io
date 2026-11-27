@@ -9,7 +9,7 @@ project:
   name: "firms-client"
   repo: "https://github.com/agent-engineering-studio/firms-client"
   docs: "https://agentengineering.it/firms-client/"
-draft: false
+draft: true
 ---
 
 Il chilometro quadrato d'Italia che ha «bruciato» più giorni negli ultimi quattordici anni non è un bosco. È l'acciaieria di Taranto: **3.308 giorni di fuoco** visti dai satelliti della NASA. Non c'è nessun incendio. C'è un altoforno, caldo tutti i giorni dell'anno, e un satellite vede il calore, non il fuoco.

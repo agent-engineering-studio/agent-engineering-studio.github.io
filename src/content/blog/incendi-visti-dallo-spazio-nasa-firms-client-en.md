@@ -9,7 +9,7 @@ project:
   name: "firms-client"
   repo: "https://github.com/agent-engineering-studio/firms-client"
   docs: "https://agentengineering.it/firms-client/"
-draft: false
+draft: true
 lang: "en"
 ---
 
