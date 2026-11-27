@@ -9,7 +9,7 @@ project:
   name: "egms-client"
   repo: "https://github.com/agent-engineering-studio/egms-client"
   docs: "https://agentengineering.it/egms-client/"
-draft: true
+draft: false
 lang: "en"
 ---
 
